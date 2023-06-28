@@ -1,0 +1,47 @@
+@import '../../variables.scss';
+
+.mat-toolbar {
+  font-size: 14px;
+  background: linear-gradient(45deg, #64a2cc, transparent);
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.logo-wrapper {
+  height: 83px;
+  gap: 0.5rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  span {
+    font-size: 52px;
+  }
+
+  img {
+    height: 100%;
+  }
+}
+
+.nav {
+  margin-left: auto;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+
+}
+
+li {
+  display: inline;
+  padding: 10px;
+  cursor: pointer;
+}
+
+li:hover {
+  color: $color-blue;
+}

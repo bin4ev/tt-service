@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import '@angular/material/theming';
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+
+$custom-typography: mat-typography-config($font-family: 'Merriweather');
+
+@include angular-material-typography($custom-typography);
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.pbl-container {
+  padding: 0 16px;
+  background: linear-gradient(45deg, #64a2cc, transparent);
+}
+
+.active {
+  color: #6081af;
+}
+
+.bold {
+  font-weight: 600;
+}
