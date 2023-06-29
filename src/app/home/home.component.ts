@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
-import { animate, style, transition, trigger } from "@angular/animations";
+import { animate, style, transition, trigger } from "@angular/animations"
 
 @Component({
   selector: "app-home",
