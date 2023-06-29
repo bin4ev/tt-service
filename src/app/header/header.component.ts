@@ -4,6 +4,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { NgOptimizedImage } from '@angular/common'
 import { RouterLink, RouterLinkActive } from "@angular/router";
 
+
 @Component({
   selector: "app-header",
   standalone: true,

@@ -1,3 +1,32 @@
 <div class="img-wrapper">
-  <img src="assets/home.webp" alt="background">
+  <!-- <img src="assets/home.webp" alt="background"> -->
+</div>
+
+<div class="content" *ngIf="!isShow" [@slideInOut]>
+  <h1>Добре дошли</h1>
+  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error aliquam laboriosam illo enim eligendi assumenda
+    officia molestiae animi unde eius neque ipsa repellendus cum impedit alias, ratione voluptates porro quae.</p>
+
+  <div class="btns-wrapper">
+    <button mat-raised-button (click)="showMoreInfo()">Повече информация</button>
+    <button mat-raised-button>Свържи се с нас</button>
+  </div>
+</div>
+
+<div class="more-info" *ngIf="isShow" [@slideInOut]>
+  <h2>Какво да очаквате от TT AUTO 88?</h2>
+  <ul>
+    <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt exercitationem atque non quos corrupti
+      praesentium </li>
+    <li>minus cumque dolorum neque minima! Asperiores delectus laborum ratione minima illum reprehenderit similique
+      nihil in?</li>
+    <li>minus cumque dolorum neque minima! Asperiores delectus laborum ratione minima illum reprehenderit similique
+      nihil in?</li>
+    <li>minus cumque dolorum neque minima! Asperiores delectus laborum ratione minima illum reprehenderit similique
+      nihil in?</li>
+    <li>minus cumque dolorum neque minima! Asperiores delectus laborum ratione minima illum reprehenderit similique
+      nihil in?</li>
+    <li>minus cumque dolorum neque minima! Asperiores delectus laborum ratione minima illum reprehenderit similique
+      nihil in?</li>
+  </ul>
 </div>

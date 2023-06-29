@@ -2,9 +2,15 @@
 
 .mat-toolbar {
   font-size: 14px;
-  background: linear-gradient(45deg, #64a2cc, transparent);
+  background: linear-gradient(3deg, #1c58a2, transparent);
   margin-bottom: 1rem;
   margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: top 0.3s ease;
 }
 
 .logo-wrapper {
@@ -21,27 +27,32 @@
 
   img {
     height: 100%;
+    border-radius: 8px;
   }
-}
-
-.nav {
-  margin-left: auto;
 }
 
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-
-
 }
 
 li {
   display: inline;
-  padding: 10px;
+  padding: 0 10px;
   cursor: pointer;
 }
 
 li:hover {
   color: $color-blue;
+}
+
+.socials-wrapper {
+  display: flex;
+  align-items: center;
+
+  a {
+    padding: 0 10px;
+
+  }
 }

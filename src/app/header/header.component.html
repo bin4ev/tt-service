@@ -1,8 +1,6 @@
 <mat-toolbar>
-  <div class="logo-wrapper">
-    <span class="bold">TT</span>
-    <img src="assets/logo.svg" alt="logo">
-    <span class="bold">88</span>
+  <div class="logo-wrapper pointer" routerLink="home">
+    <img src="assets/logo.jpg" alt="logo">
   </div>
 
   <ul class="nav">
@@ -11,4 +9,17 @@
     <li routerLinkActive="active" routerLink="services">Услуги</li>
     <li routerLinkActive="active" routerLink="contacts">Контакти</li>
   </ul>
+
+  <div class="socials-wrapper">
+    <a href="https://www.facebook.com/profile.php?id=100091754926950">
+    <img class="pointer"ngSrc="assets/icons/facebook.svg" alt="facebook-icon" width="40" height="40">
+    </a>
+
+    <a href="https://instagram.com/ttauto88?igshid=MmIzYWVlNDQ5Yg==">
+      <img class="pointer"  ngSrc="assets/icons/instagram.svg" alt="facebook-icon" width="40" height="40">
+    </a>
+  
+  </div>
+ 
+
 </mat-toolbar>
