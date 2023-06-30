@@ -11,6 +11,9 @@ $custom-typography: mat-typography-config($font-family: 'Merriweather');
 html,
 body {
   height: 100%;
+  * {
+    box-sizing: border-box;
+  }
 }
 
 body {
