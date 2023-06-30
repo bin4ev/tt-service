@@ -1,6 +1,6 @@
 .img-wrapper {
   width: 100%;
-  min-height: 800px;
+  height: 100%;
   background-image: url('../../assets/home.webp');
   background-size: cover;
   background-repeat: no-repeat;
@@ -20,10 +20,6 @@
   left: 16px;
   position: absolute;
   max-width: 50%;
-  
-  h1 {
-    font-size: 3rem;
-  }
 }
 
 .btns-wrapper {

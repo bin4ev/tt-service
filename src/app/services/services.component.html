@@ -1,1 +1,17 @@
-<p>services works!</p>
+<div class="pbl-container" >
+
+  <span class="title">Услуги</span>
+
+  <div class="cells-container">
+    <ng-container *ngFor="let service of services">
+      <div class="card pointer" [@slideInOut]>
+        <div class="card-title">{{service.title}}</div>
+        <div class="content">
+
+        </div>
+      </div>
+      
+    </ng-container> 
+  </div>
+</div>
+

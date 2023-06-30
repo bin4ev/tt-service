@@ -8,12 +8,18 @@ $custom-typography: mat-typography-config($font-family: 'Merriweather');
 
 @include angular-material-typography($custom-typography);
 
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
-  * {
-    box-sizing: border-box;
-  }
+  background: #e7e7e7;
+  ;
+
 }
 
 body {
@@ -22,9 +28,12 @@ body {
 }
 
 .pbl-container {
-  padding: 0 16px;
+  padding: 16px 16px;
   background: linear-gradient(3deg, #1c58a2, transparent);
   position: relative;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .active {
@@ -40,3 +49,8 @@ body {
   cursor: pointer;
 }
 
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
