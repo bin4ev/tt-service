@@ -5,13 +5,14 @@ import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-contacts',
   standalone: true,
   imports: [CommonModule, MatFormFieldModule, MatInputModule,
-    MatIconModule, MatButtonModule],
+    MatIconModule, MatButtonModule, FormsModule],
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss'],
   animations: [
@@ -27,5 +28,5 @@ import { animate, style, transition, trigger } from '@angular/animations';
   ]
 })
 export class ContactsComponent {
-
+formData: any = {}
 }

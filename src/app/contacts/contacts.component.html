@@ -2,26 +2,31 @@
   <div class="contacts-container"  [@slideInOut]>
     <div class="form">
       <div class="title">ПИШЕТЕ НИ</div>
-      <form action="">
+      <form #form="ngForm">
         <mat-form-field appearance="fill">
           <mat-label>Име</mat-label>
-          <input matInput placeholder="John Doe">
+          <input matInput placeholder="John Doe" name="name" [(ngModel)]="formData.name" required>
           <mat-icon matSuffix>badge</mat-icon>
+          <mat-error *ngIf="form.controls['name'].hasError('required')">Името e задължителено</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Имейл</mat-label>
-          <input matInput placeholder="example.com">
+          <input matInput placeholder="example.com" name="email" [(ngModel)]="formData.email" required email>
           <mat-icon matSuffix>mail</mat-icon>
+          <mat-error *ngIf="form.controls['email'].hasError('required')">Имейла e задължителен</mat-error>
+          <mat-error *ngIf="form.controls['email'].hasError('email')">Имейла e невалиден</mat-error>
         </mat-form-field>
 
 
         <mat-form-field appearance="fill">
           <mat-label>Телефон</mat-label>
-          <input matInput placeholder="+359 xxx xxx xxx">
+          <input matInput placeholder="+359 xxx xxx xxx"  name="phone" [(ngModel)]="formData.phone" required pattern="[0-9]{10}">
           <mat-icon matSuffix>phone</mat-icon>
+          <mat-error *ngIf="form.controls['phone'].hasError('required')">Името e задължителено</mat-error>
+          <mat-error *ngIf="form.controls['phone'].hasError('pattern')">Телефона e невалиден</mat-error>
         </mat-form-field>
-        <button mat-raised-button>Изпрати</button>
+        <button mat-raised-button [disabled]="form.invalid">Изпрати</button>
       </form>
     </div>
     
