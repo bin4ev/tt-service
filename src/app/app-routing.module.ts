@@ -3,7 +3,7 @@ import { RouteReuseStrategy, RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
 import { ContactsComponent } from "./contacts/contacts.component";
-import { ServicesComponent } from "./services/services.component";
+import { ServicesComponent } from "./service/services.component";
 
 const routes: Routes = [
   { path: "'/'", redirectTo: "home", pathMatch: "full" },

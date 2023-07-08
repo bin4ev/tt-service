@@ -7,15 +7,15 @@
           <mat-label>Име</mat-label>
           <input matInput placeholder="John Doe" name="name" [(ngModel)]="formData.name" required>
           <mat-icon matSuffix>badge</mat-icon>
-          <mat-error *ngIf="form.controls['name'].hasError('required')">Името e задължителено</mat-error>
+          <mat-error *ngIf="form.controls['name']?.errors?.['required']">Името e задължителено</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Имейл</mat-label>
           <input matInput placeholder="example.com" name="email" [(ngModel)]="formData.email" required email>
           <mat-icon matSuffix>mail</mat-icon>
-          <mat-error *ngIf="form.controls['email'].hasError('required')">Имейла e задължителен</mat-error>
-          <mat-error *ngIf="form.controls['email'].hasError('email')">Имейла e невалиден</mat-error>
+          <mat-error *ngIf="form.controls['email']?.errors?.['required']">Имейла e задължителен</mat-error>
+          <mat-error *ngIf="form.controls['email']?.errors?.['email']">Имейла e невалиден</mat-error>
         </mat-form-field>
 
 
@@ -23,10 +23,20 @@
           <mat-label>Телефон</mat-label>
           <input matInput placeholder="+359 xxx xxx xxx"  name="phone" [(ngModel)]="formData.phone" required pattern="[0-9]{10}">
           <mat-icon matSuffix>phone</mat-icon>
-          <mat-error *ngIf="form.controls['phone'].hasError('required')">Името e задължителено</mat-error>
-          <mat-error *ngIf="form.controls['phone'].hasError('pattern')">Телефона e невалиден</mat-error>
+          <mat-error *ngIf="form.controls['phone']?.errors?.['required']">Името e задължителено</mat-error>
+          <mat-error *ngIf="form.controls['phone']?.errors?.['pattern']">Телефона e невалиден</mat-error>
         </mat-form-field>
-        <button mat-raised-button [disabled]="form.invalid">Изпрати</button>
+
+        <mat-form-field>
+          <mat-label>Съобщение</mat-label>
+          <textarea matInput name="msg" [(ngModel)]="formData.msg" required></textarea>
+          <mat-icon matSuffix>messages</mat-icon>
+
+          <mat-error *ngIf="form.controls['msg']?.errors?.['required']">Съобщение e задължителено</mat-error>
+        </mat-form-field>
+
+
+        <button mat-raised-button [disabled]="form.invalid" (click)="submit(form)">Изпрати</button>
       </form>
     </div>
     
