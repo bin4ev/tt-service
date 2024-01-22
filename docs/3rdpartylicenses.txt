@@ -32,6 +32,9 @@ MIT
 @angular/core
 MIT
 
+@angular/forms
+MIT
+
 @angular/material
 MIT
 The MIT License
@@ -62,6 +65,9 @@ MIT
 
 @angular/router
 MIT
+
+@here/maps-api-for-javascript
+SEE LICENSE IN LICENSE
 
 rxjs
 Apache-2.0
@@ -268,6 +274,9 @@ Apache-2.0
  limitations under the License.
  
 
+
+simple-element-resize-detector
+MIT
 
 zone.js
 MIT
