@@ -7,6 +7,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { FormsModule, NgForm } from "@angular/forms";
 import { EmailService } from "../services/email.service";
+import { JsmapComponent } from "../jsmap/jsmap.component";
 
 @Component({
   selector: "app-contacts",
@@ -18,6 +19,7 @@ import { EmailService } from "../services/email.service";
     MatIconModule,
     MatButtonModule,
     FormsModule,
+    JsmapComponent
   ],
   templateUrl: "./contacts.component.html",
   styleUrls: ["./contacts.component.scss"],
@@ -52,4 +54,5 @@ export class ContactsComponent {
       error: (err) => console.error(err),
     });
   }
+
 }

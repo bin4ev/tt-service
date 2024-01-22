@@ -3,15 +3,17 @@
   <span class="title">Услуги</span>
 
   <div class="cells-container">
-    <ng-container *ngFor="let service of services">
-      <div class="card pointer" [@slideInOut]>
-        <div class="card-title">{{service.title}}</div>
-        <div class="content">
-
+    <mat-card  *ngFor="let service of services"  [@slideInOut]>
+      <mat-card-content>
+        <div class="card pointer">
+          <div class="card-title">{{service.title | uppercase}} </div>
+          <div class="content">
+              <img [ngSrc]="service?.iconPath" width="100" height="100" alt="icon" priority="">
+          </div>
         </div>
-      </div>
-      
-    </ng-container> 
+      </mat-card-content>
+    </mat-card>
+
   </div>
 </div>
 

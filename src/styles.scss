@@ -3,6 +3,8 @@
 @import '@angular/material/theming';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
 @import './variables.scss';
+@import './utils.scss';
+
 
 $custom-typography: mat-typography-config($font-family: 'Montserrat');
 
@@ -18,35 +20,22 @@ html,
 body {
   height: 100%;
   background: #e7e7e7;
-  ;
-
 }
 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .pbl-container {
   padding: 16px 16px;
   background: linear-gradient(3deg, #1c58a2, transparent);
   position: relative;
-  min-height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-.active {
-  color: $color-blue;
-  font-weight: 600;
-}
-
-.bold {
-  font-weight: 600;
-}
-
-.pointer {
-  cursor: pointer;
 }
 
 .title {

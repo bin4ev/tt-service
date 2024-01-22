@@ -1,36 +1,35 @@
 <div class="pbl-container">
 
   <div class="img-wrapper">
-    <img #background src="assets/home.webp" alt="background">
+    <img #background src="assets/home2.jpg" alt="background">
   </div>
-  
+
   <div class="content" *ngIf="!isShow" [@slideInOut]>
-    <span class="title">Добре дошли</span>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error aliquam laboriosam illo enim eligendi assumenda
-      officia molestiae animi unde eius neque ipsa repellendus cum impedit alias, ratione voluptates porro quae.</p>
+    <h1 class="title">
+      <small>
+        Извършваме </small>
+      Цялостни <span>автомобилни ремонти</span>
+    </h1>
+    <p class="desc">
+      Автосервиз в Бургас. Експресен ремонт на вашия автомобил - външен вид, двигател, ходова част.
+    </p>
 
     <div class="btns-wrapper">
       <button mat-raised-button (click)="showMoreInfo()">Повече информация</button>
-      <button mat-raised-button>Свържи се с нас</button>
+      <button mat-raised-button routerLink="../contacts">Свържи се с нас</button>
     </div>
   </div>
 
   <div class="more-info" *ngIf="isShow" [@slideInOut]>
-    <h2>Какво да очаквате от TT AUTO 88?</h2>
-    <ul>
-      <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt exercitationem atque non quos corrupti
-        praesentium </li>
-      <li>minus cumque dolorum neque minima! Asperiores delectus laborum ratione minima illum reprehenderit similique
-        nihil in?</li>
-      <li>minus cumque dolorum neque minima! Asperiores delectus laborum ratione minima illum reprehenderit similique
-        nihil in?</li>
-      <li>minus cumque dolorum neque minima! Asperiores delectus laborum ratione minima illum reprehenderit similique
-        nihil in?</li>
-      <li>minus cumque dolorum neque minima! Asperiores delectus laborum ratione minima illum reprehenderit similique
-        nihil in?</li>
-      <li>minus cumque dolorum neque minima! Asperiores delectus laborum ratione minima illum reprehenderit similique
-        nihil in?</li>
-    </ul>
+    <h1 class="title">
+      <small>
+        Предлагаме </small>
+      Диагностика <span>Ремонт и обслужване</span>
+    </h1>
+    <p class="desc">
+      Професионална диагностика. Всички видове ремонти на автомобили.
+      Доверете ни се, и ще се погрижим вашите коли не само да бъдат ремонтирани, но и поддържани в отлично
+        техническо състояние!
+    </p>
   </div>
-
 </div>

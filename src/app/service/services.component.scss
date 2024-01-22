@@ -3,8 +3,11 @@
 .card {
   width: 250px;
   height: 250px;
-  background: $color-blue;
+  background: #dce1ee;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease-in-out;
 
   .card-title {
     border-radius: 8px 8px 0 0 ;
@@ -13,8 +16,19 @@
   }
 }
 
+.card:hover {
+  background: #8ba7c8;
+}
+
 .cells-container {
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

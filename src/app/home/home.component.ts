@@ -2,11 +2,14 @@ import { Component, ElementRef, ViewChild } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { animate, style, transition, trigger } from "@angular/animations";
+import { JsmapComponent } from "../jsmap/jsmap.component";
+import { MatCardModule } from "@angular/material/card";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-home",
   standalone: true,
-  imports: [CommonModule, MatButtonModule],
+  imports: [CommonModule, MatButtonModule, JsmapComponent, MatCardModule, RouterLink],
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"],
   animations: [

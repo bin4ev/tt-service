@@ -1,5 +1,5 @@
 <div class="pbl-container">
-  <div class="contacts-container"  [@slideInOut]>
+  <div class="contacts-container" [@slideInOut]>
     <div class="form">
       <div class="title">ПИШЕТЕ НИ</div>
       <form #form="ngForm">
@@ -21,7 +21,8 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Телефон</mat-label>
-          <input matInput placeholder="+359 xxx xxx xxx"  name="phone" [(ngModel)]="formData.phone" required pattern="[0-9]{10}">
+          <input matInput placeholder="+359 xxx xxx xxx" name="phone" [(ngModel)]="formData.phone" required
+            pattern="[0-9]{10}">
           <mat-icon matSuffix>phone</mat-icon>
           <mat-error *ngIf="form.controls['phone']?.errors?.['required']">Името e задължителено</mat-error>
           <mat-error *ngIf="form.controls['phone']?.errors?.['pattern']">Телефона e невалиден</mat-error>
@@ -29,39 +30,46 @@
 
         <mat-form-field>
           <mat-label>Съобщение</mat-label>
-          <textarea matInput name="msg" [(ngModel)]="formData.msg" required></textarea>
+          <textarea matInput name="msg" [(ngModel)]="formData.msg" required rows="6"></textarea>
           <mat-icon matSuffix>messages</mat-icon>
 
           <mat-error *ngIf="form.controls['msg']?.errors?.['required']">Съобщение e задължителено</mat-error>
         </mat-form-field>
 
-
-        <button mat-raised-button [disabled]="form.invalid" (click)="submit(form)">Изпрати</button>
+        <button mat-raised-button (click)="submit(form)">Изпрати</button>
       </form>
+
+
     </div>
-    
-    <div class="contact-info"  [@slideInOut]>
+
+    <div class="contact-info" [@slideInOut]>
 
       <div class="title">Свържете се с нас</div>
       <div class="address">
         <div class="text-with-icon">
           <mat-icon>location_on</mat-icon>
-          <p>The Workshop</p>
+          <p>гр. Бургас</p>
         </div>
-        <p> 65 Westgate Street</p>
-        <p>E8 3RL</p>
+        <p>ул. Индустриална 3</p>
       </div>
 
 
       <a class="text-with-icon" href="mailto: Toshkina@abv.com">
         <mat-icon>mail</mat-icon>
-        <p>Toshkina@abv.com</p>
+        <p>ttavtoserviz@gmail.com</p>
       </a>
 
+      <div class="address">
+        <div class="text-with-icon">
+          <mat-icon>phone</mat-icon>
+          <p>0876 603 499</p>
+        </div>
+      </div>
 
-
-      <div id="map"></div>
-
+      <div>
+        <app-jsmap></app-jsmap>
+      </div>
     </div>
+
   </div>
 </div>

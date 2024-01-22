@@ -10,12 +10,13 @@
 
     form {
       display: flex;
-      gap: 2rem;
+      gap: 1rem;
       flex-direction: column;
     }
 
     button {
-      max-width: 190px;
+      min-width: 190px;
+      align-self: end;
     }
   }
 
@@ -30,6 +31,7 @@
   .address {
     display: flex;
     font-size: 18px;
+    gap: 0.5rem;
   }
 
   .text-with-icon {
