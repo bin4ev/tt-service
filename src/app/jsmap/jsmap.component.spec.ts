@@ -8,8 +8,8 @@ describe('JsmapComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [JsmapComponent]
-    });
+    imports: [JsmapComponent]
+});
     fixture = TestBed.createComponent(JsmapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
