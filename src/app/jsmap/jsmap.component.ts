@@ -5,10 +5,8 @@ import {
 } from "@angular/core";
 import H from "@here/maps-api-for-javascript";
 import onResize from "simple-element-resize-detector";
+import { API_KEY, DEFAULT_POSITION, DEFAULT_ZOOM } from "../contacts/constants";
 
-const API_KEY = "xJNiolYoXS5cgxyqRubcBAb0g5orfnwYi9J0FUPHnNA";
-const DEFAULT_ZOOM = 16;
-const DEFAULT_POSITION = { lat: 42.49027206029531, lng: 27.45525035767127 } as const;
 const landmarks = [
   {
     name: "TT-AUTO-88",
