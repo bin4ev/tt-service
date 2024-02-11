@@ -2,11 +2,12 @@ import { Component } from "@angular/core";
 import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { animate, style, transition, trigger } from "@angular/animations";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-services",
   standalone: true,
-  imports: [CommonModule, MatCardModule ,NgOptimizedImage ],
+  imports: [CommonModule, MatCardModule ,NgOptimizedImage,RouterLink ],
   templateUrl: "./services.component.html",
   styleUrls: ["./services.component.scss"],
   animations: [
@@ -26,31 +27,37 @@ export class ServicesComponent {
     {
       title: "СЕРВИЗНО ОБСЛУЖВАНЕ",
       iconPath: "assets/images/repair-services/engine.svg",
+      path: "full-sevice",
     },
     {
       title: "СПИРАЧНА СИСТЕМА",
       iconPath: "assets/images/repair-services/brakes.svg",
+      path: "services/full-sevice",
     },
     {
       title: "КЛИМАТИК",
       iconPath: "assets/images/repair-services/airCondition.svg",
-
+      path: "air-condition",
     },
     {
       title: " ИЗПУСКАТЕЛНА СИСТЕМА",
       iconPath: "assets/images/repair-services/exhaustSistem.svg",
+      path: "exhaust-system",
     },
     {
       title: "АНГРЕНАЖЕН РЕМЪК",
       iconPath: "assets/images/repair-services/tuneUp.svg",
+      path: "services/full-sevice",
     },
     {
       title: " ОКАЧВАНЕ",
       iconPath: "assets/images/repair-services/suspension.svg",
+      path: "services/full-sevice",
     },
     {
       title: "Скоростна кутия",
       iconPath: "assets/images/repair-services/transmision.svg",
+      path: "services/full-sevice",
     },
     
   ];

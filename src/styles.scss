@@ -43,3 +43,19 @@ body {
   font-weight: 700;
   margin-bottom: 2rem;
 }
+
+.pbl-content {
+  article {
+    flex: 1;
+    padding: 16px 16px 16px 0px;
+  }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.pbl-content-img {
+  img {
+    width: 100%;
+  }
+}

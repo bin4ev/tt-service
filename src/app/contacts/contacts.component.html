@@ -1,5 +1,6 @@
 <div class="pbl-container">
   <div class="contacts-container" [@slideInOut]>
+
     <div class="form">
       <div class="title">ПИШЕТЕ НИ</div>
       <form #form="ngForm">
@@ -7,15 +8,21 @@
           <mat-label>Име</mat-label>
           <input matInput placeholder="John Doe" name="name" [(ngModel)]="formData.name" required>
           <mat-icon matSuffix>badge</mat-icon>
-          <mat-error *ngIf="form.controls['name']?.errors?.['required']">Името e задължителено</mat-error>
+          @if (form.controls['name'].errors?.['required']) {
+            <mat-error>Името e задължителено</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Имейл</mat-label>
           <input matInput placeholder="example.com" name="email" [(ngModel)]="formData.email" required email>
           <mat-icon matSuffix>mail</mat-icon>
-          <mat-error *ngIf="form.controls['email']?.errors?.['required']">Имейла e задължителен</mat-error>
-          <mat-error *ngIf="form.controls['email']?.errors?.['email']">Имейла e невалиден</mat-error>
+          @if (form.controls['email'].errors?.['required']) {
+            <mat-error>Имейла e задължителен</mat-error>
+          }
+          @if (form.controls['email'].errors?.['email']) {
+            <mat-error>Имейла e невалиден</mat-error>
+          }
         </mat-form-field>
 
 
@@ -24,8 +31,12 @@
           <input matInput placeholder="+359 xxx xxx xxx" name="phone" [(ngModel)]="formData.phone" required
             pattern="[0-9]{10}">
           <mat-icon matSuffix>phone</mat-icon>
-          <mat-error *ngIf="form.controls['phone']?.errors?.['required']">Името e задължителено</mat-error>
-          <mat-error *ngIf="form.controls['phone']?.errors?.['pattern']">Телефона e невалиден</mat-error>
+          @if (form.controls['phone'].errors?.['required']) {
+            <mat-error>Името e задължителено</mat-error>
+          }
+          @if (form.controls['phone'].errors?.['pattern']) {
+            <mat-error>Телефона e невалиден</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field>
@@ -33,7 +44,9 @@
           <textarea matInput name="msg" [(ngModel)]="formData.msg" required rows="6"></textarea>
           <mat-icon matSuffix>messages</mat-icon>
 
-          <mat-error *ngIf="form.controls['msg']?.errors?.['required']">Съобщение e задължителено</mat-error>
+          @if (form.controls['msg'].errors?.['required']) {
+            <mat-error>Съобщение e задължителено</mat-error>
+          }
         </mat-form-field>
 
         <button mat-raised-button (click)="submit(form)">Изпрати</button>
@@ -42,7 +55,7 @@
 
     </div>
 
-    <div class="contact-info" [@slideInOut]>
+    <div class="contact-info">
 
       <div class="title">Свържете се с нас</div>
       <div class="address">
@@ -56,7 +69,7 @@
 
       <a class="text-with-icon" href="mailto: Toshkina@abv.com">
         <mat-icon>mail</mat-icon>
-        <p>ttavtoserviz@gmail.com</p>
+        <p>ttavtoserviz&#64;gmail.com</p>
       </a>
 
       <div class="address">
@@ -72,4 +85,5 @@
     </div>
 
   </div>
+  
 </div>

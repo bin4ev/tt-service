@@ -1,5 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
@@ -13,14 +13,13 @@ import { JsmapComponent } from "../jsmap/jsmap.component";
   selector: "app-contacts",
   standalone: true,
   imports: [
-    CommonModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,
     FormsModule,
     JsmapComponent
-  ],
+],
   templateUrl: "./contacts.component.html",
   styleUrls: ["./contacts.component.scss"],
   animations: [

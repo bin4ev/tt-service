@@ -4,32 +4,28 @@
     <img #background src="assets/home2.jpg" alt="background">
   </div>
 
-  <div class="content" *ngIf="!isShow" [@slideInOut]>
+  @if (!isShow) {
+  <div class="content" [@slideInOut]>
     <h1 class="title">
       <small>
         Извършваме </small>
-      Цялостни <span>автомобилни ремонти</span>
+      Цялостни <span class="blue-color">автомобилни ремонти</span>
     </h1>
     <p class="desc">
       Автосервиз в Бургас. Експресен ремонт на вашия автомобил - външен вид, двигател, ходова част.
     </p>
-
     <div class="btns-wrapper">
-      <button mat-raised-button (click)="showMoreInfo()">Повече информация</button>
+      <button mat-raised-button (click)="showMoreInfo()">Виж повече</button>
       <button mat-raised-button routerLink="../contacts">Свържи се с нас</button>
     </div>
   </div>
+  }
 
-  <div class="more-info" *ngIf="isShow" [@slideInOut]>
-    <h1 class="title">
-      <small>
-        Предлагаме </small>
-      Диагностика <span>Ремонт и обслужване</span>
-    </h1>
-    <p class="desc">
-      Професионална диагностика. Всички видове ремонти на автомобили.
-      Доверете ни се, и ще се погрижим вашите коли не само да бъдат ремонтирани, но и поддържани в отлично
-        техническо състояние!
-    </p>
+  @if (isShow) {
+
+  <div class="more" [@slideInOut]>
+    <app-corousel class="more" [items]="services"></app-corousel>
   </div>
+  }
+
 </div>
