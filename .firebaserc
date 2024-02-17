@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tt-service-88018": {
+      "hosting": {
+        "tt-service": [
+          "tt-service-88018"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tt-service-88018"
+  }
+}

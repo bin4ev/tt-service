@@ -33,8 +33,7 @@
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -106,6 +105,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "tt-service:build:production",
+              "serveTarget": "tt-service:serve:production"
+            },
+            "development": {
+              "buildTarget": "tt-service:build:development",
+              "serveTarget": "tt-service:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

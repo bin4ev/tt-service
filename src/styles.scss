@@ -30,12 +30,23 @@ body {
   min-height: 100vh;
 }
 
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
+
 .pbl-container {
   padding: 16px 16px;
   background: linear-gradient(3deg, #1c58a2, transparent);
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .title {
@@ -57,5 +68,17 @@ body {
 .pbl-content-img {
   img {
     width: 100%;
+  }
+}
+
+.pbl-form {
+  max-width: 450px;
+  width: 100%;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1rem
   }
 }
