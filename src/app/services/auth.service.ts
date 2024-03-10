@@ -10,6 +10,7 @@ import {
   signOut,
 } from "@angular/fire/auth";
 import { Router } from "@angular/router";
+import { Subject } from "rxjs";
 
 import { Observable } from "rxjs/internal/Observable";
 
@@ -18,7 +19,9 @@ import { Observable } from "rxjs/internal/Observable";
 })
 export class AuthService {
   UserData?: User;
-
+  isLogedInSubject = new Subject<boolean>();
+  isLogedIn$ = this.isLogedInSubject.asObservable();
+  
   private auth = inject(Auth);
   private router = inject(Router);
   public ngZone = inject(NgZone);
@@ -29,9 +32,11 @@ export class AuthService {
         this.UserData = user;
         localStorage.setItem("user", JSON.stringify(this.UserData));
         JSON.parse(localStorage.getItem("user")!);
+        this.isLogedInSubject.next(true)
       } else {
         localStorage.setItem("user", "null");
         JSON.parse(localStorage.getItem("user")!);
+        this.isLogedInSubject.next(false)
       }
     });
   }
@@ -40,6 +45,10 @@ export class AuthService {
   //get Authenticated user from firebase
   getAuthFire() {
     return this.auth.currentUser;
+  }
+
+  get currentUser(): User | null {
+    return this.auth.currentUser
   }
 
   //get Authenticated user from Local Storage
@@ -90,8 +99,10 @@ export class AuthService {
     }
   }
 
-  Logout() {
-    signOut(this.auth).then(() => this.router.navigate(["/sign-in"]));
+  logout() {
+    signOut(this.auth).then(() => {
+      this.router.navigate(["/login"])
+    } );
   }
 
   async sendPasswordResetEmails(email: string) {

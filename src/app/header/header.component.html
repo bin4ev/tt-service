@@ -5,7 +5,7 @@
 
   <ul class="nav">
     <li routerLinkActive="active" routerLink="home">Начало</li>
-    <li routerLinkActive="active" routerLink="about">За нас</li>
+    <li routerLinkActive="active" routerLink="about">Галерия</li>
     <li routerLinkActive="active" routerLink="services">Услуги</li>
     <li routerLinkActive="active" routerLink="contacts">Контакти</li>
   </ul>
@@ -18,8 +18,17 @@
     <a href="https://instagram.com/ttauto88?igshid=MmIzYWVlNDQ5Yg==" target="_blank">
       <img ngSrc="assets/icons/instagram.svg" alt="facebook-icon" width="40" height="40">
     </a>
-  
   </div>
- 
 
+  @if(isLogedIn$ | async) {
+    <span>Добре дошли <strong>{{userData?.email}}</strong></span>
+    <i routerLinkActive="active" routerLink="login">
+      <mat-icon (click)="logOut()">logout</mat-icon>
+    </i>
+  } @else {
+    <i routerLinkActive="active" routerLink="login">
+      <mat-icon >login</mat-icon>
+    </i>
+  }
+ 
 </mat-toolbar>

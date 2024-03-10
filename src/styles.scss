@@ -19,12 +19,14 @@ $custom-typography: mat-typography-config($font-family: 'Montserrat');
 html,
 body {
   height: 100%;
-  background: #e7e7e7;
+  color: #ffff;
 }
 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-image: url(assets//images/Carbon-background-large.jpg);
+  background-repeat: repeat;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -42,7 +44,8 @@ app-root {
 
 .pbl-container {
   padding: 16px 16px;
-  background: linear-gradient(3deg, #1c58a2, transparent);
+  background-image: url(assets//images/Carbon-background-large.jpg);
+  background-repeat: repeat;
   position: relative;
   display: flex;
   flex-direction: column;

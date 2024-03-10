@@ -13,6 +13,7 @@ import { getAuth, provideAuth } from "@angular/fire/auth";
 import { getDatabase, provideDatabase } from "@angular/fire/database";
 import { getStorage, provideStorage } from "@angular/fire/storage";
 import { environment } from "./environments/environment.development";
+import { getFirestore, provideFirestore } from "@angular/fire/firestore";
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -27,7 +28,7 @@ bootstrapApplication(AppComponent, {
       provideFirebaseApp(() => initializeApp(environment.firebaseConfig))
     ),
     importProvidersFrom(provideAuth(() => getAuth())),
-    importProvidersFrom(provideDatabase(() => getDatabase())),
+    importProvidersFrom(provideFirestore(() => getFirestore())),
     importProvidersFrom(provideStorage(() => getStorage())),
   ],
 }).catch((err) => console.error(err));

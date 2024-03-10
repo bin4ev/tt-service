@@ -1,0 +1,24 @@
+@if(shown) {
+    <div class="process-wrap">
+        <div class="process-wheel">
+            <svg [attr.width]="width"  [attr.height]="height" viewBox="0 0 85 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="42.4792" cy="42.4792" r="38.9792" stroke="#0079B3" stroke-opacity="0.2" stroke-width="7"/>
+                <animateTransform
+                    attributeName="transform"
+                    attributeType="XML"
+                    type="rotate"
+                    from="0 0 0"
+                    to="360 0 0"
+                    dur="1s"
+                    repeatCount="indefinite" />
+                <path 
+                    d="M36.3323 0.468426C47.4791 -1.16734 58.8192 1.69193 67.8579 8.41725C76.8965 15.1426 82.8933 25.183 84.5291 36.3298L78.9331 37.151C77.5152 
+                        27.4884 72.3168 18.7848 64.4816 12.9549C56.6464 7.125 46.8162 4.64642 37.1535 6.0644L36.3323 0.468426Z" 
+                    fill="#0079B3"/>
+            </svg>      
+            <div class="process-text">
+                Зареждане
+            </div>    
+        </div>
+    </div>
+}

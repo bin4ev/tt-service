@@ -1,22 +1,31 @@
 <div class="pbl-container">
+  <div class="flex-to-side">
+    <span class="title">Галерия</span>
 
-  <span class="title">Галерия</span>
-
-  @for (post of posts ;track post) {
-    <div>
-      <span>{{post}}</span>
+    <div class="upload">
+      <button mat-raised-button (click)="upload.click()">
+        <mat-icon>add</mat-icon>
+        Добави снимка</button>
+        <input #upload type="file" (change)="uploadonFileSelectedImg($event)" multiple>
     </div>
-  }
-
+  </div>
   <div class="gallery-container">
+    @if((fileUploads$ | async)) {
+    @for (file of fileUploads$ | async;track file;) {
     <div class="gallery-image">
-      <img src="path_to_your_image_1.jpg" alt="Image 1">
+      <img [ngSrc]="file" width="100" height="100" [alt]="'url'" priority="true">
+      <div class="delete-overlay">
+        <mat-icon class="delete-icon">delete</mat-icon>
+      </div>
     </div>
-    <div class="gallery-image">
-      <img src="path_to_your_image_2.jpg" alt="Image 2">
-    </div>
-    <!-- Add more gallery images as needed -->
+    }
+    } @else {
+    <p>No images found</p>
+    }
   </div>
 
 
+  @if(loading) {
+  <process-wheel [shown]="true"></process-wheel>
+  }
 </div>

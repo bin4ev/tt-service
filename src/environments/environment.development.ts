@@ -2,10 +2,10 @@ export const environment = {
   production: false,
   emailProviderUrl: 'https://mailthis.to/',
 
-  
-  firebaseConfig :{
+  firebaseConfig : {
     apiKey: "AIzaSyDUjGcyFx-fEvYnvi966B5kvfiSofbZWns",
     authDomain: "tt-service-88018.firebaseapp.com",
+    databaseURL: "https://tt-service-88018-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "tt-service-88018",
     storageBucket: "tt-service-88018.appspot.com",
     messagingSenderId: "991370145750",

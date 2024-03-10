@@ -3,7 +3,7 @@
 .card {
   width: 250px;
   height: 250px;
-  background: #dce1ee;
+  background: linear-gradient(3deg, #ffffff, transparent);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
   .card-title {
     border-radius: 8px 8px 0 0 ;
     padding: 16px;
-    background: white;
+    color: #000000DE;
   }
 }
 
