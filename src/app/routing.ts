@@ -42,4 +42,33 @@ export const routes: Routes = [
         (m) => m.ExaustSystemComponent
       ),
   },
+  {
+    path: "services/brakes",
+    loadComponent: () =>
+      import("./service/brakes-system/brakes-system.component").then(
+        (m) => m.BrakesSystemComponent
+      ),
+  },
+  {
+    path: "services/timebelt",
+    loadComponent: () =>
+      import("./service/timebelt-service/timebelt-service.component").then(
+        (m) => m.TimebeltServiceComponent
+      ),
+  },
+  {
+    path: "services/suspension",
+    loadComponent: () =>
+      import("./service/suspension-system/suspension-system.component").then(
+        (m) => m.SuspensionSystemComponent
+      ),
+  },
+  {
+    path: "services/transmission",
+    loadComponent: () =>
+      import("./service/transmission-service/transmission-service.component").then(
+        (m) => m.TransmissionServiceComponent
+      ),
+  },
+  {path:"**", redirectTo: "home"}
 ];

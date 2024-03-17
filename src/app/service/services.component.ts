@@ -32,7 +32,7 @@ export class ServicesComponent {
     {
       title: "СПИРАЧНА СИСТЕМА",
       iconPath: "assets/images/repair-services/brakes.svg",
-      path: "services/full-sevice",
+      path: "brakes",
     },
     {
       title: "КЛИМАТИК",
@@ -47,17 +47,17 @@ export class ServicesComponent {
     {
       title: "АНГРЕНАЖЕН РЕМЪК",
       iconPath: "assets/images/repair-services/tuneUp.svg",
-      path: "services/full-sevice",
+      path: "timebelt",
     },
     {
       title: " ОКАЧВАНЕ",
       iconPath: "assets/images/repair-services/suspension.svg",
-      path: "services/full-sevice",
+      path: "suspension",
     },
     {
       title: "Скоростна кутия",
       iconPath: "assets/images/repair-services/transmision.svg",
-      path: "services/full-sevice",
+      path: "transmission",
     },
     
   ];

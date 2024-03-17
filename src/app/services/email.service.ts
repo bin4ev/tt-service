@@ -3,6 +3,8 @@ import { Injectable, inject } from "@angular/core";
 import { ContactData } from "../interfaces/contactData";
 import { catchError, map } from "rxjs/operators";
 import { environment } from "src/environments/environment.development";
+import { NotificationService } from "./notification.service";
+import { throwError } from "rxjs/internal/observable/throwError";
 
 export const alias = "TT-AVTO-88";
 
@@ -13,6 +15,7 @@ export class EmailService {
   private url = `${environment.emailProviderUrl}${alias}`;
 
   private http: HttpClient = inject(HttpClient);
+  private notificationService = inject(NotificationService);
 
   constructor() {}
 
@@ -25,7 +28,11 @@ export class EmailService {
           null;
         }
       }),
-      catchError((err) => err)
+      catchError((err) => {
+        console.log(err);
+        this.notificationService.showError("Failed to send message");
+        return throwError(()=> err);
+      })
     );
   }
 }

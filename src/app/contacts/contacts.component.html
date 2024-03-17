@@ -6,21 +6,21 @@
       <form #form="ngForm">
         <mat-form-field appearance="fill">
           <mat-label>Име</mat-label>
-          <input matInput placeholder="John Doe" name="name" [(ngModel)]="formData.name" required>
+          <input #name="ngModel" matInput placeholder="John Doe" name="name" [(ngModel)]="formData.name" required>
           <mat-icon matSuffix>badge</mat-icon>
-          @if (form.controls['name'].errors?.['required']) {
+          @if (name.errors?.['required']) {
             <mat-error>Името e задължителено</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Имейл</mat-label>
-          <input matInput placeholder="example.com" name="email" [(ngModel)]="formData.email" required email>
+          <input #email="ngModel" matInput placeholder="example.com" name="email" [(ngModel)]="formData.email" required email>
           <mat-icon matSuffix>mail</mat-icon>
-          @if (form.controls['email'].errors?.['required']) {
+          @if (email.errors?.['required']) {
             <mat-error>Имейла e задължителен</mat-error>
           }
-          @if (form.controls['email'].errors?.['email']) {
+          @if (email.errors?.['email']) {
             <mat-error>Имейла e невалиден</mat-error>
           }
         </mat-form-field>
@@ -28,23 +28,23 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Телефон</mat-label>
-          <input matInput placeholder="+359 xxx xxx xxx" name="phone" [(ngModel)]="formData.phone" required
+          <input #phone="ngModel" matInput placeholder="0xxx xxx xxx xxx" name="phone" [(ngModel)]="formData.phone" required
             pattern="[0-9]{10}">
           <mat-icon matSuffix>phone</mat-icon>
-          @if (form.controls['phone'].errors?.['required']) {
+          @if (phone.errors?.['required']) {
             <mat-error>Името e задължителено</mat-error>
           }
-          @if (form.controls['phone'].errors?.['pattern']) {
+          @if (phone.errors?.['pattern']) {
             <mat-error>Телефона e невалиден</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Съобщение</mat-label>
-          <textarea matInput name="msg" [(ngModel)]="formData.msg" required rows="6"></textarea>
+          <textarea #msg="ngModel" matInput name="msg" [(ngModel)]="formData.msg" required rows="6"></textarea>
           <mat-icon matSuffix>messages</mat-icon>
 
-          @if (form.controls['msg'].errors?.['required']) {
+          @if (msg.errors?.['required']) {
             <mat-error>Съобщение e задължителено</mat-error>
           }
         </mat-form-field>
