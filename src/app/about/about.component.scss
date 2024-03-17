@@ -69,3 +69,26 @@
   height: 80px;
   width: 80px;
 }
+
+.check-icon {
+  display: none;
+  color: rgb(1, 48, 255);
+  font-size: 80px;
+  height: 80px;
+  width: 80px;
+}
+
+.checked {
+  .delete-overlay {
+    display: flex;
+    background-color: rgba(59, 95, 223, 0.4);
+  }
+
+  .delete-icon {
+    display: none;
+  }
+
+  .check-icon {
+    display: block;
+  }
+}

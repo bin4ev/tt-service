@@ -1,8 +1,7 @@
-import { Inject, Injectable, NgZone, inject } from "@angular/core";
+import { Injectable, NgZone, inject } from "@angular/core";
 import {
   Auth,
   User,
-  UserCredential,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   sendPasswordResetEmail,
@@ -11,8 +10,6 @@ import {
 } from "@angular/fire/auth";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
-
-import { Observable } from "rxjs/internal/Observable";
 
 @Injectable({
   providedIn: "root",
@@ -75,7 +72,7 @@ export class AuthService {
       this.ngZone.run(() => {
         /* Call the SendVerificaitonMail() function when new user sign
        up and returns promise */
-        this.sendEmailVerification();
+        /* this.sendEmailVerification(); */
         this.router.navigate(["/home"]);
       });
     } catch (error) {
@@ -91,7 +88,10 @@ export class AuthService {
         password
       );
       this.UserData = result.user;
+    
+   
       this.ngZone.run(() => {
+        this.isLogedInSubject.next(true)
         this.router.navigate(["/home"]);
       });
     } catch (error) {

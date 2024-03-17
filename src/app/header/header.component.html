@@ -22,12 +22,12 @@
 
   @if(isLogedIn$ | async) {
     <span>Добре дошли <strong>{{userData?.email}}</strong></span>
-    <i routerLinkActive="active" routerLink="login">
-      <mat-icon (click)="logOut()">logout</mat-icon>
+    <i class="pointer"  routerLink="login">
+      <mat-icon  matTooltip="Logout" [ngStyle]="{'color': 'red'}" (click)="logOut()">logout</mat-icon>
     </i>
   } @else {
-    <i routerLinkActive="active" routerLink="login">
-      <mat-icon >login</mat-icon>
+    <i class="pointer" routerLink="login" [ngStyle]="{'color': 'red'}">
+      <mat-icon matTooltip="Login"  [ngStyle]="{'color': 'green'}">login</mat-icon>
     </i>
   }
  

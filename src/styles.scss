@@ -1,14 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
-@import '@angular/material/theming';
+/* @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import '@angular/material/theming'; */
+
+@use '@angular/material' as mat;
+
+@include mat.core();
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
 @import './variables.scss';
 @import './utils.scss';
 
 
-$custom-typography: mat-typography-config($font-family: 'Montserrat');
+/* $custom-typography: mat-typography-config($font-family: 'Montserrat'); */
 
-@include angular-material-typography($custom-typography);
+/* @include angular-material-typography($custom-typography); */
 
 *,
 *:before,
@@ -84,4 +88,16 @@ app-root {
     padding: 2rem;
     gap: 1rem
   }
+}
+
+.success-snackbar {
+  --mdc-snackbar-container-color: green;
+}
+
+.error-snackbar {
+  --mdc-snackbar-container-color: red ;
+}
+
+.mat-icon {
+  color: $color-blue
 }
