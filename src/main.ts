@@ -16,6 +16,7 @@ import { environment } from "./environments/environment.development";
 import { getFirestore, provideFirestore } from "@angular/fire/firestore";
 
 bootstrapApplication(AppComponent, {
+
   providers: [
     importProvidersFrom(BrowserModule),
     provideAnimations(),

@@ -8,6 +8,8 @@ import { animate, style, transition, trigger } from "@angular/animations";
 import { FormsModule, NgForm } from "@angular/forms";
 import { EmailService } from "../services/email.service";
 import { JsmapComponent } from "../jsmap/jsmap.component";
+import { NotificationService } from "../services/notification.service";
+import { finalize } from "rxjs";
 
 @Component({
   selector: "app-contacts",
@@ -18,8 +20,8 @@ import { JsmapComponent } from "../jsmap/jsmap.component";
     MatIconModule,
     MatButtonModule,
     FormsModule,
-    JsmapComponent
-],
+    JsmapComponent,
+  ],
   templateUrl: "./contacts.component.html",
   styleUrls: ["./contacts.component.scss"],
   animations: [
@@ -37,21 +39,25 @@ import { JsmapComponent } from "../jsmap/jsmap.component";
 export class ContactsComponent {
   private contactService = inject(EmailService);
   formData: any = {};
+  private notificationService = inject(NotificationService);
+  loading = false;
 
-  constructor() {}
-
-  submit(form: NgForm) {
+  onSubmit(form: NgForm, event: SubmitEvent) {
     if (form.invalid) {
       return;
     }
-
-    this.contactService.postMsg(form.value).subscribe({
-      next: (responce) => {
-        console.log(responce);
-        location.href = 'https://mailthis.to/confirm'
+    this.loading = true;
+    this.contactService.sendEmail(event.target as HTMLFormElement).pipe(
+      finalize(() => this.loading = false)
+    ).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.notificationService.showSuccess(`Email is sended successfully`);
       },
-      error: (err) => console.error(err),
+      error: (err) => {
+        console.log(err);
+        this.notificationService.showError(`${err.text}. Email sending failed`);
+      },
     });
   }
-
 }

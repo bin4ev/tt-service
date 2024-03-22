@@ -3,7 +3,7 @@
 
     <div class="form">
       <div class="title">ПИШЕТЕ НИ</div>
-      <form #form="ngForm">
+      <form #form="ngForm" (ngSubmit)="onSubmit(form, $event)">
         <mat-form-field appearance="fill">
           <mat-label>Име</mat-label>
           <input #name="ngModel" matInput placeholder="John Doe" name="name" [(ngModel)]="formData.name" required>
@@ -49,7 +49,7 @@
           }
         </mat-form-field>
 
-        <button mat-raised-button (click)="submit(form)">Изпрати</button>
+        <button type="submit" [disabled]="loading" mat-raised-button>Изпрати</button>
       </form>
 
 

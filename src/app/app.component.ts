@@ -9,10 +9,9 @@ import { HeaderComponent } from './header/header.component';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     standalone: true,
-    imports: [HeaderComponent, RouterOutlet, FooterComponent]
+    imports: [HeaderComponent, RouterOutlet, FooterComponent,]
 })
 export class AppComponent {
   title = 'tt-service';
-
 
 }

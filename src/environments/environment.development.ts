@@ -1,7 +1,10 @@
 export const environment = {
   production: false,
-  emailProviderUrl: 'https://mailthis.to/',
-
+  emailConfifg : {
+    serviceID: "service_8uoi1gq",
+      templateID: "template_13ugvxh",
+      publicKey: "iUaTFTZDQC83HSVBv" 
+  },
   firebaseConfig : {
     apiKey: "AIzaSyDUjGcyFx-fEvYnvi966B5kvfiSofbZWns",
     authDomain: "tt-service-88018.firebaseapp.com",
