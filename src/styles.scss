@@ -44,6 +44,7 @@ app-root {
 
 .main-content {
   flex: 1;
+  position: relative;
 }
 
 .pbl-container {
@@ -100,4 +101,34 @@ app-root {
 
 .mat-icon {
   color: $color-blue
+}
+
+/* .mat-mdc-card {
+  background: transparent !important;
+} */
+
+.icon {
+  cursor: pointer;
+  margin: 0 .5rem;
+}
+
+.socials-wrapper {
+  display: flex;
+  align-items: center;
+
+  a {
+    padding: 0 10px;
+
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p , span {
+  line-height: normal;
+}
+
+@media screen and (max-width: $md-screen) {
+  .pbl-content {
+    flex-direction: column;
+  }
+  
 }

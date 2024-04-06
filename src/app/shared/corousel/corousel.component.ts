@@ -25,7 +25,7 @@ export class CorouselComponent {
   index = signal(0);
 
   ngOnInit() {
-    interval(5000)
+    interval(10000)
       .pipe(
         this.untilDestroyed(),
         tap((sec) => this.index.update((val) => (val + 1) % this.items.length))

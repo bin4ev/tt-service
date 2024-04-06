@@ -43,12 +43,44 @@ li:hover {
   color: $color-blue;
 }
 
-.socials-wrapper {
-  display: flex;
-  align-items: center;
+.menu {
+  display: none;
+}
 
-  a {
-    padding: 0 10px;
+.bar {
+  background: #ffffff;
+  height: 0;
+  position: absolute;
+  transition: height .3s ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  overflow-y: auto;
+  max-height: 350px;
+}
 
+.open-bar {
+  height: 260px;
+}
+
+
+
+@media screen and (max-width: $md-screen) {
+
+  .nav,
+  .exit {
+    display: none;
+  }
+
+  .menu {
+    display: block;
+  }
+
+}
+
+@media screen and (max-width: $sm-screem) {
+  .socials-wrapper {
+    display: none;
   }
 }

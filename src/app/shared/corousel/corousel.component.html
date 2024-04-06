@@ -1,14 +1,13 @@
-<div class="carousel">
+<div class="carousel-container">
   @for (item of items ;track item.title; let i = $index) {
     <div class="carousel" [ngClass]="{ 'active': index() === i }">
       <h1 class="title">
         <small>{{item.small}}</small>
         <span class="uppercase">{{item.large}}</span>
-        <span class="blue-color">{{item.title}}</span>
+        <span class="blue-color"> {{item.title}}</span>
       </h1>
       <p class="desc">{{item.desc}}
       </p>
     </div>
   }
-
 </div>

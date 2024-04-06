@@ -32,3 +32,9 @@
   align-items: center;
   justify-content: center;
 }
+
+@media screen and (max-width: calc($md-screem)) {
+  .cells-container {
+    justify-content: center;
+  }
+}

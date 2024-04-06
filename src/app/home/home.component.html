@@ -5,7 +5,7 @@
   </div>
 
   @if (!isShow) {
-  <div class="content" [@slideInOut]>
+  <div class="content" [@slideIn]>
     <h1 class="title">
       <small>
         Извършваме </small>
@@ -21,11 +21,15 @@
   </div>
   }
 
-  @if (isShow) {
 
-  <div class="more" [@slideInOut]>
-    <app-corousel class="more" [items]="services"></app-corousel>
+  @defer (on immediate) {
+  <div #carouselElem>
+    @if (isShow) {
+    <app-corousel class="more" [items]="services" [@slideInOut] />
+    }
   </div>
+  } @loading () {
+  <process-wheel />
   }
 
 </div>

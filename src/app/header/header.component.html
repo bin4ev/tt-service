@@ -11,24 +11,58 @@
   </ul>
 
   <div class="socials-wrapper">
-    <a href="https://www.facebook.com/profile.php?id=100091754926950"  target="_blank">
-    <img ngSrc="assets/icons/facebook.svg" alt="facebook-icon" width="40" height="40">
+    <a href="https://www.facebook.com/profile.php?id=100091754926950" target="_blank">
+      <img ngSrc="assets/icons/facebook.svg" alt="facebook-icon" width="40" height="40">
     </a>
 
     <a href="https://instagram.com/ttauto88?igshid=MmIzYWVlNDQ5Yg==" target="_blank">
-      <img ngSrc="assets/icons/instagram.svg" alt="facebook-icon" width="40" height="40">
+      <img ngSrc="assets/icons/instagram.svg" alt="instagram-icon" width="40" height="40">
     </a>
   </div>
 
   @if(isLogedIn$ | async) {
-    <span>Добре дошли <strong>{{userData?.email}}</strong></span>
-    <i class="pointer"  routerLink="login">
-      <mat-icon  matTooltip="Logout" [ngStyle]="{'color': 'red'}" (click)="logOut()">logout</mat-icon>
-    </i>
+  <span class="exit">Добре дошли <strong>{{userData?.email}}</strong></span>
+  <i class=" exit" routerLink="login">
+    <mat-icon matTooltip="Logout" [ngStyle]="{'color': 'red'}" (click)="logOut()">logout</mat-icon>
+  </i>
   } @else {
-    <i class="pointer" routerLink="login" [ngStyle]="{'color': 'red'}">
-      <mat-icon matTooltip="Login"  [ngStyle]="{'color': 'green'}">login</mat-icon>
-    </i>
+  <i class="icon exit" routerLink="login" [ngStyle]="{'color': 'red'}">
+    <mat-icon matTooltip="Login" [ngStyle]="{'color': 'green'}">login</mat-icon>
+  </i>
   }
- 
+
+
+  <div class="menu">
+    @if(isOpenBar) {
+    <button mat-icon-button class="pointer" (click)="isOpenBar = !isOpenBar">
+      <mat-icon>close</mat-icon>
+    </button>
+    }@else{
+    <button mat-icon-button class="pointer" (click)="isOpenBar = !isOpenBar">
+      <mat-icon>menu</mat-icon>
+    </button>
+    }
+
+  </div>
+
 </mat-toolbar>
+<div class="position-relative">
+  <section class="bar" [ngClass]="{'open-bar': isOpenBar}" (click)="isOpenBar = !isOpenBar">
+    <mat-selection-list role="list">
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="home">Начало</mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="about">Галерия</mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="services">Услуги</mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="contacts">Контакти</mat-list-item>
+
+      @if(isLogedIn$ | async) {
+      <mat-list-item role="listitem" (click)="logOut()">
+        <span [ngStyle]="{'color': 'red'}">Изход</span>
+      </mat-list-item>
+      } @else {
+      <mat-list-item role="listitem" routerLink="login">
+        <span [ngStyle]="{'color': 'green'}">Вход</span>
+      </mat-list-item>
+      }
+    </mat-selection-list>
+  </section>
+</div>

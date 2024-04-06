@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .contacts-container {
   display: flex;
 
@@ -44,5 +46,18 @@
     all: unset;
     font-size: 18px;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: $md-screen) {
+  .contacts-container {
+    flex-direction: column;
+    .form {
+      width: 100%;
+    }
+
+    .contact-info {
+      width: 100%;
+    }
   }
 }
