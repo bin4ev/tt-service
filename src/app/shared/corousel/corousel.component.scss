@@ -75,6 +75,10 @@
   transform: translateX(-50%);
 }
 
+.cursor-grabbing {
+  cursor: grabbing;
+}
+
 @media screen and (max-width: $sm-screen) {
   .carousel-container {
     padding: 0 16px;

@@ -1,6 +1,9 @@
 <div class="carousel-container">
   @for (item of items ;track item.title; let i = $index) {
-    <div class="carousel"  [ngStyle]="{transform: 'translateX(' + (index() * -100) + '%)'}">
+    <div class="carousel" 
+     [ngStyle]="{transform: 'translateX(' + (index() * -100) + '%)'}"
+     [ngClass]="{'cursor-grabbing':cordX}"
+    (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event, i)">
       <div class="carousel-item">
         <h1 class="title">
           <small>{{item.small}}</small>

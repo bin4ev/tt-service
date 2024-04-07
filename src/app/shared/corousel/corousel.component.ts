@@ -25,28 +25,49 @@ export class CorouselComponent {
   private untilDestroyed = untilDestroyed();
   private destroy$ = new Subject<void>();
   index = signal(0);
- 
+  cordX = 0;
+
   ngOnInit() {
-   this.startInterval() 
+    this.startInterval();
   }
 
   startInterval() {
     interval(10000)
-    .pipe(
-      takeUntil(this.destroy$),
-      tap((sec) => this.index.update((val) => (val + 1) % this.items.length))
-    )
-    .subscribe()
+      .pipe(
+        takeUntil(this.destroy$),
+        tap((sec) => this.index.update((val) => (val + 1) % this.items.length))
+      )
+      .subscribe();
   }
 
-  goTo(index:number){
+  goTo(index: number) {
     this.index.set(index);
-    this.resetInterval()
+    this.resetInterval();
   }
 
   resetInterval() {
-    this.destroy$.next(); 
-    this.startInterval(); 
+    this.destroy$.next();
+    this.startInterval();
+  }
+
+  onMouseDown(e: MouseEvent) {
+    this.cordX = e.clientX;
+  }
+
+  onMouseUp(e: MouseEvent, index: number) {
+    let cordX = e.clientX;
+    let diff = cordX - this.cordX;
+    this.cordX = 0;
+    debugger
+
+    if (diff > 50) {
+      let idx = index - 1 < 0 ? 0 : index - 1;
+      this.goTo(idx);
+    } else if (diff < -50) {
+      let idx =
+        index + 1 == this.items.length ? this.items.length - 1 : index + 1;
+      this.goTo(idx);
+    }
   }
 
   ngOnDestroy() {
