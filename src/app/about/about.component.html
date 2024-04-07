@@ -11,6 +11,7 @@
     </div>
     }
   </div>
+
   <div class="gallery-container">
     @if((fileUploads$ | async)) {
     @for (file of fileUploads$ | async;track file;) {
@@ -33,7 +34,7 @@
   </div>
 
 
-  @if(loading) {
-  <process-wheel [shown]="true"></process-wheel>
-  }
 </div>
+@if(loading) {
+<process-wheel [shown]="true"></process-wheel>
+}

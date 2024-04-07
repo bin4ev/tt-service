@@ -54,7 +54,6 @@ app-root {
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
 .title {
@@ -75,7 +74,7 @@ app-root {
 
 .pbl-content-img {
   img {
-    width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -106,6 +105,9 @@ app-root {
 /* .mat-mdc-card {
   background: transparent !important;
 } */
+.mat-mdc-card-title {
+  color: #00000099;
+}
 
 .icon {
   cursor: pointer;

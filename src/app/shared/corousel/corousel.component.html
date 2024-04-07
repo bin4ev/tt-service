@@ -1,13 +1,15 @@
 <div class="carousel-container">
   @for (item of items ;track item.title; let i = $index) {
-    <div class="carousel" [ngClass]="{ 'active': index() === i }">
-      <h1 class="title">
-        <small>{{item.small}}</small>
-        <span class="uppercase">{{item.large}}</span>
-        <span class="blue-color"> {{item.title}}</span>
-      </h1>
-      <p class="desc">{{item.desc}}
-      </p>
+    <div class="carousel"  [ngStyle]="{transform: 'translateX(' + (index() * -100) + '%)'}">
+      <div class="carousel-item">
+        <h1 class="title">
+          <small>{{item.small}}</small>
+          <span class="uppercase">{{item.large}}</span>
+          <span class="blue-color"> {{item.title}}</span>
+        </h1>
+        <p class="desc">{{item.desc}}
+        </p>
+      </div>
     </div>
   }
 </div>

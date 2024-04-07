@@ -5,7 +5,7 @@
   </div>
 
   @if (!isShow) {
-  <div class="content" [@slideIn]>
+  <div class="content" [@slideInOut]>
     <h1 class="title">
       <small>
         Извършваме </small>
@@ -23,9 +23,9 @@
 
 
   @defer (on immediate) {
-  <div #carouselElem>
+  <div #carouselElem [@slideInOut]>
     @if (isShow) {
-    <app-corousel class="more" [items]="services" [@slideInOut] />
+    <app-corousel class="more" [items]="services" />
     }
   </div>
   } @loading () {

@@ -9,7 +9,7 @@ import {
   signOut,
 } from "@angular/fire/auth";
 import { Router } from "@angular/router";
-import { Subject } from "rxjs";
+import { Subject, from, tap } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -18,7 +18,7 @@ export class AuthService {
   UserData?: User;
   isLogedInSubject = new Subject<boolean>();
   isLogedIn$ = this.isLogedInSubject.asObservable();
-  
+
   private auth = inject(Auth);
   private router = inject(Router);
   public ngZone = inject(NgZone);
@@ -29,11 +29,11 @@ export class AuthService {
         this.UserData = user;
         localStorage.setItem("user", JSON.stringify(this.UserData));
         JSON.parse(localStorage.getItem("user")!);
-        this.isLogedInSubject.next(true)
+        this.isLogedInSubject.next(true);
       } else {
         localStorage.setItem("user", "null");
         JSON.parse(localStorage.getItem("user")!);
-        this.isLogedInSubject.next(false)
+        this.isLogedInSubject.next(false);
       }
     });
   }
@@ -45,7 +45,7 @@ export class AuthService {
   }
 
   get currentUser(): User | null {
-    return this.auth.currentUser
+    return this.auth.currentUser;
   }
 
   //get Authenticated user from Local Storage
@@ -80,29 +80,38 @@ export class AuthService {
     }
   }
 
-  async login(email: string, password: string) {
-    try {
+  login(email: string, password: string) {
+    /* try {
       const result = await signInWithEmailAndPassword(
         this.auth,
         email,
         password
       );
       this.UserData = result.user;
-    
-   
+
       this.ngZone.run(() => {
-        this.isLogedInSubject.next(true)
+        this.isLogedInSubject.next(true);
         this.router.navigate(["/home"]);
       });
     } catch (error) {
       window.alert(error);
-    }
+    } */
+
+    return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
+      tap((userCreden) => {
+        this.UserData = userCreden.user;
+        this.ngZone.run(() => {
+          this.isLogedInSubject.next(true);
+          this.router.navigate(["/home"]);
+        });
+      })
+    );
   }
 
   logout() {
     signOut(this.auth).then(() => {
-      this.router.navigate(["/login"])
-    } );
+      this.router.navigate(["/login"]);
+    });
   }
 
   async sendPasswordResetEmails(email: string) {
