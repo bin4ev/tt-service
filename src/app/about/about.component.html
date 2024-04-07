@@ -15,12 +15,10 @@
   <div class="gallery-container">
     @if((fileUploads$ | async)) {
     @for (file of fileUploads$ | async;track file;) {
-    <div class="gallery-image"
-    [ngClass]="{
+    <div class="gallery-image" [ngClass]="{
       'checked':selectedFiles.has(file),
       'unclickeble': !isLoggedIn
-      }"
-    (click)="deleteFile(file)">
+      }" (click)="deleteFile(file)">
       <img [ngSrc]="file.url" width="100" height="100" [alt]="'url'" priority="true">
       <div class="delete-overlay">
         <mat-icon class="delete-icon">delete</mat-icon>
@@ -36,5 +34,5 @@
 
 </div>
 @if(loading) {
-<process-wheel [shown]="true"></process-wheel>
+   <process-wheel [shown]="true"></process-wheel>
 }
