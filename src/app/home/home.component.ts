@@ -52,17 +52,20 @@ export class HomeComponent {
     },
   ];
 
-  isShow = false;
+  isShowDefaultInfo = false;
+  isShowMoreInfo = false;
 
   showMoreInfo() {
-    this.isShow = !this.isShow;
+    this.isShowDefaultInfo = !this.isShowDefaultInfo;
     this.unblurBackground();
+    this.isShowMoreInfo = true
     setTimeout(() => {
-      this.carouselElement?.nativeElement.scrollIntoView({
+      
+      this.carouselElement.nativeElement.scrollIntoView({
         behavior: "smooth",
         block: "end",
       });
-    }, 1000);
+    });
   }
 
   unblurBackground() {

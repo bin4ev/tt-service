@@ -4,7 +4,7 @@
     <img #background src="assets/home2.jpg" alt="background">
   </div>
 
-  @if (!isShow) {
+  @if (!isShowDefaultInfo) {
   <div class="content" [@slideInOut]>
     <h1 class="title">
       <small>
@@ -24,7 +24,7 @@
 
   @defer (on immediate) {
   <div #carouselElem [@slideInOut]>
-    @if (isShow) {
+    @if (isShowMoreInfo) {
     <app-corousel class="more" [items]="services" />
     }
   </div>
