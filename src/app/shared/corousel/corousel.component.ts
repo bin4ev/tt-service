@@ -1,5 +1,6 @@
 import { NgClass, NgStyle } from "@angular/common";
 import { Component, Input, input, signal } from "@angular/core";
+import { Subject, Subscription, takeUntil } from "rxjs";
 import { interval } from "rxjs/internal/observable/interval";
 import { tap } from "rxjs/internal/operators/tap";
 import { untilDestroyed } from "src/app/helpers/utils";
@@ -22,14 +23,34 @@ export class CorouselComponent {
   @Input({ required: true }) items: CarouselItem[] = [];
 
   private untilDestroyed = untilDestroyed();
+  private destroy$ = new Subject<void>();
   index = signal(0);
-
+ 
   ngOnInit() {
-    interval(5000)
-      .pipe(
-        this.untilDestroyed(),
-        tap((sec) => this.index.update((val) => (val + 1) % this.items.length))
-      )
-      .subscribe();
+   this.startInterval() 
+  }
+
+  startInterval() {
+    interval(10000)
+    .pipe(
+      takeUntil(this.destroy$),
+      tap((sec) => this.index.update((val) => (val + 1) % this.items.length))
+    )
+    .subscribe()
+  }
+
+  goTo(index:number){
+    this.index.set(index);
+    this.resetInterval()
+  }
+
+  resetInterval() {
+    this.destroy$.next(); 
+    this.startInterval(); 
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

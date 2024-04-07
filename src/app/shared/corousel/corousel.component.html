@@ -12,4 +12,10 @@
       </div>
     </div>
   }
+  <div class="carousel-dots">
+    @for (item of items; track i; let i = $index) {
+      <span class="dot" [ngClass]="{'active' : index() === i}"
+      (click)="goTo(i)"></span>
+    }
+  </div>
 </div>
