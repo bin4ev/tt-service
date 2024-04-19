@@ -5,9 +5,9 @@
 
   <ul class="nav">
     <li routerLinkActive="active" routerLink="home">{{"NAV.HOME" | translate}}</li>
-    <li routerLinkActive="active" routerLink="about">Галерия</li>
-    <li routerLinkActive="active" routerLink="services">Услуги</li>
-    <li routerLinkActive="active" routerLink="contacts">Контакти</li>
+    <li routerLinkActive="active" routerLink="about">{{"NAV.GALLERY" | translate}}</li>
+    <li routerLinkActive="active" routerLink="services">{{"NAV.SERVICE" | translate}}</li>
+    <li routerLinkActive="active" routerLink="contacts">{{"NAV.CONTACTS" | translate}}</li>
   </ul>
 
   <div class="socials-wrapper">
@@ -23,7 +23,7 @@
   <languages></languages>
 
   @if(isLogedIn$ | async) {
-  <span class="exit">Добре дошли <strong>{{userData?.email}}</strong></span>
+  <span class="exit">{{'WELCOME' | translate}}<strong class="ms-2">{{userData?.email}}</strong></span>
   <i class=" exit" routerLink="login">
     <mat-icon matTooltip="Logout" [ngStyle]="{'color': 'red'}" (click)="logOut()">logout</mat-icon>
   </i>

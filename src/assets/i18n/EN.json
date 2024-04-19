@@ -1,5 +1,9 @@
 {
   "NAV": {
-    "HOME": "Home"
-  }
+    "HOME": "Home",
+    "GALLERY": "Gallery",
+    "SERVICE": "Services",
+    "CONTACTS": "Contacts"
+  },
+  "WELCOME": "Welcome"
 }
