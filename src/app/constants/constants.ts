@@ -1,0 +1,1 @@
+export const BUSSINES_PHONE_NUMBER = '+359 876 603 499'

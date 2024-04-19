@@ -24,6 +24,12 @@
   .phone {
     display: flex;
     align-items: center;
+    span {
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
   }
 }
 

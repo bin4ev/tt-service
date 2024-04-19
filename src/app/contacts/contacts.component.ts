@@ -10,6 +10,7 @@ import { EmailService } from "../services/email.service";
 import { JsmapComponent } from "../jsmap/jsmap.component";
 import { NotificationService } from "../services/notification.service";
 import { finalize } from "rxjs";
+import { BUSSINES_PHONE_NUMBER } from "../constants/constants";
 
 @Component({
   selector: "app-contacts",
@@ -37,6 +38,7 @@ import { finalize } from "rxjs";
   ],
 })
 export class ContactsComponent {
+  BUSSINES_PHONE_NUMBER = BUSSINES_PHONE_NUMBER
   private contactService = inject(EmailService);
   formData: any = {};
   private notificationService = inject(NotificationService);
