@@ -5,5 +5,7 @@
     "SERVICE": "Services",
     "CONTACTS": "Contacts"
   },
-  "WELCOME": "Welcome"
+  "WELCOME": "Welcome",
+  "LOGIN": "Login",
+  "EXIT": "Logout"
 }

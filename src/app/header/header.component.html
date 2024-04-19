@@ -51,18 +51,18 @@
 <div class="position-relative">
   <section class="bar" [ngClass]="{'open-bar': isOpenBar}" (click)="isOpenBar = !isOpenBar">
     <mat-selection-list role="list">
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="home">Начало</mat-list-item>
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="about">Галерия</mat-list-item>
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="services">Услуги</mat-list-item>
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="contacts">Контакти</mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="home">{{"NAV.HOME" | translate}}</mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="about">{{"NAV.GALLERY" | translate}}</mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="services">{{"NAV.SERVICE" | translate}}</mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="contacts">{{"NAV.CONTACTS" | translate}}</mat-list-item>
 
       @if(isLogedIn$ | async) {
       <mat-list-item role="listitem" (click)="logOut()">
-        <span [ngStyle]="{'color': 'red'}">Изход</span>
+        <span [ngStyle]="{'color': 'red'}">{{"EXIT" | translate}}</span>
       </mat-list-item>
       } @else {
       <mat-list-item role="listitem" routerLink="login">
-        <span [ngStyle]="{'color': 'green'}">Вход</span>
+        <span [ngStyle]="{'color': 'green'}">{{"LOGIN" | translate}}</span>
       </mat-list-item>
       }
     </mat-selection-list>
