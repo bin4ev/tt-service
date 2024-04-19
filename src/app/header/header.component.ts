@@ -10,13 +10,12 @@ import { Observable } from "rxjs/internal/Observable";
 import { tap } from "rxjs";
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatListModule} from '@angular/material/list';
-
-
-
+import { TranslateModule } from "@ngx-translate/core";
+import { LanguagesComponent } from "../shared/languages/languages.component";
 @Component({
   selector: "app-header",
   standalone: true,
-  imports: [MatToolbarModule, NgOptimizedImage, RouterLink, RouterLinkActive, MatIconModule, AsyncPipe,NgStyle, MatTooltipModule, MatListModule, NgClass],
+  imports: [MatToolbarModule, NgOptimizedImage, RouterLink, RouterLinkActive, MatIconModule, AsyncPipe,NgStyle, MatTooltipModule, MatListModule, NgClass, TranslateModule, LanguagesComponent],
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.scss"],
 })

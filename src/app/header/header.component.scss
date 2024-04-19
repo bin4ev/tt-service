@@ -7,6 +7,7 @@
   margin-top: 2rem;
   display: flex;
   justify-content: space-between;
+  color:#ffffff
 }
 
 .logo-wrapper {
@@ -83,5 +84,9 @@ li:hover {
 @media screen and (max-width: $sm-screen) {
   .socials-wrapper {
     display: none;
+  }
+
+  .logo-wrapper {
+    height: 60px;
   }
 }

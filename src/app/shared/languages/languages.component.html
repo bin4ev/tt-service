@@ -1,0 +1,22 @@
+<div [matMenuTriggerFor]="menuLng" class="container">
+    <div class="poiter">
+        <div class="options pointer">
+            <span>{{language}}</span>
+            <div class="flex-align-center">
+                <img ngSrc="assets/flags/{{language}}.svg" height="19" width="21">
+                <mat-icon>arrow_drop_down</mat-icon>
+            </div>
+        </div>
+    </div>
+
+    <mat-menu #menuLng="matMenu">
+        @for(item of langToShow; track item) {
+            <div mat-menu-item (click)="changeLanguage(item)">
+                <div class="options">
+                    <span class="me-1">{{item}}</span>
+                    <img ngSrc="assets/flags/{{item}}.svg" height="19" width="21">
+                </div>
+            </div>
+        }
+    </mat-menu>
+</div>

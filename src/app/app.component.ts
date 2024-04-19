@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FooterComponent } from './footer/footer.component';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -12,6 +13,10 @@ import { HeaderComponent } from './header/header.component';
     imports: [HeaderComponent, RouterOutlet, FooterComponent,]
 })
 export class AppComponent {
-  title = 'tt-service';
+  #translateService = inject(TranslateService)
 
+  constructor() {
+  this.#translateService.setDefaultLang('BG')
+  this.#translateService.use('BG')
+  }
 }

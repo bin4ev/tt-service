@@ -3,6 +3,7 @@ import { AppComponent } from "./app/app.component";
 import {
   withInterceptorsFromDi,
   provideHttpClient,
+  HttpClient,
 } from "@angular/common/http";
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { BrowserModule, bootstrapApplication } from "@angular/platform-browser";
@@ -10,10 +11,15 @@ import { provideRouter, withViewTransitions } from "@angular/router";
 import { routes } from "./app/routing";
 import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
 import { getAuth, provideAuth } from "@angular/fire/auth";
-import { getDatabase, provideDatabase } from "@angular/fire/database";
 import { getStorage, provideStorage } from "@angular/fire/storage";
 import { environment } from "./environments/environment.development";
 import { getFirestore, provideFirestore } from "@angular/fire/firestore";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+
+export function HttpLoaderFactory(http:HttpClient) {
+  return new TranslateHttpLoader(http, "./assets/i18n/", '.json')
+} 
 
 bootstrapApplication(AppComponent, {
 
@@ -31,5 +37,13 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(provideAuth(() => getAuth())),
     importProvidersFrom(provideFirestore(() => getFirestore())),
     importProvidersFrom(provideStorage(() => getStorage())),
+    importProvidersFrom(TranslateModule.forRoot({
+      defaultLanguage: "BG",
+      loader:{
+        provide :TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps:[HttpClient]
+      }
+    }))
   ],
 }).catch((err) => console.error(err));
