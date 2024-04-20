@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>{{config().title}}</h2>
-<mat-dialog-content>{{config().message}}</mat-dialog-content>
+<h2 mat-dialog-title>{{config().title | translate}}</h2>
+<mat-dialog-content>{{config().message | translate}}</mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="closeDialog(false)">{{config().cancel_button_label}}</button>
-  <button mat-button (click)="closeDialog(true)" cdkFocusInitial>{{config().confirm_button_label}}</button>
+  <button mat-button (click)="closeDialog(false)">{{config().cancel_button_label | translate}}</button>
+  <button mat-button (click)="closeDialog(true)" cdkFocusInitial>{{config().confirm_button_label | translate}}</button>
 </mat-dialog-actions>

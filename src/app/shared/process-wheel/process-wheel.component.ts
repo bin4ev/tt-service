@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'process-wheel',
   templateUrl: './process-wheel.component.html',
   styleUrls: ['./process-wheel.component.scss'],
-  standalone:true
+  standalone:true,
+  imports:[TranslateModule]
 })
 export class ProcessWheelComponent implements OnInit {
   @Input() shown: boolean = false;

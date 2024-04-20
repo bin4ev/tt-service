@@ -4,10 +4,7 @@
   </div>
 
   <ul class="nav">
-    <li routerLinkActive="active" routerLink="home">{{"NAV.HOME" | translate}}</li>
-    <li routerLinkActive="active" routerLink="about">{{"NAV.GALLERY" | translate}}</li>
-    <li routerLinkActive="active" routerLink="services">{{"NAV.SERVICE" | translate}}</li>
-    <li routerLinkActive="active" routerLink="contacts">{{"NAV.CONTACTS" | translate}}</li>
+    <app-nav-lisst [navList]="navList"></app-nav-lisst>
   </ul>
 
   <div class="socials-wrapper">

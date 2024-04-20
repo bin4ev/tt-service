@@ -16,6 +16,7 @@ import { UploadResult } from "@angular/fire/storage";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationDialogComponent } from "../shared/confirmation-dialog/confirmation-dialog.component";
 import { AuthService } from "../services/auth.service";
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: "app-about",
@@ -29,6 +30,7 @@ import { AuthService } from "../services/auth.service";
     MatButtonModule,
     MatIconModule,
     NgClass,
+    TranslateModule
   ],
 })
 export class AboutComponent {

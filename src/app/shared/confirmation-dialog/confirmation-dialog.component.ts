@@ -7,6 +7,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from "@angular/material/dialog";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { ConfirmDialogConfig } from "src/app/interfaces/confirm-dialog-config";
 
 @Component({
@@ -18,21 +19,24 @@ import { ConfirmDialogConfig } from "src/app/interfaces/confirm-dialog-config";
     MatDialogActions,
     MatDialogClose,
     MatButtonModule,
+    TranslateModule
   ],
   templateUrl: "./confirmation-dialog.component.html",
   styleUrl: "./confirmation-dialog.component.scss",
 })
 export class ConfirmationDialogComponent {
-  matDialogRef = inject(MatDialogRef<ConfirmationDialogComponent>);
   config = signal<ConfirmDialogConfig>({
-    title: "Изтриване на файл",
-    message: "Сигурни ли сте, че искате да изтриете файла?",
-    cancel_button_label: "Не",
-    confirm_button_label: "Да",
+    title: "DELETE_CONFIRMATION.title",
+    message: "DELETE_CONFIRMATION.message",
+    cancel_button_label: "DELETE_CONFIRMATION.cancel_button_label",
+    confirm_button_label: "DELETE_CONFIRMATION.confirm_button_label",
   });
 
+  #matDialogRef = inject(MatDialogRef<ConfirmationDialogComponent>);
+
+
   closeDialog(bul: boolean) {
-    this.matDialogRef.close(bul);
+    this.#matDialogRef.close(bul);
   }
 }
 

@@ -7,16 +7,16 @@
   @if (!isShowDefaultInfo) {
   <div class="content" [@slideInOut]>
     <h1 class="title">
-      <small>
-        Извършваме </small>
-      Цялостни <span class="blue-color">автомобилни ремонти</span>
+      <small>{{ 'HOME.TITLE.PART1' | translate }}</small>
+      {{ 'HOME.TITLE.PART2' | translate }}
+      <span class="blue-color">{{ 'HOME.TITLE.PART3' | translate }}</span>
     </h1>
     <p class="desc">
-      Автосервиз в Бургас. Експресен ремонт на вашия автомобил - външен вид, двигател, ходова част.
+      {{ 'HOME.DESCRIPTION' | translate }}
     </p>
     <div class="btns-wrapper">
-      <button mat-raised-button (click)="showMoreInfo()">Виж повече</button>
-      <button mat-raised-button routerLink="../contacts">Свържи се с нас</button>
+      <button mat-raised-button (click)="showMoreInfo()">{{ 'SEE_MORE' | translate }}</button>
+      <button mat-raised-button routerLink="../contacts">{{ 'CONTACT_US' | translate }}</button>
     </div>
   </div>
   }

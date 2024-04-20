@@ -2,10 +2,69 @@
   "NAV": {
     "HOME": "Home",
     "GALLERY": "Gallery",
-    "SERVICE": "Services",
+    "SERVICES": "Services",
     "CONTACTS": "Contacts"
   },
   "WELCOME": "Welcome",
   "LOGIN": "Login",
-  "EXIT": "Logout"
+  "EXIT": "Logout",
+  "HOME": {
+    "TITLE": {
+      "PART1": "We perform",
+      "PART2": "Comprehensive",
+      "PART3": "car repairs"
+    },
+    "DESCRIPTION": "Car service in Burgas. Express repair of your car - exterior, engine, chassis."
+  },
+  "SEE_MORE": "See more",
+  "CONTACT_US": "Contact us",
+  "SERVICES": [
+    {
+      "title": "Repair and Maintenance",
+      "small": "We offer",
+      "large": "Diagnostics and comprehensive servicing",
+      "desc": "Trust us, and we will ensure that your cars are not only repaired but also maintained in excellent technical condition!"
+    },
+    {
+      "title": "Specialized Service and Maintenance of Air Conditioning Systems",
+      "small": "We take care of your",
+      "large": "comfort and convenience,",
+      "desc": "From troubleshooting to repair and refrigerant charging, we are here to ensure optimal functioning of the climate in your car throughout the year. With us, your comfort comes first."
+    },
+    {
+      "title": "Express Oil and Filter Service:",
+      "small": "We offer",
+      "large": "fast and efficient oil and filter service for your car.",
+      "desc": "With us, you can trust for a quick oil and filter change, which will ensure optimal engine performance and extended life of your car."
+    }
+  ],
+  "FOOTER": {
+    "working_time": "Working hours",
+    "monday_friday": "Monday - Friday:"
+  },
+  "GALLERY": {
+    "title": "Gallery",
+    "add_photo": "Add photo",
+    "no_photos_found": "images not found"
+  },
+  "DELETE_CONFIRMATION": {
+    "title": "Delete File",
+    "message": "Are you sure you want to delete the file?",
+    "cancel_button_label": "Cancel",
+    "confirm_button_label": "Confirm"
+  },
+  "LOGIN_FORM": {
+    "title":"Login",
+    "email_label": "Email",
+    "email_placeholder": "email@gmail.com",
+    "email_required_error": "This field is required",
+    "email_invalid_error": "Invalid email",
+    "password_label": "Password",
+    "password_placeholder": "Password",
+    "password_required_error": "This field is required",
+    "password_minlength_error": "Password must be at least 4 characters long",
+    "login_button": "Login"
+  },
+  "loading":"Loading"
+
 }

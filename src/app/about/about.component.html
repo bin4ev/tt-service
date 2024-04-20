@@ -1,12 +1,12 @@
 <div class="pbl-container">
   <div class="flex-to-side">
-    <span class="title">Галерия</span>
+    <span class="title">{{'GALLERY.title' | translate}}</span>
 
     @if(isLoggedIn) {
     <div class="upload">
       <button mat-raised-button (click)="upload.click()">
         <mat-icon>add</mat-icon>
-        Добави снимка</button>
+        {{"GALLERY.add_photo" | translate}}</button>
       <input #upload type="file" (change)="uploadonFileSelectedImg($event)" multiple>
     </div>
     }
@@ -27,7 +27,7 @@
     </div>
     }
     } @else {
-    <p>No images found</p>
+    <p>{{'GALLERY.no_photos_found' | translate}}</p>
     }
   </div>
 

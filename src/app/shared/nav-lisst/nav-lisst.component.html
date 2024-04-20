@@ -1,0 +1,4 @@
+<ul>
+  @for( item of navList();track item) {
+  <li routerLinkActive="active" routerLink="{{item}}">{{("NAV." + item.toUpperCase()) | translate}}</li> }
+</ul>

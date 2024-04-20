@@ -1,6 +1,6 @@
 <div class="pbl-container">
 
-  <mat-card class="pbl-form">
+  <!-- <mat-card class="pbl-form">
     <form #form="ngForm">
       <mat-card-title>Вход</mat-card-title>
 
@@ -28,7 +28,42 @@
         }
       </mat-form-field>
 
-      <button mat-raised-button (click)="submit()">Вход</button>
+      <button mat-raised-button [disabled]="form.invalid"
+      (click)="submit()">Вход</button>
+
+    </form>
+  </mat-card> -->
+
+  <mat-card class="pbl-form">
+    <form #form="ngForm">
+      <mat-card-title>{{ 'LOGIN_FORM.title' | translate }}</mat-card-title>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'LOGIN_FORM.email_label' | translate }}</mat-label>
+        <input #email="ngModel" matInput placeholder="{{ 'LOGIN_FORM.email_placeholder' | translate }}" name="email" [(ngModel)]="formData.email" required email>
+        <mat-icon matSuffix>email</mat-icon>
+        @if (email.errors?.['required']) {
+        <mat-error>{{ 'LOGIN_FORM.email_required_error' | translate }}</mat-error>
+        }
+        @if (email.errors?.['email']) {
+        <mat-error>{{ 'LOGIN_FORM.email_invalid_error' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'LOGIN_FORM.password_label' | translate }}</mat-label>
+        <input  #password="ngModel" matInput placeholder="{{ 'LOGIN_FORM.password_placeholder' | translate }}" name="password" [(ngModel)]="formData.password" required minlength="4">
+        <mat-icon matSuffix>password</mat-icon>
+        @if (password.errors?.['required']) {
+        <mat-error>{{ 'LOGIN_FORM.password_required_error' | translate }}</mat-error>
+        }
+        @if (password.errors?.['minlength']) {
+        <mat-error>{{ 'LOGIN_FORM.password_minlength_error' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <button mat-raised-button
+      (click)="submit(form)">{{ 'LOGIN_FORM.login_button' | translate }}</button>
 
     </form>
   </mat-card>

@@ -3,7 +3,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, NgForm } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
@@ -12,6 +12,7 @@ import { catchError, finalize } from "rxjs/operators";
 import { NotificationService } from "src/app/services/notification.service";
 import { of } from "rxjs/internal/observable/of";
 import { ProcessWheelComponent } from "src/app/shared/process-wheel/process-wheel.component";
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: "app-sign-in",
@@ -25,7 +26,8 @@ import { ProcessWheelComponent } from "src/app/shared/process-wheel/process-whee
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    ProcessWheelComponent
+    ProcessWheelComponent,
+    TranslateModule
   ],
   templateUrl: "./sign-in.component.html",
   styleUrl: "./sign-in.component.scss",
@@ -37,7 +39,10 @@ export class SignInComponent {
   #authService = inject(AuthService);
   #notifService = inject(NotificationService);
 
-  submit() {
+  submit(form:NgForm) {
+    if(form.invalid) {
+      return
+    }
     this.loading = true;
     this.#authService.login(this.formData.email, this.formData.password).pipe(
       finalize(() => {
