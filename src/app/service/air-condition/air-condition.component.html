@@ -1,34 +1,30 @@
 <button mat-raised-button routerLink="../" class="m-3">
   <mat-icon>arrow_back</mat-icon>
-  Назад
+  {{ 'BUTTON.back' | translate }}
 </button>
 
 <div class="pbl-container">
-  <span class="title">Климатик</span>
+  <span class="title">{{ 'SERVICE_PAGE_SERVICE.AIR_CONDITION.air_conditioning' | translate }}</span>
 
   <section class="pbl-content">
 
     <article class="pbl-content-article">
-      <h3 class="fw-semibold">Периодично и профилактично сервизно обслужване на климатик:</h3>
+      <h3 class="fw-semibold">{{ 'SERVICE_PAGE_SERVICE.AIR_CONDITION.periodic_and_preventive_maintenance' | translate }}</h3>
       <ul>
-        <ul>
-          <li>Преглед и зареждане на фреона</li>
-          <li>Проверка на компресора и вентилаторите</li>
-          <li>Проверка на филтрите за прах и полени</li>
-          <li>Проверка на вътрешните и външните вентилационни отвори</li>
-          <li>Проверка на уплътненията и маркучите</li>
-          <li>Проверка на температурните настройки</li>
-          <li>Чистене на кондензатора</li>
-          <li>Проверка на общото състояние</li>
-        </ul>
+        <li>{{ 'SERVICE_PAGE_SERVICE.AIR_CONDITION.inspection_and_refill_of_refrigerant' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.AIR_CONDITION.checking_compressor_and_fans' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.AIR_CONDITION.checking_dust_and_pollen_filters' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.AIR_CONDITION.checking_internal_and_external_ventilation_openings' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.AIR_CONDITION.checking_seals_and_hoses' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.AIR_CONDITION.checking_temperature_settings' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.AIR_CONDITION.cleaning_condenser' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.AIR_CONDITION.checking_overall_condition' | translate }}</li>
       </ul>
-
     </article>
 
     <article class="pbl-content-img">
-      <img src="assets/images/repair-services/air-cond.jpg" alt="fullSerivce">
+      <img src="assets/images/repair-services/air-cond.jpg" alt="{{ 'SERVICE_PAGE_SERVICE.AIR_CONDITION.air_conditioning' | translate }}">
     </article>
 
   </section>
-
 </div>

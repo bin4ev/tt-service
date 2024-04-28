@@ -39,7 +39,7 @@
     }
   ],
   "FOOTER": {
-    "working_time":"Работно време",
+    "working_time": "Работно време",
     "monday_friday": "Понеделник - Петък:"
   },
   "GALLERY": {
@@ -54,7 +54,7 @@
     "confirm_button_label": "Да"
   },
   "LOGIN_FORM": {
-    "title":"Вход",
+    "title": "Вход",
     "email_label": "Имейл",
     "email_placeholder": "email@gmail.com",
     "email_required_error": "Задължително поле",
@@ -65,5 +65,146 @@
     "password_minlength_error": "Паролата трябва да бъде поне 4 символа",
     "login_button": "Вход"
   },
-  "loading":"Зареждане"
+  "loading": "Зареждане",
+  "SERVICE_PAGE": {
+    "title": "Услуги",
+    "service_pills_title": {
+      "service": "СЕРВИЗНО ОБСЛУЖВАНЕ",
+      "brake_system": "СПИРАЧНА СИСТЕМА",
+      "air_conditioning": "КЛИМАТИК",
+      "exhaust_system": "ИЗПУСКАТЕЛНА СИСТЕМА",
+      "timing_belt": "АНГРЕНАЖЕН РЕМЪК",
+      "suspension": "ОКАЧВАНЕ",
+      "transmission": "Скоростна кутия"
+    }
+  },
+  "BUTTON": {
+    "back": "Назад",
+    "send": "Изпрати"
+  },
+  "SERVICE_PAGE_SERVICE": {
+    "AIR_CONDITION": {
+      "air_conditioning": "Климатик",
+      "periodic_and_preventive_maintenance": "Периодично и профилактично сервизно обслужване на климатик:",
+      "inspection_and_refill_of_refrigerant": "Преглед и зареждане на фреона",
+      "checking_compressor_and_fans": "Проверка на компресора и вентилаторите",
+      "checking_dust_and_pollen_filters": "Проверка на филтрите за прах и полени",
+      "checking_internal_and_external_ventilation_openings": "Проверка на вътрешните и външните вентилационни отвори",
+      "checking_seals_and_hoses": "Проверка на уплътненията и маркучите",
+      "checking_temperature_settings": "Проверка на температурните настройки",
+      "cleaning_condenser": "Чистене на кондензатора",
+      "checking_overall_condition": "Проверка на общото състояние"
+    },
+    "BRAKE_SYSTEM": {
+      "title": "Спирачна система",
+      "preventive_maintenance": "Профилактично сервизно обслужване на спирачната система:",
+      "check_brake_fluid_level_and_condition": "Проверка на нивото и състоянието на спирачната течност",
+      "check_wear_of_brake_discs_and_pads": "Проверка на износването на спирачните дискове и накладки",
+      "check_condition_of_brake_hoses_and_pipes_for_leaks": "Проверка на състоянието на спирачните маркучи и тръби за изтичания",
+      "clean_brake_drums_if_present": "Прочистване на спирачните барабани (при наличие)",
+      "adjust_brake_drums_if_present": "Регулиране на спирачните барабани (при наличие)",
+      "lubricate_sliding_surfaces_and_mechanisms_of_brake_system": "Смазване на плъзгащи се повърхности и механизми на спирачната система",
+      "check_and_tighten_bolts_and_nuts_of_brake_system": "Проверка на компунентите на спирачната система",
+      "test_brake_system_for_proper_operation_and_responsiveness": "Тестване на спирачната система за правилна работа и отзивчивост",
+      "clean_or_replace_brake_fluid_filter_if_necessary": "Прочистване или замяна на филтъра на спирачната течност (при необходимост)",
+      "check_ABS_system_if_present_and_resolve_any_issues": "Проверка на системата за ABS (при наличие) и решаване на евентуални проблеми",
+      "adjust_hand_brake_if_present_and_check_its_functionality": "Регулиране на ръчната спирачка (при наличие) и проверка на нейната функционалност",
+      "replace_worn_parts_as_needed_brake_pads_discs_hoses_etc": "Подмяна на износените части според необходимостта (накладки, дискове, маркучи и др.)"
+    },
+    "EXHAUST_SYSTEM": {
+      "title": "Изпускателна система",
+      "repair_and_replacement": "Ремонт и подмяна на изпускателна система:",
+      "check_for_exhaustive_or_damaged_parts": "Проверка за изтощаващи се или повредени части в изпускателната система",
+      "repair_exhaust_pipes_and_hoses": "Ремонт на изпускателни тръби и маркучи",
+      "replace_catalytic_converters_if_necessary": "Подмяна на катализатори, ако е необходимо",
+      "check_and_repair_leaking_or_loose_connections": "Проверка и ремонт на гърнещи или разхлабени връзки",
+      "replace_gaskets_and_sealing_rings": "Подмяна на уплътнения и уплътнителни пръстени",
+      "check_and_adjust_exhaust_system_for_proper_operation_and_emissions": "Проверка и регулиране на изпускателната система за правилна работа и емисии",
+      "check_and_replace_gurnets_and_fasteners": "Проверка и подмяна на гърнета и крепежни елементи",
+      "test_vehicle_after_repair_for_confidence_in_proper_operation_of_exhaust_system": "Тестване на автомобила след ремонт за увереност в правилната работа на изпускателната система"
+    },
+    "FULL_SERVICE": {
+      "title": "Сервизно обслужване",
+      "periodic_and_preventive_maintenance": "Периодично и профилактично сервизно обслужване на автомобила:",
+      "check_condition_and_systems_of_the_car": "Преглед на състоянието и системите на автомобила",
+      "timing_belt": "Ангренажен ремък",
+      "v-ribbed_belt": "Клиновиден ремък",
+      "piston_belt": "Пистов ремък",
+      "water_pump": "Водна помпа",
+      "oil": "Масло",
+      "oil_filter": "Маслен филтър",
+      "air_filter": "Въздушен филтър",
+      "crankcase_gas_filter": "Филтър на картерните газове",
+      "cabin_pollen_filter_with_activated_charcoal": "Поленов филтър на купето с активен въглен",
+      "oil_and_filter_for_automatic_transmissions": "Масло и филтър за автоматични скоростни кутии",
+      "brake_fluid_change": "Смяна на спирачна течност",
+      "antifreeze_change": "Смяна на антифриз",
+      "hydraulic_oil_change": "Смяна на хидравлично масло"
+    },
+    "SUSPENSION": {
+      "title": "Окачване",
+      "suspension_repair": "Ремонт на ходова част:",
+      "check_and_adjust_suspension": "Проверка и регулиране на окачването",
+      "check_shock_absorbers_for_leaks_and_wear": "Проверка на амортисьорите за изтичания и износване",
+      "check_and_replace_suspension_bushings_and_pads": "Проверка и замяна на тампоните и подложките на окачването",
+      "adjust_wheel_angles_as_needed": "Регулиране на ъглите на колелата (според необходимостта)",
+      "check_and_tighten_suspension_bolts_and_nuts": "Проверка и затегване на болтовете и гайките на окачването",
+      "check_traction_and_replace_worn_parts": "Проверка на тракцията и замяна на износените части",
+      "check_weight_and_balance_of_wheels": "Проверка на тежестта и баланса на колелата",
+      "adjust_steering_system_if_necessary": "Регулиране на кормилната система (при необходимост)",
+      "check_and_replace_steering_tie_rods_and_crosspieces": "Проверка и замяна на кормилните накрайници и кръстове",
+      "check_and_tighten_centimeter_and_screw_connections_of_suspension": "Проверка и затегване на сантиметровите и винтовите връзки на ходовата част",
+      "test_vehicle_for_stability_and_comfort_during_movement": "Тестване на автомобила за стабилност и комфорт по време на движение",
+      "diagnose_and_repair_any_noise_and_vibrations_while_driving": "Диагностика и ремонт на евентуални шумове и вибрации при движение"
+    },
+    "TIMING_BELT": {
+      "title": "Ангренажен ремък",
+      "timing_belt_change": "Смяна на ангренажен ремък:",
+      "check_condition_of_current_timing_belt": "Проверка на състоянието на текущия ангренажен ремък",
+      "remove_timing_belt_from_alternator_pulley_compressor_or_other_accessories": "Откачане на ангренажния ремък от шкива на алтернатора, компресора или другите аксесоари",
+      "check_fully_connected_accessories_for_dirt_and_damage": "Проверка на напълно свързаните аксесоари за замърсявания и повреди",
+      "check_condition_of_rotating_accessory_pulleys_and_wear": "Проверка на състоянието на въртящите се аксесоарни шкиви и износване",
+      "install_new_timing_belt_in_accordance_with_manufacturer_recommendations": "Поставяне на нов ангренажен ремък в съответствие с препоръките на производителя",
+      "tension_timing_belt_using_tensioning_system": "Натягане на ангренажния ремък с помощта на натягателната система",
+      "check_correct_position_and_range_of_new_belt": "Проверка на правилното разположение и обхват на новия ремък",
+      "check_tension_and_tightening_of_new_timing_belt": "Проверка на тягата и натягането на новия ангренажен ремък",
+      "test_operation_of_accessories_and_belt_after_replacement": "Тестване на работата на аксесоарите и ремъка след смяната",
+      "document_timing_belt_replacement_for_future_reference": "Документиране на смяната на ангренажния ремък за бъдещи справки"
+    },
+    "TRANSMISSION": {
+      "title": "Скоростна кутия",
+      "service_and_repair_of_transmission": "Обслужване и ремонт на скоростна кутия:",
+      "check_level_and_condition_of_transmission_oil": "Проверка на нивото и състоянието на маслото в скоростната кутия",
+      "change_transmission_oil_and_filter_if_necessary": "Промяна на маслото и филтъра на скоростната кутия (при необходимост)",
+      "check_condition_of_clutch_and_repair_or_replace_as_needed": "Проверка на състоянието на съединителя и ремонт или подмяна при нужда",
+      "check_condition_of_gears_and_repair_worn_or_damaged_parts": "Проверка на състоянието на предавките и ремонт на износените или повредени части",
+      "adjust_cables_or_hydraulic_mechanisms_for_gear_shifting": "Регулиране на кабелите или хидравличните механизми за превключване на скоростите",
+      "check_and_replace_worn_synchros_if_necessary": "Проверка и подмяна на изтощени синхронизатори (при необходимост)",
+      "check_and_tighten_bolts_and_nuts_on_transmission": "Проверка и затегване на болтовете и гайките на скоростната кутия",
+      "test_operation_of_transmission_after_service_or_repair": "Тестване на работата на скоростната кутия след обслужване или ремонт",
+      "check_clutch_and_clutch_adjustment_settings_for_correctness": "Проверка на работата на куплунга и съединителя за коректност на настройките",
+      "test_gear_shifting_for_smoothness_and_accuracy": "Тестване на превключването на скоростите за плавност и точност",
+      "check_for_oil_leaks_or_other_problems_and_resolve_them": "Проверка на утечки на масло или други проблеми и тяхното отстраняване"
+    }
+  },
+  "CONTACT_US_PAGE": {
+    "WRITE_US": "Пишете Ни",
+    "NAME": "Име",
+    "EMAIL": "Имейл",
+    "PHONE": "Телефон",
+    "MESSAGE": "Съобщение",
+    "SEND": "Изпрати",
+    "NAME_REQUIRED": "Името е задължително",
+    "EMAIL_REQUIRED": "Имейла е задължителен",
+    "MESSAGE_REQUIRED": "Съобщението е задължително",
+    "INVALID_EMAIL": "Имейла е невалиден",
+    "PHONE_REQUIRED": "Телефонът е задължителен",
+    "INVALID_PHONE": "Телефонът е невалиден",
+    "CONTACT_US": "Свържете се с нас",
+    "EMAIL_ADDRESS": "example@example.com"
+  },
+  "UTILS": {
+    "city":"гр.",
+    "street": "ул."
+  }
 }

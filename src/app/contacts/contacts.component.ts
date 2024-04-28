@@ -10,7 +10,8 @@ import { EmailService } from "../services/email.service";
 import { JsmapComponent } from "../jsmap/jsmap.component";
 import { NotificationService } from "../services/notification.service";
 import { finalize } from "rxjs";
-import { BUSSINES_PHONE_NUMBER } from "../constants/constants";
+import { ADDRESS_STREET, ADDRESS_TOWN, BUSSINES_PHONE_NUMBER } from "../constants/constants";
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: "app-contacts",
@@ -22,6 +23,7 @@ import { BUSSINES_PHONE_NUMBER } from "../constants/constants";
     MatButtonModule,
     FormsModule,
     JsmapComponent,
+    TranslateModule,
   ],
   templateUrl: "./contacts.component.html",
   styleUrls: ["./contacts.component.scss"],
@@ -38,7 +40,9 @@ import { BUSSINES_PHONE_NUMBER } from "../constants/constants";
   ],
 })
 export class ContactsComponent {
-  BUSSINES_PHONE_NUMBER = BUSSINES_PHONE_NUMBER
+  BUSSINES_PHONE_NUMBER = BUSSINES_PHONE_NUMBER;
+  ADDRESS_TOWN = ADDRESS_TOWN;
+  ADDRESS_STREET = ADDRESS_STREET;
   private contactService = inject(EmailService);
   formData: any = {};
   private notificationService = inject(NotificationService);
@@ -49,17 +53,20 @@ export class ContactsComponent {
       return;
     }
     this.loading = true;
-    this.contactService.sendEmail(event.target as HTMLFormElement).pipe(
-      finalize(() => this.loading = false)
-    ).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.notificationService.showSuccess(`Email is sended successfully`);
-      },
-      error: (err) => {
-        console.log(err);
-        this.notificationService.showError(`${err.text}. Email sending failed`);
-      },
-    });
+    this.contactService
+      .sendEmail(event.target as HTMLFormElement)
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.notificationService.showSuccess(`Email is sended successfully`);
+        },
+        error: (err) => {
+          console.log(err);
+          this.notificationService.showError(
+            `${err.text}. Email sending failed`
+          );
+        },
+      });
   }
 }

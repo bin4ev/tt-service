@@ -2,54 +2,54 @@
   <div class="contacts-container" [@slideInOut]>
 
     <div class="form">
-      <div class="title">ПИШЕТЕ НИ</div>
+      <div class="title">{{ 'CONTACT_US_PAGE.WRITE_US' | translate }}</div>
       <form #form="ngForm" (ngSubmit)="onSubmit(form, $event)">
         <mat-form-field appearance="fill">
-          <mat-label>Име</mat-label>
+          <mat-label>{{ 'CONTACT_US_PAGE.NAME' | translate }}</mat-label>
           <input #name="ngModel" matInput placeholder="John Doe" name="name" [(ngModel)]="formData.name" required>
           <mat-icon matSuffix>badge</mat-icon>
           @if (name.errors?.['required']) {
-            <mat-error>Името e задължителено</mat-error>
+          <mat-error>{{ 'CONTACT_US_PAGE.NAME_REQUIRED' | translate }}</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-          <mat-label>Имейл</mat-label>
-          <input #email="ngModel" matInput placeholder="example.com" name="email" [(ngModel)]="formData.email" required email>
+          <mat-label>{{ 'CONTACT_US_PAGE.EMAIL' | translate }}</mat-label>
+          <input #email="ngModel" matInput placeholder="example.com" name="email" [(ngModel)]="formData.email" required
+            email>
           <mat-icon matSuffix>mail</mat-icon>
           @if (email.errors?.['required']) {
-            <mat-error>Имейла e задължителен</mat-error>
+          <mat-error>{{ 'CONTACT_US_PAGE.EMAIL_REQUIRED' | translate }}</mat-error>
           }
           @if (email.errors?.['email']) {
-            <mat-error>Имейла e невалиден</mat-error>
+          <mat-error>{{ 'CONTACT_US_PAGE.INVALID_EMAIL' | translate }}</mat-error>
           }
         </mat-form-field>
 
-
         <mat-form-field appearance="fill">
-          <mat-label>Телефон</mat-label>
-          <input #phone="ngModel" matInput placeholder="0xxx xxx xxx xxx" name="phone" [(ngModel)]="formData.phone" required
-            pattern="[0-9]{10}">
+          <mat-label>{{ 'CONTACT_US_PAGE.PHONE' | translate }}</mat-label>
+          <input #phone="ngModel" matInput placeholder="0xxx xxx xxx xxx" name="phone" [(ngModel)]="formData.phone"
+            required pattern="[0-9]{10}">
           <mat-icon matSuffix>phone</mat-icon>
           @if (phone.errors?.['required']) {
-            <mat-error>Името e задължителено</mat-error>
+          <mat-error>{{ 'CONTACT_US_PAGE.PHONE_REQUIRED' | translate }}</mat-error>
           }
           @if (phone.errors?.['pattern']) {
-            <mat-error>Телефона e невалиден</mat-error>
+          <mat-error>{{ 'CONTACT_US_PAGE.INVALID_PHONE' | translate }}</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Съобщение</mat-label>
+          <mat-label>{{ 'CONTACT_US_PAGE.MESSAGE' | translate }}</mat-label>
           <textarea #msg="ngModel" matInput name="msg" [(ngModel)]="formData.msg" required rows="6"></textarea>
           <mat-icon matSuffix>messages</mat-icon>
 
           @if (msg.errors?.['required']) {
-            <mat-error>Съобщение e задължителено</mat-error>
+          <mat-error>{{ 'CONTACT_US_PAGE.MESSAGE_REQUIRED' | translate }}</mat-error>
           }
         </mat-form-field>
 
-        <button type="submit" [disabled]="loading" mat-raised-button>Изпрати</button>
+        <button type="submit" [disabled]="loading" mat-raised-button>{{ 'BUTTON.send' | translate }}</button>
       </form>
 
 
@@ -57,13 +57,15 @@
 
     <div class="contact-info">
 
-      <div class="title">Свържете се с нас</div>
+      <div class="title">{{ 'CONTACT_US_PAGE.CONTACT_US' | translate }}</div>
       <div class="address">
-        <div class="text-with-icon">
+        <a class="text-with-icon"
+          href="https://www.google.com/maps/search/?api=1&query={{ADDRESS_TOWN}},{{ADDRESS_STREET}}" target="_blank">
           <mat-icon>location_on</mat-icon>
-          <p>гр. Бургас</p>
-        </div>
-        <p>ул. Индустриална 3</p>
+          <p><span>{{"UTILS.city" | translate}}</span> {{ADDRESS_TOWN}}</p>
+          <p><span>{{"UTILS.street" | translate}}</span> {{ADDRESS_STREET}}</p>
+        </a>
+
       </div>
 
 
@@ -85,5 +87,5 @@
     </div>
 
   </div>
-  
+
 </div>

@@ -1,34 +1,33 @@
 <button mat-raised-button routerLink="../" class="m-3">
   <mat-icon>arrow_back</mat-icon>
-  Назад
+  {{ 'BUTTON.back' | translate }}
 </button>
 
 <div class="pbl-container">
-  <span class="title">Спирачна система</span>
+  <span class="title">{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.title' | translate }}</span>
 
   <section class="pbl-content">
 
     <article class="pbl-content-article">
-      <h3 class="fw-semibold">Профилактично сервизно обслужване на спирачната система:</h3>
+      <h3 class="fw-semibold">{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.preventive_maintenance' | translate }}</h3>
       <ul>
-        <li>Проверка на нивото и състоянието на спирачната течност</li>
-        <li>Проверка на износването на спирачните дискове и накладки</li>
-        <li>Проверка на състоянието на спирачните маркучи и тръби за изтичания</li>
-        <li>Прочистване на спирачните барабани (при наличие)</li>
-        <li>Регулиране на спирачните барабани (при наличие)</li>
-        <li>Смазване на плъзгащи се повърхности и механизми на спирачната система</li>
-        <li>Проверка и затегване на болтове и гайки на спирачната система</li>
-        <li>Тестване на спирачната система за правилна работа и отзивчивост</li>
-        <li>Прочистване или замяна на филтъра на спирачната течност (при необходимост)</li>
-        <li>Проверка на системата за ABS (при наличие) и решаване на евентуални проблеми</li>
-        <li>Регулиране на ръчната спирачка (при наличие) и проверка на нейната функционалност</li>
-        <li>Подмяна на износените части според необходимостта (накладки, дискове, маркучи и др.)</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.check_brake_fluid_level_and_condition' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.check_wear_of_brake_discs_and_pads' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.check_condition_of_brake_hoses_and_pipes_for_leaks' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.clean_brake_drums_if_present' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.adjust_brake_drums_if_present' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.lubricate_sliding_surfaces_and_mechanisms_of_brake_system' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.check_and_tighten_bolts_and_nuts_of_brake_system' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.test_brake_system_for_proper_operation_and_responsiveness' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.clean_or_replace_brake_fluid_filter_if_necessary' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.check_ABS_system_if_present_and_resolve_any_issues' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.adjust_hand_brake_if_present_and_check_its_functionality' | translate }}</li>
+        <li>{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.replace_worn_parts_as_needed_brake_pads_discs_hoses_etc' | translate }}</li>
       </ul>
-
     </article>
 
     <article class="pbl-content-img">
-      <img src="assets/images/repair-services/brakes2.jpg" alt="brakes">
+      <img src="assets/images/repair-services/brakes2.jpg" alt="{{ 'SERVICE_PAGE_SERVICE.BRAKE_SYSTEM.title' | translate }}">
     </article>
 
   </section>

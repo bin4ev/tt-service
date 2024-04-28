@@ -1,13 +1,13 @@
 <div class="pbl-container" >
 
-  <span class="title">Услуги</span>
+  <span class="title">{{'SERVICE_PAGE.title' | translate}}</span>
 
   <div class="cells-container">
     @for (service of services; track service) {
       <mat-card  [@slideInOut] routerLink="{{service.path}}" >
         <mat-card-content >
           <div class="card pointer">
-            <div class="card-title">{{service.title | uppercase}} </div>
+            <div class="card-title">{{service.title | translate | uppercase}} </div>
             <div class="content">
               <img [ngSrc]="service?.iconPath" width="100" height="100" alt="icon" priority="">
             </div>

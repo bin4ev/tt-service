@@ -54,7 +54,7 @@
     "confirm_button_label": "Confirm"
   },
   "LOGIN_FORM": {
-    "title":"Login",
+    "title": "Login",
     "email_label": "Email",
     "email_placeholder": "email@gmail.com",
     "email_required_error": "This field is required",
@@ -65,6 +65,146 @@
     "password_minlength_error": "Password must be at least 4 characters long",
     "login_button": "Login"
   },
-  "loading":"Loading"
-
+  "loading": "Loading",
+  "SERVICE_PAGE": {
+    "title": "Услуги",
+    "service_pills_title": {
+      "service": "Service",
+      "brake_system": "Brake System",
+      "air_conditioning": "Air Conditioning",
+      "exhaust_system": "Exhaust System",
+      "timing_belt": "Timing Belt",
+      "suspension": "Suspension",
+      "transmission": "Transmission"
+    }
+  },
+  "BUTTON": {
+    "back": "Back",
+    "send": "Send"
+  },
+  "SERVICE_PAGE_SERVICE": {
+    "AIR_CONDITION": {
+      "air_conditioning": "Air Conditioning",
+      "periodic_and_preventive_maintenance": "Periodic and Preventive Maintenance of Air Conditioning:",
+      "inspection_and_refill_of_refrigerant": "Inspection and Refill of Refrigerant",
+      "checking_compressor_and_fans": "Checking Compressor and Fans",
+      "checking_dust_and_pollen_filters": "Checking Dust and Pollen Filters",
+      "checking_internal_and_external_ventilation_openings": "Checking Internal and External Ventilation Openings",
+      "checking_seals_and_hoses": "Checking Seals and Hoses",
+      "checking_temperature_settings": "Checking Temperature Settings",
+      "cleaning_condenser": "Cleaning Condenser",
+      "checking_overall_condition": "Checking Overall Condition"
+    },
+    "BRAKE_SYSTEM": {
+      "title": "Brake System",
+      "preventive_maintenance": "Preventive Maintenance of the Brake System:",
+      "check_brake_fluid_level_and_condition": "Check Brake Fluid Level and Condition",
+      "check_wear_of_brake_discs_and_pads": "Check Wear of Brake Discs and Pads",
+      "check_condition_of_brake_hoses_and_pipes_for_leaks": "Check Condition of Brake Hoses and Pipes for Leaks",
+      "clean_brake_drums_if_present": "Clean Brake Drums (if present)",
+      "adjust_brake_drums_if_present": "Adjust Brake Drums (if present)",
+      "lubricate_sliding_surfaces_and_mechanisms_of_brake_system": "Lubricate Sliding Surfaces and Mechanisms of Brake System",
+      "check_and_tighten_bolts_and_nuts_of_brake_system": "Check and Tighten Bolts and Nuts of Brake System",
+      "test_brake_system_for_proper_operation_and_responsiveness": "Test Brake System for Proper Operation and Responsiveness",
+      "clean_or_replace_brake_fluid_filter_if_necessary": "Clean or Replace Brake Fluid Filter (if necessary)",
+      "check_ABS_system_if_present_and_resolve_any_issues": "Check ABS System (if present) and Resolve Any Issues",
+      "adjust_hand_brake_if_present_and_check_its_functionality": "Adjust Hand Brake (if present) and Check Its Functionality",
+      "replace_worn_parts_as_needed_brake_pads_discs_hoses_etc": "Replace Worn Parts as Needed (Brake Pads, Discs, Hoses, etc.)"
+    },
+    "EXHAUST_SYSTEM": {
+      "title": "Exhaust System",
+      "repair_and_replacement": "Repair and Replacement of Exhaust System:",
+      "check_for_exhaustive_or_damaged_parts": "Check for Exhaustive or Damaged Parts in the Exhaust System",
+      "repair_exhaust_pipes_and_hoses": "Repair Exhaust Pipes and Hoses",
+      "replace_catalytic_converters_if_necessary": "Replace Catalytic Converters if Necessary",
+      "check_and_repair_leaking_or_loose_connections": "Check and Repair Leaking or Loose Connections",
+      "replace_gaskets_and_sealing_rings": "Replace Gaskets and Sealing Rings",
+      "check_and_adjust_exhaust_system_for_proper_operation_and_emissions": "Check and Adjust Exhaust System for Proper Operation and Emissions",
+      "check_and_replace_gurnets_and_fasteners": "Check and Replace Gurnets and Fasteners",
+      "test_vehicle_after_repair_for_confidence_in_proper_operation_of_exhaust_system": "Test Vehicle After Repair for Confidence in Proper Operation of Exhaust System"
+    },
+    "FULL_SERVICE": {
+      "title": "Servicing",
+      "periodic_and_preventive_maintenance": "Periodic and Preventive Maintenance of the Car:",
+      "check_condition_and_systems_of_the_car": "Check Condition and Systems of the Car",
+      "timing_belt": "Timing Belt",
+      "v-ribbed_belt": "V-Ribbed Belt",
+      "piston_belt": "Piston Belt",
+      "water_pump": "Water Pump",
+      "oil": "Oil",
+      "oil_filter": "Oil Filter",
+      "air_filter": "Air Filter",
+      "crankcase_gas_filter": "Crankcase Gas Filter",
+      "cabin_pollen_filter_with_activated_charcoal": "Cabin Pollen Filter with Activated Charcoal",
+      "oil_and_filter_for_automatic_transmissions": "Oil and Filter for Automatic Transmissions",
+      "brake_fluid_change": "Brake Fluid Change",
+      "antifreeze_change": "Antifreeze Change",
+      "hydraulic_oil_change": "Hydraulic Oil Change"
+    },
+    "SUSPENSION": {
+      "title": "Suspension",
+      "suspension_repair": "Repair of Suspension Components:",
+      "check_and_adjust_suspension": "Check and Adjust Suspension",
+      "check_shock_absorbers_for_leaks_and_wear": "Check Shock Absorbers for Leaks and Wear",
+      "check_and_replace_suspension_bushings_and_pads": "Check and Replace Suspension Bushings and Pads",
+      "adjust_wheel_angles_as_needed": "Adjust Wheel Angles as Needed",
+      "check_and_tighten_suspension_bolts_and_nuts": "Check and Tighten Suspension Bolts and Nuts",
+      "check_traction_and_replace_worn_parts": "Check Traction and Replace Worn Parts",
+      "check_weight_and_balance_of_wheels": "Check Weight and Balance of Wheels",
+      "adjust_steering_system_if_necessary": "Adjust Steering System if Necessary",
+      "check_and_replace_steering_tie_rods_and_crosspieces": "Check and Replace Steering Tie Rods and Crosspieces",
+      "check_and_tighten_centimeter_and_screw_connections_of_suspension": "Check and Tighten Centimeter and Screw Connections of Suspension",
+      "test_vehicle_for_stability_and_comfort_during_movement": "Test Vehicle for Stability and Comfort During Movement",
+      "diagnose_and_repair_any_noise_and_vibrations_while_driving": "Diagnose and Repair Any Noise and Vibrations While Driving"
+    },
+    "TIMING_BELT": {
+      "title": "Timing Belt",
+      "timing_belt_change": "Timing Belt Replacement:",
+      "check_condition_of_current_timing_belt": "Check Condition of Current Timing Belt",
+      "remove_timing_belt_from_alternator_pulley_compressor_or_other_accessories": "Remove Timing Belt from Alternator Pulley, Compressor, or Other Accessories",
+      "check_fully_connected_accessories_for_dirt_and_damage": "Check Fully Connected Accessories for Dirt and Damage",
+      "check_condition_of_rotating_accessory_pulleys_and_wear": "Check Condition of Rotating Accessory Pulleys and Wear",
+      "install_new_timing_belt_in_accordance_with_manufacturer_recommendations": "Install New Timing Belt in Accordance with Manufacturer Recommendations",
+      "tension_timing_belt_using_tensioning_system": "Tension Timing Belt Using Tensioning System",
+      "check_correct_position_and_range_of_new_belt": "Check Correct Position and Range of New Belt",
+      "check_tension_and_tightening_of_new_timing_belt": "Check Tension and Tightening of New Timing Belt",
+      "test_operation_of_accessories_and_belt_after_replacement": "Test Operation of Accessories and Belt After Replacement",
+      "document_timing_belt_replacement_for_future_reference": "Document Timing Belt Replacement for Future Reference"
+    },
+    "TRANSMISSION": {
+      "title": "Transmission",
+      "service_and_repair_of_transmission": "Service and Repair of Transmission:",
+      "check_level_and_condition_of_transmission_oil": "Check Level and Condition of Transmission Oil",
+      "change_transmission_oil_and_filter_if_necessary": "Change Transmission Oil and Filter If Necessary",
+      "check_condition_of_clutch_and_repair_or_replace_as_needed": "Check Condition of Clutch and Repair or Replace as Needed",
+      "check_condition_of_gears_and_repair_worn_or_damaged_parts": "Check Condition of Gears and Repair Worn or Damaged Parts",
+      "adjust_cables_or_hydraulic_mechanisms_for_gear_shifting": "Adjust Cables or Hydraulic Mechanisms for Gear Shifting",
+      "check_and_replace_worn_synchros_if_necessary": "Check and Replace Worn Synchros If Necessary",
+      "check_and_tighten_bolts_and_nuts_on_transmission": "Check and Tighten Bolts and Nuts on Transmission",
+      "test_operation_of_transmission_after_service_or_repair": "Test Operation of Transmission After Service or Repair",
+      "check_clutch_and_clutch_adjustment_settings_for_correctness": "Check Clutch and Clutch Adjustment Settings for Correctness",
+      "test_gear_shifting_for_smoothness_and_accuracy": "Test Gear Shifting for Smoothness and Accuracy",
+      "check_for_oil_leaks_or_other_problems_and_resolve_them": "Check for Oil Leaks or Other Problems and Resolve Them"
+    }
+  },
+  "CONTACT_US_PAGE": {
+      "WRITE_US": "Write Us",
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "PHONE": "Phone",
+      "MESSAGE": "Message",
+      "SEND": "Send",
+      "NAME_REQUIRED": "Name is required",
+      "EMAIL_REQUIRED": "Email is required",
+      "MESSAGE_REQUIRED": "Messages is required",
+      "INVALID_EMAIL": "Invalid email",
+      "PHONE_REQUIRED": "Phone is required",
+      "INVALID_PHONE": "Invalid phone number",
+      "CONTACT_US": "Contact Us",
+      "EMAIL_ADDRESS": "example@example.com"
+  },
+  "UTILS": {
+    "city":"",
+    "street": "str."
+  }
 }
