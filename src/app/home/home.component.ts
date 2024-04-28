@@ -12,7 +12,7 @@ import { slideIn, slideInOut } from "../animatios";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { untilDestroyed } from "../helpers/utils";
 import { ServiceItem } from "../models/services";
-import { map, tap } from "rxjs/operators";
+import { map, startWith, tap } from "rxjs/operators";
 
 @Component({
   selector: "app-home",
@@ -49,6 +49,7 @@ export class HomeComponent {
   setServices() {
     this.#translateService.onLangChange.pipe(
       this.untilDestroyed(),
+      startWith(this.#translateService.currentLang),
       tap(_ => this.services = this.#translateService.instant("SERVICES")),
     ).subscribe()
   }
