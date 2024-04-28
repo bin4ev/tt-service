@@ -1,39 +1,5 @@
 <div class="pbl-container">
 
-  <!-- <mat-card class="pbl-form">
-    <form #form="ngForm">
-      <mat-card-title>Вход</mat-card-title>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Имейл</mat-label>
-        <input #email="ngModel" matInput placeholder="email@gmail.com" name="email" [(ngModel)]="formData.email" required email>
-        <mat-icon matSuffix>email</mat-icon>
-        @if (email.errors?.['required']) {
-        <mat-error>Задължително поле</mat-error>
-        }
-        @if (email.errors?.['email']) {
-        <mat-error>Имейла е не валиден</mat-error>
-        }
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Парола</mat-label>
-        <input  #password="ngModel" matInput placeholder="Паролата" name="password" [(ngModel)]="formData.password" required minlength="4">
-        <mat-icon matSuffix>password</mat-icon>
-        @if (password.errors?.['required']) {
-        <mat-error>Задължително поле</mat-error>
-        }
-        @if (password.errors?.['minLength']) {
-        <mat-error>Паролата трябва да бъде поне 4 символа</mat-error>
-        }
-      </mat-form-field>
-
-      <button mat-raised-button [disabled]="form.invalid"
-      (click)="submit()">Вход</button>
-
-    </form>
-  </mat-card> -->
-
   <mat-card class="pbl-form">
     <form #form="ngForm">
       <mat-card-title>{{ 'LOGIN_FORM.title' | translate }}</mat-card-title>
@@ -69,6 +35,6 @@
   </mat-card>
 </div>
 
-@if(loading) {
+@if(loading()) {
   <process-wheel [shown]="true"></process-wheel>
   }

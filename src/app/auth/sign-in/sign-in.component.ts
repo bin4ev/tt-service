@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, signal } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatDividerModule } from "@angular/material/divider";
@@ -34,7 +34,7 @@ import { TranslateModule } from "@ngx-translate/core";
 })
 export class SignInComponent {
   formData: any = {};
-  loading = false;
+  loading = signal(false);
 
   #authService = inject(AuthService);
   #notifService = inject(NotificationService);
@@ -43,10 +43,10 @@ export class SignInComponent {
     if(form.invalid) {
       return
     }
-    this.loading = true;
+    this.loading.set(true);
     this.#authService.login(this.formData.email, this.formData.password).pipe(
       finalize(() => {
-        this.loading = false;
+        this.loading.set(false);
       }),
       catchError((err) => {
         console.error(err);
