@@ -49,8 +49,8 @@
   <section class="bar" [ngClass]="{'open-bar': isOpenBar}" (click)="isOpenBar = !isOpenBar">
     <mat-selection-list role="list">
       <mat-list-item role="listitem" routerLinkActive="active" routerLink="home">{{"NAV.HOME" | translate}}</mat-list-item>
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="about">{{"NAV.GALLERY" | translate}}</mat-list-item>
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="services">{{"NAV.SERVICE" | translate}}</mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="gallery">{{"NAV.GALLERY" | translate}}</mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="services">{{"NAV.SERVICES" | translate}}</mat-list-item>
       <mat-list-item role="listitem" routerLinkActive="active" routerLink="contacts">{{"NAV.CONTACTS" | translate}}</mat-list-item>
 
       @if(isLogedIn$ | async) {
