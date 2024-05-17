@@ -58,14 +58,26 @@ export class CorouselComponent {
     let cordX = e.clientX;
     let diff = cordX - this.cordX;
     this.cordX = 0;
-    debugger
 
-    if (diff > 50) {
-      let idx = index - 1 < 0 ? 0 : index - 1;
+    if (Math.abs(diff) > 50) {
+      const offset = diff > 0 ? -1 : 1;
+      const idx = Math.min(Math.max(0, index + offset), this.items.length - 1);
       this.goTo(idx);
-    } else if (diff < -50) {
-      let idx =
-        index + 1 == this.items.length ? this.items.length - 1 : index + 1;
+    }
+  }
+
+  onTouchStart(e: TouchEvent) {
+    this.cordX = e.touches[0].clientX;
+  }
+
+  onTouchEnd(e: TouchEvent, index: number) {
+    let cordX = e.changedTouches[0].clientX;
+    let diff = cordX - this.cordX;
+    this.cordX = 0;
+
+    if (Math.abs(diff) > 50) {
+      const offset = diff > 0 ? -1 : 1;
+      const idx = Math.min(Math.max(0, index + offset), this.items.length - 1);
       this.goTo(idx);
     }
   }
