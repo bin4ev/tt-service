@@ -5,14 +5,15 @@ import { AsyncPipe, NgClass, NgOptimizedImage, NgStyle } from '@angular/common'
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatIconModule } from "@angular/material/icon";
 import { User } from "@angular/fire/auth";
-import { AuthService } from "../services/auth.service";
 import { Observable } from "rxjs/internal/Observable";
 import { tap } from "rxjs";
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatListModule} from '@angular/material/list';
 import { TranslateModule } from "@ngx-translate/core";
-import { LanguagesComponent } from "../shared/languages/languages.component";
-import { NavLisstComponent } from "../shared/nav-lisst/nav-lisst.component";
+import { LanguagesComponent } from "../components/languages/languages.component";
+import { NavLisstComponent } from "../components/nav-lisst/nav-lisst.component";
+import { AuthService } from "src/app/core/services/auth.service";
+
 @Component({
   selector: "app-header",
   standalone: true,

@@ -2,8 +2,8 @@ import { NgOptimizedImage } from "@angular/common";
 import { Component } from "@angular/core";
 
 import { MatIconModule } from "@angular/material/icon";
-import { BUSSINES_PHONE_NUMBER, WORKING_TIME } from "../constants/constants";
 import { TranslateModule } from "@ngx-translate/core";
+import { BUSSINES_PHONE_NUMBER, WORKING_TIME } from "src/app/core/constants/constants";
 
 
 @Component({

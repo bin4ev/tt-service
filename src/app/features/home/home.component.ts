@@ -1,18 +1,21 @@
 import { Component, ElementRef, ViewChild, inject } from "@angular/core";
 
 import { MatButtonModule } from "@angular/material/button";
-import { animate, style, transition, trigger } from "@angular/animations";
 import { JsmapComponent } from "../jsmap/jsmap.component";
 import { MatCardModule } from "@angular/material/card";
 import { RouterLink } from "@angular/router";
 import { NgClass } from "@angular/common";
-import { CorouselComponent } from "../shared/corousel/corousel.component";
-import { ProcessWheelComponent } from "../shared/process-wheel/process-wheel.component";
-import { slideIn, slideInOut } from "../animatios";
+
+
+
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { untilDestroyed } from "../helpers/utils";
-import { ServiceItem } from "../models/services";
-import { map, startWith, tap } from "rxjs/operators";
+
+import { startWith, tap } from "rxjs/operators";
+import { slideIn, slideInOut } from "src/app/core/animations/animatios";
+import { ServiceItem } from "src/app/core/models/services";
+import { untilDestroyed } from "src/app/core/helpers/utils";
+import { ProcessWheelComponent } from "src/app/shared/components/process-wheel/process-wheel.component";
+import { CorouselComponent } from "src/app/shared/components/corousel/corousel.component";
 
 @Component({
   selector: "app-home",

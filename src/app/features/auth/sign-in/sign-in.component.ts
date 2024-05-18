@@ -7,12 +7,12 @@ import { FormsModule, NgForm } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
-import { AuthService } from "src/app/services/auth.service";
 import { catchError, finalize } from "rxjs/operators";
-import { NotificationService } from "src/app/services/notification.service";
 import { of } from "rxjs/internal/observable/of";
-import { ProcessWheelComponent } from "src/app/shared/process-wheel/process-wheel.component";
 import { TranslateModule } from "@ngx-translate/core";
+import { ProcessWheelComponent } from "src/app/shared/components/process-wheel/process-wheel.component";
+import { AuthService } from "src/app/core/services/auth.service";
+import { NotificationService } from "src/app/core/services/notification.service";
 
 @Component({
   selector: "app-sign-in",

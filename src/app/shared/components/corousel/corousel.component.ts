@@ -3,7 +3,7 @@ import { Component, Input, input, signal } from "@angular/core";
 import { Subject, Subscription, takeUntil } from "rxjs";
 import { interval } from "rxjs/internal/observable/interval";
 import { tap } from "rxjs/internal/operators/tap";
-import { untilDestroyed } from "src/app/helpers/utils";
+import { untilDestroyed } from "src/app/core/helpers/utils";
 
 export interface CarouselItem {
   title: string;

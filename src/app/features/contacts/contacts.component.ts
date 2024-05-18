@@ -6,12 +6,12 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { FormsModule, NgForm } from "@angular/forms";
-import { EmailService } from "../services/email.service";
 import { JsmapComponent } from "../jsmap/jsmap.component";
-import { NotificationService } from "../services/notification.service";
 import { finalize } from "rxjs";
-import { ADDRESS_STREET, ADDRESS_TOWN, BUSSINES_PHONE_NUMBER } from "../constants/constants";
 import { TranslateModule } from "@ngx-translate/core";
+import { ADDRESS_STREET, ADDRESS_TOWN, BUSSINES_PHONE_NUMBER } from "src/app/core/constants/constants";
+import { EmailService } from "src/app/core/services/email.service";
+import { NotificationService } from "src/app/core/services/notification.service";
 
 @Component({
   selector: "app-contacts",

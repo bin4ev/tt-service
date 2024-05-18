@@ -8,7 +8,7 @@ import {
   MatDialogTitle,
 } from "@angular/material/dialog";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { ConfirmDialogConfig } from "src/app/interfaces/confirm-dialog-config";
+import { ConfirmDialogConfig } from "src/app/core/interfaces/confirm-dialog-config";
 
 @Component({
   selector: "app-confirmation-dialog",

@@ -1,22 +1,27 @@
 import { Component, inject } from "@angular/core";
-import { FileUploadService } from "../services/file-upload-service.";
+
 import {
   catchError,
   concatAll,
   finalize,
   tap,
 } from "rxjs/operators";
-import { FileUpload } from "../models/file-upload";
+
 import { Observable, forkJoin, of } from "rxjs";
 import { AsyncPipe, NgClass, NgOptimizedImage } from "@angular/common";
-import { ProcessWheelComponent } from "../shared/process-wheel/process-wheel.component";
+
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { UploadResult } from "@angular/fire/storage";
 import { MatDialog } from "@angular/material/dialog";
-import { ConfirmationDialogComponent } from "../shared/confirmation-dialog/confirmation-dialog.component";
-import { AuthService } from "../services/auth.service";
+
+
 import { TranslateModule } from "@ngx-translate/core";
+import { FileUploadService } from "src/app/core/services/file-upload-service.";
+import { AuthService } from "src/app/core/services/auth.service";
+import { FileUpload } from "src/app/core/models/file-upload";
+import { ConfirmationDialogComponent } from "src/app/shared/components/confirmation-dialog/confirmation-dialog.component";
+import { ProcessWheelComponent } from "src/app/shared/components/process-wheel/process-wheel.component";
 
 @Component({
   selector: "app-about",
