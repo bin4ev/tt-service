@@ -25,6 +25,7 @@
 @include keyframes-with-color(call2, 0, 86, 179);
 
   .book-appointment-button {
+    text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: center;
