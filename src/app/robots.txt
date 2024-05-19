@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /login/
+Allow: /
+Sitemap: https://www.ttavto88.com/sitemap.xml
