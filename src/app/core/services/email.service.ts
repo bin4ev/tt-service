@@ -1,10 +1,7 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable, inject } from "@angular/core";
-import { ContactData } from "../interfaces/contactData";
+
+import { Injectable } from "@angular/core";
 import emailjs, { type EmailJSResponseStatus } from "@emailjs/browser";
 import { environment } from "src/environments/environment.development";
-import { NotificationService } from "./notification.service";
-import { throwError } from "rxjs/internal/observable/throwError";
 import { from } from "rxjs";
 
 export const alias = "TT-AVTO-88";

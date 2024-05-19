@@ -3,8 +3,11 @@ import { Component } from "@angular/core";
 
 import { MatIconModule } from "@angular/material/icon";
 import { TranslateModule } from "@ngx-translate/core";
-import { BUSSINES_PHONE_NUMBER, WORKING_TIME } from "src/app/core/constants/constants";
-
+import {
+  BUSSINES_PHONE_NUMBER,
+  WORKING_TIME,
+  WORKING_TIME_WEEKEND,
+} from "src/app/core/constants/constants";
 
 @Component({
   selector: "app-footer",
@@ -16,4 +19,5 @@ import { BUSSINES_PHONE_NUMBER, WORKING_TIME } from "src/app/core/constants/cons
 export class FooterComponent {
   BUSSINES_PHONE_NUMBER = BUSSINES_PHONE_NUMBER;
   WORKING_TIME = WORKING_TIME;
+  WORKING_TIME_WEEKEND = WORKING_TIME_WEEKEND;
 }

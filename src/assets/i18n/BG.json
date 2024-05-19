@@ -40,7 +40,8 @@
   ],
   "FOOTER": {
     "working_time": "Работно време",
-    "monday_friday": "Понеделник - Петък:"
+    "monday_friday": "Понеделник - Петък:",
+    "saturday": "Събота:"
   },
   "GALLERY": {
     "title": "Галерия",

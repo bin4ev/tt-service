@@ -40,7 +40,8 @@
   ],
   "FOOTER": {
     "working_time": "Working hours",
-    "monday_friday": "Monday - Friday:"
+    "monday_friday": "Monday - Friday:",
+    "saturday": "Saturday:"
   },
   "GALLERY": {
     "title": "Gallery",
