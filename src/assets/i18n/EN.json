@@ -207,5 +207,8 @@
   "UTILS": {
     "city":"",
     "street": "str."
+  },
+  "APPOINTMENT": {
+    "title": "Book now"
   }
 }

@@ -16,6 +16,8 @@ import { environment } from "./environments/environment.development";
 import { getFirestore, provideFirestore } from "@angular/fire/firestore";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { MAT_DATE_LOCALE, provideNativeDateAdapter } from "@angular/material/core";
+import { registerLocaleData } from "@angular/common";
 
 export function HttpLoaderFactory(http:HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", '.json')
@@ -44,6 +46,8 @@ bootstrapApplication(AppComponent, {
         useFactory: HttpLoaderFactory,
         deps:[HttpClient]
       }
-    }))
+    })),
+    provideNativeDateAdapter(),
   ],
+
 }).catch((err) => console.error(err));

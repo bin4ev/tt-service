@@ -1,1 +1,23 @@
-<p>create-appointment works!</p>
+<div class="pbl-container">
+  <span class="title">{{'APPOINTMENT.title' | translate}}</span>
+
+  <main class="content">
+    <mat-card class="inline-card">
+      <mat-calendar
+      [(selected)]="selected"
+       [dateFilter]="myFilter"
+       (selectedChange)="onSelected($event)"></mat-calendar>
+    </mat-card>
+
+
+    <mat-card class="inline-card">
+      <div id="slotsContainer" class="container">
+        @for(slot of hoursSlots(); track slot) {
+          <div class="hour-slot">{{slot}}</div>
+        }
+      </div>
+    </mat-card >
+
+  </main>
+
+</div>
