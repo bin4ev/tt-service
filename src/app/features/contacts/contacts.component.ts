@@ -43,27 +43,29 @@ export class ContactsComponent {
   BUSSINES_PHONE_NUMBER = BUSSINES_PHONE_NUMBER;
   ADDRESS_TOWN = ADDRESS_TOWN;
   ADDRESS_STREET = ADDRESS_STREET;
-  private contactService = inject(EmailService);
+
   formData: any = {};
-  private notificationService = inject(NotificationService);
   loading = false;
+
+  #contactService = inject(EmailService);
+  #notificationService = inject(NotificationService);
 
   onSubmit(form: NgForm, event: SubmitEvent) {
     if (form.invalid) {
       return;
     }
     this.loading = true;
-    this.contactService
+    this.#contactService
       .sendEmail(event.target as HTMLFormElement)
       .pipe(finalize(() => (this.loading = false)))
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.notificationService.showSuccess(`Email is sended successfully`);
+          this.#notificationService.showSuccess(`Email is sended successfully`);
         },
         error: (err) => {
           console.log(err);
-          this.notificationService.showError(
+          this.#notificationService.showError(
             `${err.text}. Email sending failed`
           );
         },

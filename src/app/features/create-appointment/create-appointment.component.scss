@@ -15,7 +15,6 @@
     background-color: #fff;
     flex-wrap: wrap;
     border-radius: 5px;
-    height: 100%;
 }
 
 .hour-slot {
@@ -31,4 +30,22 @@
 
 .hour-slot:hover {
   background: #8ba7c8;
+}
+
+busy-slot {
+  background-color: red;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  mat-form-field {
+    width: 100%;
+  }
+
+  button[type="submit"] {
+    min-width: 190px;
+    margin-left: auto;
+  }
 }
