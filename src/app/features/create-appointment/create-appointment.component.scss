@@ -49,3 +49,8 @@ form {
     margin-left: auto;
   }
 }
+
+.notAvailable {
+  background-color: red;
+  pointer-events: none;
+}

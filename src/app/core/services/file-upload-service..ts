@@ -1,44 +1,30 @@
 import { Injectable, inject } from "@angular/core";
 import { FileUpload } from "../models/file-upload";
-import { Observable } from "rxjs/internal/Observable";
-import { getDatabase } from "@angular/fire/database";
 import {
   catchError,
-  concatAll,
-  concatMap,
-  finalize,
   map,
   mergeMap,
-  scan,
-  switchMap,
   tap,
 } from "rxjs/operators";
-import { Firestore, collection, collectionData } from "@angular/fire/firestore";
+import { Firestore, collection } from "@angular/fire/firestore";
 import {
   Storage,
   deleteObject,
   getDownloadURL,
-  getStorage,
   listAll,
   ref,
   uploadBytes,
 } from "@angular/fire/storage";
 import { from } from "rxjs/internal/observable/from";
-import { concat, forkJoin, pipe, throwError } from "rxjs";
+import { forkJoin, throwError } from "rxjs";
 import { NotificationService } from "./notification.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class FileUploadService {
-  private basePath = "uploads";
-
-  private db = inject(Firestore);
   private storage: Storage = inject(Storage);
   private notificationService = inject(NotificationService);
-  
-  uploadsRef = collection(this.db, "uploads");
-
   // Create a reference under which you want to list
   listRef = ref(this.storage);
 

@@ -14,9 +14,10 @@
       <div id="slotsContainer" class="container">
         @for(slot of hoursSlots(); track slot) {
           <div class="hour-slot"
-          [ngStyle]="{'background-color': formValue().slot === slot ? '#8ba7c8' : ''}" 
+          [ngStyle]="{'background-color': formValue().slot === slot.range  ? '#8ba7c8' : ''}"
+          [ngClass]="{'notAvailable' : !slot.available}"
           (click)="onSelectedSlot(slot)">
-          {{slot}}
+          {{slot.range}}
           </div>
         }
       </div>
@@ -27,10 +28,10 @@
 
         <mat-form-field appearance="fill">
           <mat-label>{{ 'APPOINTMENT.FORM.service' | translate }}</mat-label>
-          <mat-select #name="ngModel" matInput name="name" [(ngModel)]="formValue().name" required>
-            <mat-option value="option1">Option 1</mat-option>
-            <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
-            <mat-option value="option3">Option 3</mat-option>
+          <mat-select #name="ngModel" matInput name="name" [(ngModel)]="formValue().service" required>
+            <mat-option value="airCondition">Диагностика на климатик</mat-option>
+            <mat-option value="oilChange">Смяна на масло и филтри</mat-option>
+            <!-- <mat-option value="option3">Option 3</mat-option> -->
           </mat-select>
           <mat-icon matSuffix>manufacturing</mat-icon>
           
