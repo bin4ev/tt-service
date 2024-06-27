@@ -82,7 +82,8 @@
   "BUTTON": {
     "back": "Назад",
     "send": "Изпрати",
-    "save": "Запази"
+    "save": "Запази",
+    "delete" : "Изтрий"
   },
   "SERVICE_PAGE_SERVICE": {
     "AIR_CONDITION": {

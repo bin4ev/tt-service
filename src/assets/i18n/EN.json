@@ -82,7 +82,8 @@
   "BUTTON": {
     "back": "Back",
     "send": "Send",
-    "save" : "Save"
+    "save" : "Save",
+    "delete" : "Delete"
   },
   "SERVICE_PAGE_SERVICE": {
     "AIR_CONDITION": {

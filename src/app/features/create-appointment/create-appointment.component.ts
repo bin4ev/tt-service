@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, inject, signal } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, inject, signal, viewChild } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
 import {
   DateSelectionModelChange,
@@ -19,6 +19,7 @@ import { NgClass, NgStyle } from "@angular/common";
 import { AppointmentsService } from "src/app/core/services/appointments.service";
 import { Observable, of, tap } from "rxjs";
 import { formatDate } from "src/app/core/helpers/utils";
+import { AuthService } from "src/app/core/services/auth.service";
 
 export interface Appointment {
   name: string;
@@ -53,17 +54,20 @@ export interface Slot {
   styleUrl: "./create-appointment.component.scss",
 })
 export class CreateAppointmentComponent implements OnInit {
-  today = new Date()
+  form = viewChild.required<NgForm>("form");
+
+  today = new Date();
   selected = signal<Date>(new Date());
   workingTime = WORKING_TIME;
   saturdayTime = WORKING_TIME_WEEKEND;
   hoursSlots = signal<{ available: boolean; range: string }[]>([]);
   formValue = signal<Appointment>({ name: "", phone: "", email: "", date: "", slot: "", service: "" });
-
+  isLoggedIn = false;
   allAppoitments: Appointment[] = [];
 
   #notificationService = inject(NotificationService);
   #apoitmentService = inject(AppointmentsService);
+  #authService = inject(AuthService);
 
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
@@ -71,6 +75,7 @@ export class CreateAppointmentComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.isLoggedIn = this.#authService.isLoggedIn;
     this.initSlots();
     this.getAllAppoitments();
     this.formValue().date = this.selected();
@@ -80,7 +85,7 @@ export class CreateAppointmentComponent implements OnInit {
     this.#apoitmentService.getAppointments().subscribe((res) => {
       this.allAppoitments = res as Appointment[];
       console.log(this.allAppoitments);
-      
+
       this.setAppoitmentsForDate(this.selected());
     });
   }
@@ -101,12 +106,12 @@ export class CreateAppointmentComponent implements OnInit {
   generateHourSlots(startTime: string, endTime: string, range: number) {
     let start = new Date(`1970-01-01T${startTime}:00`);
     let end = new Date(`1970-01-01T${endTime}:00`);
-    let now = new Date().getHours()
+    let now = new Date().getHours();
 
     while (start < end) {
       let slotStart = start.toTimeString().substring(0, 5);
       start.setHours(start.getHours() + range);
-      let available = this.selected().getDate() === this.today.getDate() && start.getHours() < now
+      let available = this.selected().getDate() === this.today.getDate() && start.getHours() < now;
       let slotEnd = start.toTimeString().substring(0, 5);
       let slot = {
         available: !available,
@@ -153,21 +158,39 @@ export class CreateAppointmentComponent implements OnInit {
       return;
     }
 
-    this.#apoitmentService.createAppointment({ ...this.formValue()}).subscribe(response => {
-      this.#notificationService.showSuccess("Успешно запазихте час!")
-      this.getAllAppoitments()
-      this.formValue.set({ name: "", phone: "", email: "", date: "", slot: "", service: "" })
-      form.resetForm()
-    })
+    this.#apoitmentService.createAppointment({ ...this.formValue() }).subscribe((response) => {
+      this.#notificationService.showSuccess("Успешно запазихте час!");
+      this.getAllAppoitments();
+      this.formValue.set({ name: "", phone: "", email: "", date: "", slot: "", service: "" });
+      form.resetForm();
+    });
   }
 
   onSelectedSlot(slot: Slot) {
-    debugger
+    if (this.isLoggedIn && !slot.available) {
+      const currSlotsData = this.allAppoitments.find(
+        (x) => x.date === formatDate(this.selected()) && slot.range === x.slot
+      );
+
+      if (currSlotsData) {
+        this.formValue.set({ ...currSlotsData });
+      }
+      return;
+    }
+
+    if (this.isLoggedIn && slot.available) {
+      this.form().resetForm();
+    }
+
     if (this.formValue().slot === slot.range) {
       this.formValue.set({ ...this.formValue(), slot: "" });
-      return
+      return;
     }
 
     this.formValue.set({ ...this.formValue(), slot: slot.range });
+  }
+
+  compareFn(appointment1:Appointment, appointment2:Appointment) {
+    return JSON.stringify(appointment1) === JSON.stringify(appointment2)
   }
 }
