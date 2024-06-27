@@ -157,3 +157,4 @@ export class CreateAppointmentComponent implements OnInit {
     console.log(this.formValue());
   }
 }
+// da se mahne butona za zapazwane na chas kogato sme na routa
