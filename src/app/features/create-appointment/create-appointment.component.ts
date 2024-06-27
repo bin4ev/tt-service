@@ -53,6 +53,7 @@ export interface Slot {
   styleUrl: "./create-appointment.component.scss",
 })
 export class CreateAppointmentComponent implements OnInit {
+  today = new Date()
   selected = signal<Date>(new Date());
   workingTime = WORKING_TIME;
   saturdayTime = WORKING_TIME_WEEKEND;
@@ -78,6 +79,9 @@ export class CreateAppointmentComponent implements OnInit {
   getAllAppoitments() {
     this.#apoitmentService.getAppointments().subscribe((res) => {
       this.allAppoitments = res as Appointment[];
+      console.log(this.allAppoitments);
+      
+      this.setAppoitmentsForDate(this.selected());
     });
   }
 
@@ -97,13 +101,15 @@ export class CreateAppointmentComponent implements OnInit {
   generateHourSlots(startTime: string, endTime: string, range: number) {
     let start = new Date(`1970-01-01T${startTime}:00`);
     let end = new Date(`1970-01-01T${endTime}:00`);
+    let now = new Date().getHours()
 
     while (start < end) {
       let slotStart = start.toTimeString().substring(0, 5);
       start.setHours(start.getHours() + range);
+      let available = this.selected().getDate() === this.today.getDate() && start.getHours() < now
       let slotEnd = start.toTimeString().substring(0, 5);
       let slot = {
-        available: true,
+        available: !available,
         range: slotStart + "-" + slotEnd,
       };
 
@@ -117,8 +123,8 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   onSelectedDate(date: Date | null) {
-    console.log(date);
     if (date !== null) {
+      this.initSlots();
       this.setAppoitmentsForDate(date);
       this.formValue.set({ ...this.formValue(), date, slot: "" });
     }
@@ -134,8 +140,6 @@ export class CreateAppointmentComponent implements OnInit {
       });
       this.hoursSlots.set(slots);
       console.log(this.hoursSlots());
-    } else {
-      this.initSlots();
     }
   }
 
@@ -149,12 +153,21 @@ export class CreateAppointmentComponent implements OnInit {
       return;
     }
 
-    this.#apoitmentService.createAppointment({ ...this.formValue() });
+    this.#apoitmentService.createAppointment({ ...this.formValue()}).subscribe(response => {
+      this.#notificationService.showSuccess("Успешно запазихте час!")
+      this.getAllAppoitments()
+      this.formValue.set({ name: "", phone: "", email: "", date: "", slot: "", service: "" })
+      form.resetForm()
+    })
   }
 
   onSelectedSlot(slot: Slot) {
+    debugger
+    if (this.formValue().slot === slot.range) {
+      this.formValue.set({ ...this.formValue(), slot: "" });
+      return
+    }
+
     this.formValue.set({ ...this.formValue(), slot: slot.range });
-    console.log(this.formValue());
   }
 }
-// da se mahne butona za zapazwane na chas kogato sme na routa

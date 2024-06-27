@@ -4,9 +4,11 @@
   <main class="content">
     <mat-card class="inline-card">
       <mat-calendar
-      [(selected)]="selected"
+       [(selected)]="selected"
        [dateFilter]="myFilter"
-       (selectedChange)="onSelectedDate($event)"></mat-calendar>
+       [minDate]="today"
+       (selectedChange)="onSelectedDate($event)">
+      </mat-calendar>
     </mat-card>
 
 
