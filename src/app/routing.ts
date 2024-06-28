@@ -7,6 +7,7 @@ import { ForgotPasswordComponent } from "./features/auth/forgot-password/forgot-
 import { HomeComponent } from "./features/home/home.component";
 import { AboutComponent } from "./features/about/about.component";
 import { ServicesComponent } from "./features/service/services.component";
+import { AppointmentsComponent } from "./features/appointments/appointments.component";
 
 export const routes: Routes = [
   { path: "'/'", redirectTo: "home", pathMatch: "full" },
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: "home", component: HomeComponent },
   { path: "gallery", component: AboutComponent },
   { path: "services", component: ServicesComponent },
+  { path: "appointments", component: AppointmentsComponent },
   {
     path: "contacts",
     loadComponent: () =>

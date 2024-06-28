@@ -1,10 +1,7 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, inject, signal, viewChild } from "@angular/core";
+import { Component, OnInit, inject, signal, viewChild } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
 import {
-  DateSelectionModelChange,
   MatCalendar,
-  MatCalendarCell,
-  MatDateSelectionModel,
 } from "@angular/material/datepicker";
 import { MatCard } from "@angular/material/card";
 import { WORKING_TIME, WORKING_TIME_WEEKEND } from "src/app/core/constants/constants";
@@ -17,9 +14,8 @@ import { MatSelectModule } from "@angular/material/select";
 import { NotificationService } from "src/app/core/services/notification.service";
 import { NgClass, NgStyle } from "@angular/common";
 import { AppointmentsService } from "src/app/core/services/appointments.service";
-import { Observable, of, tap } from "rxjs";
 import { formatDate } from "src/app/core/helpers/utils";
-import { AuthService } from "src/app/core/services/auth.service";
+
 
 export interface Appointment {
   name: string;
@@ -28,6 +24,7 @@ export interface Appointment {
   date: Date | "";
   slot: string;
   service: "";
+  id:string
 }
 
 export interface Slot {
@@ -61,13 +58,12 @@ export class CreateAppointmentComponent implements OnInit {
   workingTime = WORKING_TIME;
   saturdayTime = WORKING_TIME_WEEKEND;
   hoursSlots = signal<{ available: boolean; range: string }[]>([]);
-  formValue = signal<Appointment>({ name: "", phone: "", email: "", date: "", slot: "", service: "" });
+  formValue = signal<Appointment>({ name: "", phone: "", email: "", date: "", slot: "", service: "", id:"" });
   isLoggedIn = false;
   allAppoitments: Appointment[] = [];
 
   #notificationService = inject(NotificationService);
   #apoitmentService = inject(AppointmentsService);
-  #authService = inject(AuthService);
 
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
@@ -75,7 +71,6 @@ export class CreateAppointmentComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.isLoggedIn = this.#authService.isLoggedIn;
     this.initSlots();
     this.getAllAppoitments();
     this.formValue().date = this.selected();
@@ -111,10 +106,10 @@ export class CreateAppointmentComponent implements OnInit {
     while (start < end) {
       let slotStart = start.toTimeString().substring(0, 5);
       start.setHours(start.getHours() + range);
-      let available = this.selected().getDate() === this.today.getDate() && start.getHours() < now;
+      let notAvailable = this.selected().getDate() === this.today.getDate() && start.getHours() <= now;
       let slotEnd = start.toTimeString().substring(0, 5);
       let slot = {
-        available: !available,
+        available: !notAvailable,
         range: slotStart + "-" + slotEnd,
       };
 
@@ -161,26 +156,12 @@ export class CreateAppointmentComponent implements OnInit {
     this.#apoitmentService.createAppointment({ ...this.formValue() }).subscribe((response) => {
       this.#notificationService.showSuccess("Успешно запазихте час!");
       this.getAllAppoitments();
-      this.formValue.set({ name: "", phone: "", email: "", date: "", slot: "", service: "" });
+      this.formValue.set({ name: "", phone: "", email: "", date: "", slot: "", service: "", id:"" });
       form.resetForm();
     });
   }
 
-  onSelectedSlot(slot: Slot) {
-    if (this.isLoggedIn && !slot.available) {
-      const currSlotsData = this.allAppoitments.find(
-        (x) => x.date === formatDate(this.selected()) && slot.range === x.slot
-      );
-
-      if (currSlotsData) {
-        this.formValue.set({ ...currSlotsData });
-      }
-      return;
-    }
-
-    if (this.isLoggedIn && slot.available) {
-      this.form().resetForm();
-    }
+  onSelectedSlot(slot: Slot){
 
     if (this.formValue().slot === slot.range) {
       this.formValue.set({ ...this.formValue(), slot: "" });
@@ -190,7 +171,4 @@ export class CreateAppointmentComponent implements OnInit {
     this.formValue.set({ ...this.formValue(), slot: slot.range });
   }
 
-  compareFn(appointment1:Appointment, appointment2:Appointment) {
-    return JSON.stringify(appointment1) === JSON.stringify(appointment2)
-  }
 }

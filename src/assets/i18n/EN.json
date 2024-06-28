@@ -3,7 +3,8 @@
     "HOME": "Home",
     "GALLERY": "Gallery",
     "SERVICES": "Services",
-    "CONTACTS": "Contacts"
+    "CONTACTS": "Contacts",
+    "APPOINTMENTS": "Appointmets"
   },
   "WELCOME": "Welcome",
   "LOGIN": "Login",
@@ -228,5 +229,9 @@
         "phone": "Invalid phone"
       }
     }
+  },
+  "APPOINTMENTS": {
+    "title" : "Appointments",
+    "not_results": "There are not appointments"
   }
 }

@@ -29,7 +29,7 @@
           <mat-label>{{ 'APPOINTMENT.FORM.service' | translate }}</mat-label>
           <mat-select #name="ngModel" matInput name="name" [(ngModel)]="formValue().service"
            required
-           [compareWith]="compareFn">
+           >
             <mat-option value="airCondition">Диагностика на климатик</mat-option>
             <mat-option value="oilChange">Смяна на масло и филтри</mat-option>
             <!-- <mat-option value="option3">Option 3</mat-option> -->
@@ -81,9 +81,6 @@
           }
         </mat-form-field>
 
-        @if(isLoggedIn) {
-        <button mat-raised-button>{{ 'BUTTON.delete' | translate }}</button>
-        }
         <button type="submit" mat-raised-button>{{ 'BUTTON.save' | translate }}</button>
         
       </form>

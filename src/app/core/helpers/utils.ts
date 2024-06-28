@@ -12,10 +12,30 @@ export function untilDestroyed() {
   return <T>() => takeUntil<T>(subject.asObservable());
 }
 
-// Function to format date to "dd.mm.yyyy"
-export function formatDate(date:Date) {
-    let day = date.getDate().toString().padStart(2, '0');
-    let month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-indexed
-    let year = date.getFullYear();
-    return `${day}.${month}.${year}`;
+export function formatDate(date: Date | string): Date | string | null {
+  if (typeof date === "string") {
+    const regex = /^\d{2}\.\d{2}\.\d{4}$/;
+    if (!regex.test(date)) {
+      return null;
+    }
+
+    let [day, month, year] = date.split(".").map(Number);
+
+    if (isNaN(day) || isNaN(month) || isNaN(year) || day < 1 || day > 31 || month < 1 || month > 12 || year < 1) {
+      return null;
+    }
+
+    let parsedDate = new Date(year, month - 1, day);
+    if (parsedDate.getDate() !== day || parsedDate.getMonth() !== month - 1 || parsedDate.getFullYear() !== year) {
+      return null;
+    }
+
+    return parsedDate;
+  }
+
+  let day = date.getDate().toString().padStart(2, "0");
+  let month = (date.getMonth() + 1).toString().padStart(2, "0");
+  let year = date.getFullYear();
+  
+  return `${day}.${month}.${year}`;
 }

@@ -1,11 +1,17 @@
+@import '../../../variables.scss';
+
+
 .content {
   display: flex;
-  gap: 5%;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .inline-card {
-  min-width: 300px;
+  min-width: 435px;
   width: 30%;
+  margin: 1rem;
+  min-height: 450px;
 }
 
 .container {
@@ -18,7 +24,7 @@
 }
 
 .hour-slot {
-  width: 180px;
+  min-width: 180px;
   padding: 20px;
   margin: 0.5rem;
   border: 1px solid #ddd;
@@ -26,6 +32,7 @@
   background-color: green;
   cursor: pointer;
   transition: background-color 0.3s;
+  border-radius: 6px;
 }
 
 .hour-slot:hover {
@@ -52,4 +59,22 @@ form {
 
 .notAvailable {
   background-color: red;
+  pointer-events: none;
+}
+
+@media screen and (max-width: $sm-screen) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .inline-card {
+    min-width: 300px;
+    min-height: unset;
+  }
+
+  .hour-slot {
+    flex: 1;
+  }
+  
 }

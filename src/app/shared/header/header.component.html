@@ -8,7 +8,8 @@
   </ul>
 
   <div class="socials-wrapper">
-    <a href="https://www.facebook.com/people/%D0%90%D0%B2%D1%82%D0%BE-%D0%A2%D0%A2/pfbid02hVNmK5T2Cfhu5DaRFzmZ8mDW4QDCgd1R3BNZ7kSbDCj2qK7R7fktWHXgK5P5saNcl/" target="_blank">
+    <a href="https://www.facebook.com/people/%D0%90%D0%B2%D1%82%D0%BE-%D0%A2%D0%A2/pfbid02hVNmK5T2Cfhu5DaRFzmZ8mDW4QDCgd1R3BNZ7kSbDCj2qK7R7fktWHXgK5P5saNcl/"
+      target="_blank">
       <img ngSrc="assets/icons/facebook.svg" alt="facebook-icon" width="40" height="40">
     </a>
 
@@ -48,12 +49,19 @@
 <div class="position-relative">
   <section class="bar" [ngClass]="{'open-bar': isOpenBar}" (click)="isOpenBar = !isOpenBar">
     <mat-selection-list role="list">
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="home">{{"NAV.HOME" | translate}}</mat-list-item>
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="gallery">{{"NAV.GALLERY" | translate}}</mat-list-item>
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="services">{{"NAV.SERVICES" | translate}}</mat-list-item>
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="contacts">{{"NAV.CONTACTS" | translate}}</mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="home">{{"NAV.HOME" |
+        translate}}</mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="gallery">{{"NAV.GALLERY" |
+        translate}}</mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="services">{{"NAV.SERVICES" |
+        translate}}</mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="contacts">{{"NAV.CONTACTS" |
+        translate}}</mat-list-item>
 
       @if(isLogedIn$ | async) {
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="appointments">{{"NAV.APPOINTMENTS" |
+        translate}}</mat-list-item>
+
       <mat-list-item role="listitem" (click)="logOut()">
         <span [ngStyle]="{'color': 'red'}">{{"EXIT" | translate}}</span>
       </mat-list-item>

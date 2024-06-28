@@ -67,6 +67,7 @@ app-root {
     flex: 1;
     padding: 16px 16px 16px 0px;
   }
+
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -95,7 +96,7 @@ app-root {
 }
 
 .error-snackbar {
-  --mdc-snackbar-container-color: red ;
+  --mdc-snackbar-container-color: red;
 }
 
 .mat-icon {
@@ -111,7 +112,11 @@ app-root {
 
 .icon {
   cursor: pointer;
-  margin: 0 .5rem;
+  margin: 0 0.5rem;
+
+  &:active {
+    transform: scale(1.2);
+  }
 }
 
 .socials-wrapper {
@@ -124,13 +129,24 @@ app-root {
   }
 }
 
-h1, h2, h3, h4, h5, h6, p , span {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
   line-height: normal;
+}
+
+.pbl-table {
+  border-radius: 8px;
 }
 
 @media screen and (max-width: $md-screen) {
   .pbl-content {
     flex-direction: column;
   }
-  
+
 }
