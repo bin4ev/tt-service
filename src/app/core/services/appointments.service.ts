@@ -25,7 +25,7 @@ export class AppointmentsService {
     return from(getDocs(this.collectionRef)).pipe(
       map((querySnapshot) => {
         let results:Appointment[] = [];
-        querySnapshot.forEach((doc) => results.push({ ...doc.data() as Appointment, id: doc.id }));
+        querySnapshot.forEach((doc) => results.push({ ...doc.data()as any, id: doc.id }));
         return results;
       }),
       catchError((error) => {

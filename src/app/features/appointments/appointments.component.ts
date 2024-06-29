@@ -6,11 +6,12 @@ import { Appointment } from "../create-appointment/create-appointment.component"
 import { MatCard } from "@angular/material/card";
 import { AppointmentsService } from "src/app/core/services/appointments.service";
 import { MatSort, MatSortModule } from "@angular/material/sort";
-import { formatDate } from "src/app/core/helpers/utils";
+import { formatDate, untilDestroyed } from "src/app/core/helpers/utils";
 import { AsyncPipe, DatePipe, NgFor } from "@angular/common";
 import { ProcessWheelComponent } from "src/app/shared/components/process-wheel/process-wheel.component";
-import { Observable, async, finalize, map, of } from "rxjs";
+import { BehaviorSubject, Observable, Subject, async, finalize, map, of, take } from "rxjs";
 import { NotificationService } from "src/app/core/services/notification.service";
+import { ResolveStart } from "@angular/router";
 
 @Component({
   selector: "app-appointments",
@@ -24,7 +25,7 @@ import { NotificationService } from "src/app/core/services/notification.service"
     MatSort,
     DatePipe,
     ProcessWheelComponent,
-    NgFor
+    NgFor,
   ],
   templateUrl: "./appointments.component.html",
   styleUrl: "./appointments.component.scss",
@@ -32,10 +33,12 @@ import { NotificationService } from "src/app/core/services/notification.service"
 export class AppointmentsComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
+  untilDestroyed = untilDestroyed();
   displayedColumns: string[] = ["date", "name", "phone", "email", "slot", "service", "action"];
-  responsiveCol: string[] = ["date","slot", "service", "action"];
+  responsiveCol: string[] = ["date", "slot", "service", "action"];
   dataSource!: MatTableDataSource<Appointment>;
-  allAppoitments$: Observable<Appointment[]> = of([]);
+  allAppoitmentsAvailable: Subject<boolean> = new Subject();
+  allallAppoitmentsAvailable$ = this.allAppoitmentsAvailable.asObservable();
   loading = false;
 
   #apoitmentService = inject(AppointmentsService);
@@ -46,32 +49,38 @@ export class AppointmentsComponent {
   }
 
   ngAfterViewInit() {
-    this.getAllAppoitments()
+    this.allallAppoitmentsAvailable$.pipe(this.untilDestroyed()).subscribe((bool) => {
+      if (bool) {
+        this.dataSource.sort = this.sort;
+        this.dataSource.sortingDataAccessor = (item: any, property) => {
+          switch (property) {
+            case "date":
+              return formatDate(item.date);
+            default:
+              return item[property];
+          }
+        };
+      }
+    });
   }
 
   getAllAppoitments() {
     this.loading = true;
-    this.#apoitmentService.getAppointments().pipe(
-      finalize(() => (this.loading = false)),
-      map((dataArr: Appointment[]) => {
-        return dataArr.map((x) => {
-          return {
-            ...x,
-            date: formatDate(x["date"]) as Date,
-          };
-        });
-      })
-    )
-    .subscribe((res: Appointment[]) => {
-      this.dataSource = new MatTableDataSource(res);
-      this.dataSource.sort = this.sort;
-    })
+    this.#apoitmentService
+      .getAppointments()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe((res: Appointment[]) => {
+        this.dataSource = new MatTableDataSource(res);
+        console.log(res);
+
+        this.allAppoitmentsAvailable.next(true);
+      });
   }
 
   deleteAppointment(appointment: Appointment) {
     this.#apoitmentService.deleteAppointment(appointment).subscribe((response) => {
       this.#notificationService.showSuccess("Успешно изтрихте часа!");
-      this.getAllAppoitments()
+      this.getAllAppoitments();
     });
   }
 }

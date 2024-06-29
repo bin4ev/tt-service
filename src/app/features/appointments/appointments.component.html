@@ -9,7 +9,7 @@
   
         <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Дата</th>
-          <td mat-cell *matCellDef="let element"> {{element.date | date: "dd.MM.yyyy"}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
         </ng-container>
     
         <ng-container matColumnDef="name">
@@ -50,11 +50,11 @@
       </table>
     </div>
 
-    <table class="responsive-table" mat-table [dataSource]="dataSource" matSort>
+    <table class="responsive-table" mat-table [dataSource]="dataSource" >
   
       <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Дата</th>
-        <td mat-cell *matCellDef="let element"> {{element.date | date: "dd.MM.yyyy"}} </td>
+        <th mat-header-cell *matHeaderCellDef >Дата</th>
+        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
       </ng-container>
   
       <ng-container matColumnDef="slot">
