@@ -1,8 +1,6 @@
 import { Component, OnInit, inject, signal, viewChild } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
-import {
-  MatCalendar,
-} from "@angular/material/datepicker";
+import { MatCalendar } from "@angular/material/datepicker";
 import { MatCard } from "@angular/material/card";
 import { WORKING_TIME, WORKING_TIME_WEEKEND } from "src/app/core/constants/constants";
 import { FormsModule, NgForm } from "@angular/forms";
@@ -14,8 +12,8 @@ import { MatSelectModule } from "@angular/material/select";
 import { NotificationService } from "src/app/core/services/notification.service";
 import { NgClass, NgStyle } from "@angular/common";
 import { AppointmentsService } from "src/app/core/services/appointments.service";
-import { formatDate } from "src/app/core/helpers/utils";
-
+import { appendHiddenInputToForm, formatDate } from "src/app/core/helpers/utils";
+import { EMAIL_TEMPLATES_IDS, EmailService } from "src/app/core/services/email.service";
 
 export interface Appointment {
   name: string;
@@ -24,7 +22,7 @@ export interface Appointment {
   date: Date | "";
   slot: string;
   service: "";
-  id:string
+  id: string;
 }
 
 export interface Slot {
@@ -58,12 +56,13 @@ export class CreateAppointmentComponent implements OnInit {
   workingTime = WORKING_TIME;
   saturdayTime = WORKING_TIME_WEEKEND;
   hoursSlots = signal<{ available: boolean; range: string }[]>([]);
-  formValue = signal<Appointment>({ name: "", phone: "", email: "", date: "", slot: "", service: "", id:"" });
+  formValue = signal<Appointment>({ name: "", phone: "", email: "", date: "", slot: "", service: "", id: "" });
   isLoggedIn = false;
   allAppoitments: Appointment[] = [];
 
   #notificationService = inject(NotificationService);
   #apoitmentService = inject(AppointmentsService);
+  #emailService = inject(EmailService);
 
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
@@ -155,14 +154,15 @@ export class CreateAppointmentComponent implements OnInit {
 
     this.#apoitmentService.createAppointment({ ...this.formValue() }).subscribe((response) => {
       this.#notificationService.showSuccess("Успешно запазихте час!");
+      this.sendEmailToClien(event);
+      this.sendEmailToAdmin(event)
       this.getAllAppoitments();
-      this.formValue.set({ name: "", phone: "", email: "", date: "", slot: "", service: "", id:"" });
+      this.formValue.set({ name: "", phone: "", email: "", date: "", slot: "", service: "", id: "" });
       form.resetForm();
     });
   }
 
-  onSelectedSlot(slot: Slot){
-
+  onSelectedSlot(slot: Slot) {
     if (this.formValue().slot === slot.range) {
       this.formValue.set({ ...this.formValue(), slot: "" });
       return;
@@ -171,4 +171,24 @@ export class CreateAppointmentComponent implements OnInit {
     this.formValue.set({ ...this.formValue(), slot: slot.range });
   }
 
+  sendEmailToClien(event: SubmitEvent) {
+    let form = event.target as HTMLFormElement
+    
+    appendHiddenInputToForm(form, "date", formatDate(this.formValue().date) as string)
+    appendHiddenInputToForm(form, "slot", this.formValue().slot.split('-')[0])
+
+    this.#emailService.sendEmail(form,EMAIL_TEMPLATES_IDS.CREATE_APPOINTMENT).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+        this.#notificationService.showError(`${err.text}. Email sending failed`);
+      },
+    });
+  }
+
+  sendEmailToAdmin(event:SubmitEvent) {
+
+  }
 }

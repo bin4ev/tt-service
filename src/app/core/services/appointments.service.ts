@@ -5,7 +5,7 @@ import { Appointment } from "src/app/features/create-appointment/create-appointm
 import { NotificationService } from "./notification.service";
 import { from } from "rxjs/internal/observable/from";
 import { tap } from "rxjs/internal/operators/tap";
-import { catchError, map, throwError } from "rxjs";
+import { Observable, catchError, map, throwError } from "rxjs";
 import { formatDate } from "../helpers/utils";
 
 @Injectable({
@@ -21,11 +21,11 @@ export class AppointmentsService {
 
   constructor() {}
 
-  getAppointments() {
+  getAppointments():Observable<Appointment[]> {
     return from(getDocs(this.collectionRef)).pipe(
       map((querySnapshot) => {
-        let results: DocumentData[] = [];
-        querySnapshot.forEach((doc) => results.push({ ...doc.data(), id: doc.id }));
+        let results:Appointment[] = [];
+        querySnapshot.forEach((doc) => results.push({ ...doc.data() as Appointment, id: doc.id }));
         return results;
       }),
       catchError((error) => {

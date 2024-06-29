@@ -39,3 +39,11 @@ export function formatDate(date: Date | string): Date | string | null {
   
   return `${day}.${month}.${year}`;
 }
+
+export function appendHiddenInputToForm(form:HTMLFormElement, key:string, value:string) {
+  const input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = key;
+  input.value = value;
+  form.appendChild(input);
+}

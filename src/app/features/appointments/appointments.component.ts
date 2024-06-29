@@ -33,6 +33,7 @@ export class AppointmentsComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   displayedColumns: string[] = ["date", "name", "phone", "email", "slot", "service", "action"];
+  responsiveCol: string[] = ["date","slot", "service", "action"];
   dataSource!: MatTableDataSource<Appointment>;
   allAppoitments$: Observable<Appointment[]> = of([]);
   loading = false;
@@ -45,12 +46,12 @@ export class AppointmentsComponent {
   }
 
   ngAfterViewInit() {
-   this.setDataSource()
+    this.getAllAppoitments()
   }
 
-  setDataSource() {
-    this.allAppoitments$
-    .pipe(
+  getAllAppoitments() {
+    this.loading = true;
+    this.#apoitmentService.getAppointments().pipe(
       finalize(() => (this.loading = false)),
       map((dataArr: Appointment[]) => {
         return dataArr.map((x) => {
@@ -64,14 +65,7 @@ export class AppointmentsComponent {
     .subscribe((res: Appointment[]) => {
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.sort = this.sort;
-    });
-  }
-
-  getAllAppoitments() {
-    this.loading = true;
-    this.allAppoitments$ = this.#apoitmentService.getAppointments() as Observable<Appointment[]>;
-   this.setDataSource()
-
+    })
   }
 
   deleteAppointment(appointment: Appointment) {

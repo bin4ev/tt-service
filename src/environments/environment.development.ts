@@ -2,8 +2,7 @@ export const environment = {
   production: false,
   emailConfifg : {
     serviceID: "service_8uoi1gq",
-      templateID: "template_13ugvxh",
-      publicKey: "iUaTFTZDQC83HSVBv" 
+    publicKey: "iUaTFTZDQC83HSVBv" 
   },
   firebaseConfig : {
     apiKey: "AIzaSyDUjGcyFx-fEvYnvi966B5kvfiSofbZWns",
