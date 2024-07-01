@@ -15,6 +15,9 @@
 .responsive-table {
   display: none;
 }
+.selectedRow {
+  background-color: red;
+}
 
 @media print,
 (max-width: 450px) {
