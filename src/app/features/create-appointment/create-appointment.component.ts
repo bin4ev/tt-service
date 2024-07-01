@@ -189,6 +189,18 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   sendEmailToAdmin(event:SubmitEvent) {
-
+    let form = event.target as HTMLFormElement
+    
+    appendHiddenInputToForm(form, "date", formatDate(this.formValue().date) as string)
+    appendHiddenInputToForm(form, "slot", this.formValue().slot.split('-')[0])
+    appendHiddenInputToForm(form, "service", this.formValue().service)
+    this.#emailService.sendEmail(event.target as HTMLFormElement, EMAIL_TEMPLATES_IDS.CONTACT).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
   }
 }
