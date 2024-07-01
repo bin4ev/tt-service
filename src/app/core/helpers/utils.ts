@@ -47,3 +47,10 @@ export function appendHiddenInputToForm(form:HTMLFormElement, key:string, value:
   input.value = value;
   form.appendChild(input);
 }
+
+export function isToday(date: Date): boolean {
+  const today = new Date();
+  return date.getFullYear() === today.getFullYear() &&
+         date.getMonth() === today.getMonth() &&
+         date.getDate() === today.getDate();
+}

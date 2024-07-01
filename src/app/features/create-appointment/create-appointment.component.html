@@ -4,9 +4,25 @@
   <main class="content">
     <mat-card class="inline-card">
       <mat-calendar [(selected)]="selected" [dateFilter]="myFilter" [minDate]="today"
-        (selectedChange)="onSelectedDate($event)">
+        (selectedChange)="onSelectedDate($event)"
+      >
       </mat-calendar>
     </mat-card>
+
+    
+    <!-- <mat-card class="inline-card">
+      <div id="slotsContainer" class="container">
+        @if (slots.get(selected())){
+          @for(slot of slots.get(selected()); track slot) {
+          <div class="hour-slot" [ngStyle]="{'background-color': formValue().slot === slot.range  ? '#8ba7c8' : ''}"
+            [ngClass]="{'notAvailable' : !slot.available}" (click)="onSelectedSlot(slot)">
+            {{slot.range}}
+          </div>
+          }
+
+        }
+      </div>
+    </mat-card> -->
 
 
     <mat-card class="inline-card">

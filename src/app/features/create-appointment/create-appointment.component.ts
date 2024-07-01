@@ -12,8 +12,10 @@ import { MatSelectModule } from "@angular/material/select";
 import { NotificationService } from "src/app/core/services/notification.service";
 import { NgClass, NgStyle } from "@angular/common";
 import { AppointmentsService } from "src/app/core/services/appointments.service";
-import { appendHiddenInputToForm, formatDate } from "src/app/core/helpers/utils";
+import { appendHiddenInputToForm, formatDate, isToday } from "src/app/core/helpers/utils";
 import { EMAIL_TEMPLATES_IDS, EmailService } from "src/app/core/services/email.service";
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmationDialogComponent } from "src/app/shared/components/confirmation-dialog/confirmation-dialog.component";
 
 export interface Appointment {
   name: string;
@@ -63,7 +65,8 @@ export class CreateAppointmentComponent implements OnInit {
   #notificationService = inject(NotificationService);
   #apoitmentService = inject(AppointmentsService);
   #emailService = inject(EmailService);
-
+  #matDialogService = inject(MatDialog);
+ 
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
     return day !== 0;
@@ -79,7 +82,6 @@ export class CreateAppointmentComponent implements OnInit {
     this.#apoitmentService.getAppointments().subscribe((res) => {
       this.allAppoitments = res as Appointment[];
       console.log(this.allAppoitments);
-
       this.setAppoitmentsForDate(this.selected());
     });
   }
@@ -105,7 +107,7 @@ export class CreateAppointmentComponent implements OnInit {
     while (start < end) {
       let slotStart = start.toTimeString().substring(0, 5);
       start.setHours(start.getHours() + range);
-      let notAvailable = this.selected().getDate() === this.today.getDate() && start.getHours() <= now;
+      let notAvailable = isToday(this.selected()) && start.getHours() <= now;
       let slotEnd = start.toTimeString().substring(0, 5);
       let slot = {
         available: !notAvailable,
@@ -126,7 +128,10 @@ export class CreateAppointmentComponent implements OnInit {
       this.initSlots();
       this.setAppoitmentsForDate(date);
       this.formValue.set({ ...this.formValue(), date, slot: "" });
+      return;
     }
+
+    this.formValue.set({ ...this.formValue(), date: this.selected() });
   }
 
   setAppoitmentsForDate(date: Date) {
@@ -137,14 +142,25 @@ export class CreateAppointmentComponent implements OnInit {
         let hour = appoitmentForDate.find((y) => x.range === y.slot);
         return hour ? { range: x.range, available: false } : x;
       });
-      this.hoursSlots.set(slots);
-      console.log(this.hoursSlots());
+
+      this.hoursSlots.set([...slots]);
+      return;
     }
+
+    this.initSlots();
   }
 
+ 
   onSubmit(form: NgForm, event: SubmitEvent) {
-    if (!this.formValue().slot) {
+    const { slot, date } = this.formValue();
+
+    if (!slot) {
       this.#notificationService.showError("Трябва да изберете час!"); //da se prewede
+      return;
+    }
+
+    if (!date) {
+      this.#notificationService.showError("Трябва да изберете дата!"); //da se prewede
       return;
     }
 
@@ -152,14 +168,30 @@ export class CreateAppointmentComponent implements OnInit {
       return;
     }
 
-    this.#apoitmentService.createAppointment({ ...this.formValue() }).subscribe((response) => {
-      this.#notificationService.showSuccess("Успешно запазихте час!");
-      this.sendEmailToClien(event);
-      this.sendEmailToAdmin(event)
-      this.getAllAppoitments();
-      this.formValue.set({ name: "", phone: "", email: "", date: "", slot: "", service: "", id: "" });
-      form.resetForm();
-    });
+    const dialogRef = this.#matDialogService.open(ConfirmationDialogComponent)
+    let config = dialogRef.componentInstance.config()
+    config = {
+      ...config,
+      title :"Потвърждение",
+      message: `Сигурни ли сте, че искате да запазите час ${slot.split('-')[0]} за дата ${formatDate(date)} ?`
+    }
+
+
+    dialogRef.componentInstance.config = signal(config)
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.#apoitmentService.createAppointment({ ...this.formValue() }).subscribe((response) => {
+          this.#notificationService.showSuccess("Успешно запазихте час!");
+          this.sendEmailToClien(event);
+          this.sendEmailToAdmin(event);
+          this.getAllAppoitments();
+          this.formValue.set({ name: "", phone: "", email: "", date: "", slot: "", service: "", id: "" });
+          form.resetForm();
+        });
+      }
+    })
+    
+  
   }
 
   onSelectedSlot(slot: Slot) {
@@ -172,12 +204,12 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   sendEmailToClien(event: SubmitEvent) {
-    let form = event.target as HTMLFormElement
-    
-    appendHiddenInputToForm(form, "date", formatDate(this.formValue().date) as string)
-    appendHiddenInputToForm(form, "slot", this.formValue().slot.split('-')[0])
+    let form = event.target as HTMLFormElement;
 
-    this.#emailService.sendEmail(form,EMAIL_TEMPLATES_IDS.CREATE_APPOINTMENT).subscribe({
+    appendHiddenInputToForm(form, "date", formatDate(this.formValue().date) as string);
+    appendHiddenInputToForm(form, "slot", this.formValue().slot.split("-")[0]);
+
+    this.#emailService.sendEmail(form, EMAIL_TEMPLATES_IDS.CREATE_APPOINTMENT).subscribe({
       next: (res) => {
         console.log(res);
       },
@@ -188,12 +220,9 @@ export class CreateAppointmentComponent implements OnInit {
     });
   }
 
-  sendEmailToAdmin(event:SubmitEvent) {
-    let form = event.target as HTMLFormElement
-    
-    appendHiddenInputToForm(form, "date", formatDate(this.formValue().date) as string)
-    appendHiddenInputToForm(form, "slot", this.formValue().slot.split('-')[0])
-    appendHiddenInputToForm(form, "service", this.formValue().service)
+  sendEmailToAdmin(event: SubmitEvent) {
+    let form = event.target as HTMLFormElement;
+    appendHiddenInputToForm(form, "service", this.formValue().service);
     this.#emailService.sendEmail(event.target as HTMLFormElement, EMAIL_TEMPLATES_IDS.CONTACT).subscribe({
       next: (res) => {
         console.log(res);
@@ -201,6 +230,6 @@ export class CreateAppointmentComponent implements OnInit {
       error: (err) => {
         console.log(err);
       },
-    })
+    });
   }
 }

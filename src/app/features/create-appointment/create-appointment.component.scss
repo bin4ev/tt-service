@@ -35,9 +35,9 @@
   border-radius: 6px;
 }
 
-.hour-slot:hover {
-  background: #afc7e1;
-}
+// .hour-slot:hover {
+//   background: #afc7e1;
+// }
 
 busy-slot {
   background-color: red;
@@ -60,6 +60,10 @@ form {
 .notAvailable {
   background-color: red;
   pointer-events: none;
+}
+
+mat-card:has(mat-calendar) {
+  color: #673ab7;
 }
 
 @media screen and (max-width: $sm-screen) {
