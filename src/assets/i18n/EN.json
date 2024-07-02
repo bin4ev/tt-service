@@ -3,7 +3,8 @@
     "HOME": "Home",
     "GALLERY": "Gallery",
     "SERVICES": "Services",
-    "CONTACTS": "Contacts"
+    "CONTACTS": "Contacts",
+    "APPOINTMENTS": "Appointmets"
   },
   "WELCOME": "Welcome",
   "LOGIN": "Login",
@@ -81,7 +82,9 @@
   },
   "BUTTON": {
     "back": "Back",
-    "send": "Send"
+    "send": "Send",
+    "save" : "Save",
+    "delete" : "Delete"
   },
   "SERVICE_PAGE_SERVICE": {
     "AIR_CONDITION": {
@@ -209,6 +212,26 @@
     "street": "str."
   },
   "APPOINTMENT": {
-    "title": "Book now"
+    "title": "Book now",
+    "FORM" : {
+      "service": "Service",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "REQUARED": {
+        "service": "Service is require",
+        "name": "Name is require",
+        "email": "Email is required",
+        "phone": "Phone is required"
+      },
+      "INVALID": {
+        "email": "Invalid email",
+        "phone": "Invalid phone"
+      }
+    }
+  },
+  "APPOINTMENTS": {
+    "title" : "Appointments",
+    "not_results": "There are not appointments"
   }
 }

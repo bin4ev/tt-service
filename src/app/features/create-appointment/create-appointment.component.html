@@ -3,20 +3,88 @@
 
   <main class="content">
     <mat-card class="inline-card">
-      <mat-calendar
-      [(selected)]="selected"
-       [dateFilter]="myFilter"
-       (selectedChange)="onSelected($event)"></mat-calendar>
+      <mat-calendar [(selected)]="selected" [dateFilter]="myFilter" [minDate]="today"
+        (selectedChange)="onSelectedDate($event)"
+      >
+      </mat-calendar>
     </mat-card>
-
 
     <mat-card class="inline-card">
       <div id="slotsContainer" class="container">
         @for(slot of hoursSlots(); track slot) {
-          <div class="hour-slot">{{slot}}</div>
+        <div class="hour-slot" [ngStyle]="{'background-color': formValue().slot === slot.range  ? '#8ba7c8' : ''}"
+          [ngClass]="{'notAvailable' : !slot.available}" (click)="onSelectedSlot(slot)">
+          {{slot.range}}
+        </div>
         }
       </div>
-    </mat-card >
+    </mat-card>
+
+    <mat-card class="inline-card">
+      <form #form="ngForm"
+        class="container"
+        (ngSubmit)="onSubmit(form, $event)">
+
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'APPOINTMENT.FORM.service' | translate }}</mat-label>
+          <mat-select #name="ngModel" matInput name="name" [(ngModel)]="formValue().service"
+           required
+           >
+            <mat-option value="airCondition">Диагностика на климатик</mat-option>
+            <mat-option value="oilChange">Смяна на масло и филтри</mat-option>
+            <!-- <mat-option value="option3">Option 3</mat-option> -->
+          </mat-select>
+          <mat-icon matSuffix>manufacturing</mat-icon>
+
+          @if (name.errors?.['required']) {
+          <mat-error>{{ 'APPOINTMENT.FORM.REQUARED.service' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'APPOINTMENT.FORM.name' | translate }}</mat-label>
+          <input #name="ngModel" matInput placeholder="John Doe" name="name" [(ngModel)]="formValue().name" required>
+          <mat-icon matSuffix>badge</mat-icon>
+
+          @if (name.errors?.['required']) {
+          <mat-error>{{ 'APPOINTMENT.FORM.REQUARED.name' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'APPOINTMENT.FORM.email' | translate }}</mat-label>
+          <input #email="ngModel" matInput placeholder="example.com" name="email" [(ngModel)]="formValue().email"
+            required email>
+          <mat-icon matSuffix>mail</mat-icon>
+
+          @if (email.errors?.['required']) {
+          <mat-error>{{ 'APPOINTMENT.FORM.REQUARED.email' | translate }}</mat-error>
+          }
+
+          @if (email.errors?.['email']) {
+          <mat-error>{{ 'APPOINTMENT.FORM.INVALID.email' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'APPOINTMENT.FORM.phone' | translate }}</mat-label>
+          <input #phone="ngModel" matInput placeholder="0xxx xxx xxx xxx" name="phone" [(ngModel)]="formValue().phone"
+            required pattern="[0-9]{10}">
+          <mat-icon matSuffix>phone</mat-icon>
+
+          @if (phone.errors?.['required']) {
+          <mat-error>{{ 'APPOINTMENT.FORM.REQUARED.phone' | translate }}</mat-error>
+          }
+
+          @if (phone.errors?.['pattern']) {
+          <mat-error>{{ 'APPOINTMENT.FORM.INVALID.phone' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button>{{ 'BUTTON.save' | translate }}</button>
+        
+      </form>
+    </mat-card>
 
   </main>
 
