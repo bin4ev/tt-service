@@ -12,7 +12,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { NotificationService } from "src/app/core/services/notification.service";
 import { NgClass, NgStyle } from "@angular/common";
 import { AppointmentsService } from "src/app/core/services/appointments.service";
-import { appendHiddenInputToForm, formatDate, isToday } from "src/app/core/helpers/utils";
+import { appendHiddenInputToForm, createToggleFunction, formatDate, isToday } from "src/app/core/helpers/utils";
 import { EMAIL_TEMPLATES_IDS, EmailService } from "src/app/core/services/email.service";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationDialogComponent } from "src/app/shared/components/confirmation-dialog/confirmation-dialog.component";
@@ -61,15 +61,24 @@ export class CreateAppointmentComponent implements OnInit {
   formValue = signal<Appointment>({ name: "", phone: "", email: "", date: "", slot: "", service: "", id: "" });
   isLoggedIn = false;
   allAppoitments: Appointment[] = [];
+  toggleFn = createToggleFunction();
 
   #notificationService = inject(NotificationService);
   #apoitmentService = inject(AppointmentsService);
   #emailService = inject(EmailService);
   #matDialogService = inject(MatDialog);
- 
+
   myFilter = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDay();
-    return day !== 0;
+    const day: number = (d || new Date()).getDay();
+    if (day === 0) {
+      return false;
+    }
+
+    if (day === 6) {
+      return this.toggleFn();
+    }
+
+    return true;
   };
 
   ngOnInit() {
@@ -104,7 +113,7 @@ export class CreateAppointmentComponent implements OnInit {
     let end = new Date(`1970-01-01T${endTime}:00`);
     let now = new Date().getHours();
 
-    while (start < end) {
+    while (start.getHours() < end.getHours()) {
       let slotStart = start.toTimeString().substring(0, 5);
       start.setHours(start.getHours() + range);
       let notAvailable = isToday(this.selected()) && start.getHours() <= now;
@@ -150,7 +159,6 @@ export class CreateAppointmentComponent implements OnInit {
     this.initSlots();
   }
 
- 
   onSubmit(form: NgForm, event: SubmitEvent) {
     const { slot, date } = this.formValue();
 
@@ -168,17 +176,16 @@ export class CreateAppointmentComponent implements OnInit {
       return;
     }
 
-    const dialogRef = this.#matDialogService.open(ConfirmationDialogComponent)
-    let config = dialogRef.componentInstance.config()
+    const dialogRef = this.#matDialogService.open(ConfirmationDialogComponent);
+    let config = dialogRef.componentInstance.config();
     config = {
       ...config,
-      title :"Потвърждение",
-      message: `Сигурни ли сте, че искате да запазите час ${slot.split('-')[0]} за дата ${formatDate(date)} ?`
-    }
+      title: "Потвърждение",
+      message: `Сигурни ли сте, че искате да запазите час ${slot.split("-")[0]} за дата ${formatDate(date)} ?`,
+    };
 
-
-    dialogRef.componentInstance.config = signal(config)
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef.componentInstance.config = signal(config);
+    dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.#apoitmentService.createAppointment({ ...this.formValue() }).subscribe((response) => {
           this.#notificationService.showSuccess("Успешно запазихте час!");
@@ -189,9 +196,7 @@ export class CreateAppointmentComponent implements OnInit {
           form.resetForm();
         });
       }
-    })
-    
-  
+    });
   }
 
   onSelectedSlot(slot: Slot) {
