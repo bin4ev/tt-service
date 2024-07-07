@@ -54,3 +54,14 @@ export function isToday(date: Date): boolean {
          date.getMonth() === today.getMonth() &&
          date.getDate() === today.getDate();
 }
+
+export function createToggleFunction() {
+  let state = false;
+  
+  return function() {
+      state = !state;
+      return state;
+  }
+}
+
+
