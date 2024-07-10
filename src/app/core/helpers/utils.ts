@@ -56,7 +56,7 @@ export function isToday(date: Date): boolean {
 }
 
 export function createToggleFunction() {
-  let state = false;
+  let state = true;
   
   return function() {
       state = !state;

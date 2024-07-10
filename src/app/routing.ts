@@ -8,6 +8,7 @@ import { HomeComponent } from "./features/home/home.component";
 import { AboutComponent } from "./features/about/about.component";
 import { ServicesComponent } from "./features/service/services.component";
 import { AppointmentsComponent } from "./features/appointments/appointments.component";
+import { FeedbacksComponent } from "./features/feedbacks/feedbacks.component";
 
 export const routes: Routes = [
   { path: "'/'", redirectTo: "home", pathMatch: "full" },
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: "gallery", component: AboutComponent },
   { path: "services", component: ServicesComponent },
   { path: "appointments", component: AppointmentsComponent },
+  { path: "feedbacks", component: FeedbacksComponent },
   {
     path: "contacts",
     loadComponent: () =>
