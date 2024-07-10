@@ -36,8 +36,8 @@ import { AuthService } from "src/app/core/services/auth.service";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent {
-  readonly NAV_LIST = ["home", "gallery", "services", "contacts"];
-  readonly NAV_LIST_ADMIN = ["home", "gallery", "services", "contacts", "appointments"];
+  readonly NAV_LIST = ["home", "gallery", "services", "contacts", "feedbacks"];
+  readonly NAV_LIST_ADMIN = ["home", "gallery", "services", "contacts", "appointments", "feedbacks"];
 
   userData: User | null = null;
   isLogedIn$?: Observable<boolean>;

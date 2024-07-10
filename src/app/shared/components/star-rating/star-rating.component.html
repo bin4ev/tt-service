@@ -1,0 +1,8 @@
+<div class="star-rating">
+  @for(fill of starFills;track fill){
+    <div class="star">
+      <div class="filled" [style.width.%]="fill"></div>
+    </div>
+  }
+  <span class="rating-text">{{ rating }} from 5</span>
+</div>

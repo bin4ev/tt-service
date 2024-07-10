@@ -1,0 +1,23 @@
+.card {
+  min-width: 300px;
+  width: 80%;
+}
+
+.content {
+  color: #0000008A;
+  margin-top: 1rem;
+}
+
+.avatar {
+    background-color: cornflowerblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pbl-container {
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100%;
+  gap: 2rem;
+}
