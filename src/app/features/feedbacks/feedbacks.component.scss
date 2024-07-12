@@ -21,3 +21,14 @@
   min-height: 100%;
   gap: 2rem;
 }
+
+.top-rating {
+  .title {
+    font-size: 2rem;
+  }
+
+  .rate {
+    display: flex;
+    font-size: 16px;
+  }
+}

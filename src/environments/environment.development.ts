@@ -14,7 +14,6 @@ export const environment = {
     appId: "1:991370145750:web:40df9229b732dd6c2a3e77"
   },
   reviewsConfig : {
-    apiKey : "AIzaSyDE11NgtbFjQIiT-ehV1cbWOGNg4v-MLi0",
     placeId: "ChIJfWqBMMGVpkARCXTa2ufVueo",
     baseUrl:'https://maps.googleapis.com/maps/api/place/details/json'
 

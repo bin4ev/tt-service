@@ -1,6 +1,5 @@
 .star-rating {
   display: flex;
-  align-items: baseline;
   font-size: 25px;
 }
 
@@ -42,7 +41,9 @@
 }
 
 .rating-text {
-  margin-left: 10px;
+  line-height: unset;
+  margin-left: 5px;
   font-size: 16px;
-  color: #333;
 }
+
+

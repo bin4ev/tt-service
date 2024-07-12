@@ -144,6 +144,10 @@ span {
   border-radius: 8px;
 }
 
+.mat-mdc-card-avatar~.mat-mdc-card-header-text .mat-mdc-card-subtitle{
+  line-height: revert !important;
+}
+
 @media screen and (max-width: $md-screen) {
   .pbl-content {
     flex-direction: column;

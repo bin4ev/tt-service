@@ -14,15 +14,11 @@ import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { MAT_DATE_LOCALE, provideNativeDateAdapter } from "@angular/material/core";
 import { registerLocaleData } from "@angular/common";
-import { firstValueFrom } from "rxjs";
+import { finalize, firstValueFrom } from "rxjs";
 import { GooglePlaceService } from "./app/core/services/google-place.service";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
-}
-
-export function initializeAppGetMyPlace(googlePlaceService: GooglePlaceService) {
-  return () => firstValueFrom(googlePlaceService.getMyPlaceDetails());
 }
 
 bootstrapApplication(AppComponent, {
@@ -48,12 +44,6 @@ bootstrapApplication(AppComponent, {
         },
       })
     ),
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeAppGetMyPlace,
-      multi: true,
-      deps: [GooglePlaceService],
-    },
     provideNativeDateAdapter(),
   ],
 }).catch((err) => console.error(err));
