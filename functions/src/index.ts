@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const getPlaceDetails = onRequest({cors: true}, async (req, res) => {
   const placeId = "ChIJfWqBMMGVpkARCXTa2ufVueo";
-  const apiKey = req.body.data.apiKey; /* "AIzaSyCoTB-Old6kCKAHQnnjHqMm6cPnqXRJ7fw"; */
+  const apiKey = req.body.data.apiKey;
   try {
     const response = await axios.get(
       `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}&language=bg`
