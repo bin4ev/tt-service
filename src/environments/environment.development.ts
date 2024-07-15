@@ -12,10 +12,5 @@ export const environment = {
     storageBucket: "tt-service-88018.appspot.com",
     messagingSenderId: "991370145750",
     appId: "1:991370145750:web:40df9229b732dd6c2a3e77"
-  },
-  reviewsConfig : {
-    placeId: "ChIJfWqBMMGVpkARCXTa2ufVueo",
-    baseUrl:'https://maps.googleapis.com/maps/api/place/details/json'
-
   }
 };

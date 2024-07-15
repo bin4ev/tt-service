@@ -1,0 +1,11 @@
+{
+  "/feedbacks": {
+    "target": "https://us-central1-tt-service-88018.cloudfunctions.net",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/feedbacks": ""
+    }
+  }
+}

@@ -19,14 +19,11 @@ import { toSignal } from "@angular/core/rxjs-interop";
 export class FeedbacksComponent {
   #googlePlaceService = inject(GooglePlaceService);
 
-  readonly placeId = environment.reviewsConfig.placeId;
   loading = signal(false);
   myPlaceDetails$ = this.#googlePlaceService.getMyPlaceDetails();
 
   myReviews = toSignal(
     this.myPlaceDetails$.pipe(
-      finalize(() => this.loading.set(false)),
-      tap((res) => this.loading.set(true)),
       map((myPLaceObj) => myPLaceObj?.reviews ?? []),
       catchError((err) => of([]))
     )
