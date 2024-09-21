@@ -19,11 +19,8 @@ export class ApiKeysService {
     const docRef = doc(this.#db,this.basePath, this.googleMapIdDoc);
     
     return from(getDoc(docRef)).pipe(
-      map((docSnap) => {
-        console.log(docSnap);
-        
+      map((docSnap) => {        
         if (docSnap.exists()) {
-          console.log("Document data:", docSnap.data());
           return docSnap.data();
         } else {
           // docSnap.data() will be undefined in this case

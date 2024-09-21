@@ -1,5 +1,5 @@
-import { HttpClient } from "@angular/common/http";
-import { inject, Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import {
   BehaviorSubject,
   catchError,
@@ -8,18 +8,19 @@ import {
   map,
   Observable,
   of,
+  shareReplay,
   Subject,
   switchMap,
   tap,
   throwError,
-} from "rxjs";
-import { environment } from "src/environments/environment.development";
-import { NotificationService } from "./notification.service";
-import { PlaceResponse } from "../models/google-place-responce";
-import { ApiKeysService } from "./api-keys.service";
-import { getFunctions, httpsCallable } from "firebase/functions";
+} from 'rxjs';
+import { environment } from 'src/environments/environment.development';
+import { NotificationService } from './notification.service';
+import { PlaceResponse } from '../models/google-place-responce';
+import { ApiKeysService } from './api-keys.service';
+import { getFunctions, httpsCallable } from 'firebase/functions';
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class GooglePlaceService {
   functions = getFunctions();
@@ -53,11 +54,10 @@ export class GooglePlaceService {
         if (!apiKey) {
           return of(null);
         }
-        console.log(apiKey);
-        const requestFn = httpsCallable(this.functions, "getPlaceDetails")
-        return from(requestFn({apiKey: apiKey["key"]})).pipe(
+
+        const requestFn = httpsCallable(this.functions, 'getPlaceDetails');
+        return from(requestFn({ apiKey: apiKey['key'] })).pipe(
           map((res: any) => {
-            console.log(res.data);
             return res.data;
           }),
           catchError((err) => {
@@ -65,6 +65,10 @@ export class GooglePlaceService {
             return throwError(() => err);
           })
         );
+      }),
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => err);
       })
     );
   }

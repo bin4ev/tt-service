@@ -76,8 +76,6 @@ export class AppointmentsComponent {
       .pipe(finalize(() => (this.loading = false)))
       .subscribe((res: Appointment[]) => {
         this.dataSource = new MatTableDataSource(res);
-        console.log(res);
-
         this.allAppoitmentsAvailable.next(true);
       });
   }
