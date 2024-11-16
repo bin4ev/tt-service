@@ -2,7 +2,7 @@ import { APP_INITIALIZER, importProvidersFrom } from "@angular/core";
 import { AppComponent } from "./app/app.component";
 import { withInterceptorsFromDi, provideHttpClient, HttpClient } from "@angular/common/http";
 import { provideAnimations } from "@angular/platform-browser/animations";
-import { BrowserModule, bootstrapApplication } from "@angular/platform-browser";
+import { BrowserModule, bootstrapApplication, provideClientHydration } from "@angular/platform-browser";
 import { provideRouter, withViewTransitions } from "@angular/router";
 import { routes } from "./app/routing";
 import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
@@ -54,6 +54,6 @@ bootstrapApplication(AppComponent, {
       multi: true,
       deps: [GooglePlaceService],
     },
-    provideNativeDateAdapter(),
+    provideNativeDateAdapter(), provideClientHydration(),
   ],
 }).catch((err) => console.error(err));
