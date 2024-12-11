@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, importProvidersFrom } from "@angular/core";
+import { importProvidersFrom } from "@angular/core";
 import { AppComponent } from "./app/app.component";
 import { withInterceptorsFromDi, provideHttpClient, HttpClient } from "@angular/common/http";
 import { provideAnimations } from "@angular/platform-browser/animations";
@@ -12,10 +12,8 @@ import { environment } from "./environments/environment.development";
 import { getFirestore, provideFirestore } from "@angular/fire/firestore";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { MAT_DATE_LOCALE, provideNativeDateAdapter } from "@angular/material/core";
-import { registerLocaleData } from "@angular/common";
-import { finalize, firstValueFrom } from "rxjs";
-import { GooglePlaceService } from "./app/core/services/google-place.service";
+import { provideNativeDateAdapter } from "@angular/material/core";
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
