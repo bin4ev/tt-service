@@ -4,8 +4,7 @@ import {
   MatCardModule,
 } from "@angular/material/card";
 import { TranslateModule } from "@ngx-translate/core";
-import { map, Observable, startWith, tap } from "rxjs";
-import { PlaceResponse, Review } from "src/app/core/models/google-place-responce";
+import { map, tap } from "rxjs";
 import { GooglePlaceService } from "src/app/core/services/google-place.service";
 import { StarRatingComponent } from "src/app/shared/components/star-rating/star-rating.component";
 import { environment } from "src/environments/environment.development";
@@ -13,7 +12,7 @@ import { environment } from "src/environments/environment.development";
 @Component({
   selector: "app-feedbacks",
   standalone: true,
-  imports: [MatCardModule, TranslateModule, AsyncPipe, NgOptimizedImage, StarRatingComponent],
+  imports: [MatCardModule, TranslateModule, AsyncPipe, StarRatingComponent],
   templateUrl: "./feedbacks.component.html",
   styleUrl: "./feedbacks.component.scss",
 })
@@ -25,5 +24,4 @@ export class FeedbacksComponent {
     tap(res => console.log(res)
     ),
     map((myPLaceObj) => myPLaceObj?.reviews ?? []));
-  
 }
