@@ -1,10 +1,11 @@
-import { mergeApplicationConfig, ApplicationConfig } from '@angular/core';
+import { mergeApplicationConfig, ApplicationConfig, APP_INITIALIZER } from '@angular/core';
 import { provideServerRendering } from '@angular/platform-server';
-import { appConfig } from './app.config';
+import { appConfig,  } from './app.config';
+import { GooglePlaceService } from './core/services/google-place.service';
 
 const serverConfig: ApplicationConfig = {
   providers: [
-    provideServerRendering()
+    provideServerRendering(),
   ]
 };
 

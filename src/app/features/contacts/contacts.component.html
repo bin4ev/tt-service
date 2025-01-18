@@ -82,7 +82,13 @@
       </div>
 
       <div>
-        <app-jsmap></app-jsmap>
+        @defer(on viewport) {
+        <app-jsmap />
+        } @loading {
+        <process-wheel />
+        }@placeholder {
+          <p>No content</p>
+        }
       </div>
     </div>
 

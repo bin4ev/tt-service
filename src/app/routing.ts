@@ -1,25 +1,25 @@
 import { Routes } from "@angular/router";
 
-import { CreateAppointmentComponent } from "./features/create-appointment/create-appointment.component";
-import { SignInComponent } from "./features/auth/sign-in/sign-in.component";
-import { SignUpComponent } from "./features/auth/sign-up/sign-up.component";
-import { ForgotPasswordComponent } from "./features/auth/forgot-password/forgot-password.component";
-import { HomeComponent } from "./features/home/home.component";
-import { AboutComponent } from "./features/about/about.component";
-import { ServicesComponent } from "./features/service/services.component";
-import { AppointmentsComponent } from "./features/appointments/appointments.component";
-import { FeedbacksComponent } from "./features/feedbacks/feedbacks.component";
+
+
+
+
+
+
+
+
+
 
 export const routes: Routes = [
   { path: "'/'", redirectTo: "home", pathMatch: "full" },
-  { path: "login", component: SignInComponent },
-  { path: "register", component: SignUpComponent },
-  { path: "forgotPassword", component: ForgotPasswordComponent },
-  { path: "home", component: HomeComponent },
-  { path: "gallery", component: AboutComponent },
-  { path: "services", component: ServicesComponent },
-  { path: "appointments", component: AppointmentsComponent },
-  { path: "feedbacks", component: FeedbacksComponent },
+  { path: "login", loadComponent: () => import('./features/auth/sign-in/sign-in.component').then(m => m.SignInComponent) },
+  { path: "register", loadComponent: () => import('./features/auth/sign-up/sign-up.component').then(m => m.SignUpComponent) },
+  { path: "forgotPassword", loadComponent: () => import('./features/auth/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent) },
+  { path: "home", loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent) },
+  { path: "gallery", loadComponent: () => import('./features/about/about.component').then(m => m.AboutComponent) },
+  { path: "services", loadComponent: () => import('./features/service/services.component').then(m => m.ServicesComponent) },
+  { path: "appointments", loadComponent: () => import('./features/appointments/appointments.component').then(m => m.AppointmentsComponent) },
+  { path: "feedbacks", loadComponent: () => import('./features/feedbacks/feedbacks.component').then(m => m.FeedbacksComponent) },
   {
     path: "contacts",
     loadComponent: () =>
@@ -74,6 +74,6 @@ export const routes: Routes = [
         (m) => m.TransmissionServiceComponent
       ),
   },
-  { path: 'create-appointment', component: CreateAppointmentComponent },
+  { path: 'create-appointment', loadComponent: () => import('./features/create-appointment/create-appointment.component').then(m => m.CreateAppointmentComponent) },
   {path:"**", redirectTo: "home"}
 ];

@@ -12,6 +12,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { ADDRESS_STREET, ADDRESS_TOWN, BUSSINES_PHONE_NUMBER } from "src/app/core/constants/constants";
 import { EMAIL_TEMPLATES_IDS, EmailService } from "src/app/core/services/email.service";
 import { NotificationService } from "src/app/core/services/notification.service";
+import { ProcessWheelComponent } from "../../shared/components/process-wheel/process-wheel.component";
 
 @Component({
   selector: "app-contacts",
@@ -24,7 +25,8 @@ import { NotificationService } from "src/app/core/services/notification.service"
     FormsModule,
     JsmapComponent,
     TranslateModule,
-  ],
+    ProcessWheelComponent
+],
   templateUrl: "./contacts.component.html",
   styleUrls: ["./contacts.component.scss"],
   animations: [

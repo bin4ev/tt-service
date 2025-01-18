@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { inject, Injectable } from "@angular/core";
+import { afterNextRender, inject, Injectable } from "@angular/core";
 import { BehaviorSubject, catchError, map, Observable, Subject, tap, throwError } from "rxjs";
 import { environment } from "src/environments/environment.development";
 import { NotificationService } from "./notification.service";
@@ -23,10 +23,15 @@ export class GooglePlaceService {
     const url = `${this.baseUrl}?placeid=${this.placeId}&key=${this.apiKey}`;
     return this.#http.get(url).pipe(
       tap((res: any) => {
+        debugger
+        console.log(res);
+        
         this.myPlaceDetails.next(res.result);
       }),
       catchError((err) => {
         this.#notifService.showError(err.error_message);
+        console.log(err);
+        
         this.myPlaceDetails.next(null);
         return throwError(() => err);
       })

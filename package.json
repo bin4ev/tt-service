@@ -8,18 +8,19 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "deploy": "gh-pages -d dist",
-    "serve:ssr:tt-service": "node dist/tt-service/server/server.mjs"
+    "serve:ssr:tt-service": "node dist/tt-service/server/server.mjs",
+    "dev:ssr": "ng run tt-service:serve-ssr"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^18.2.12",
-    "@angular/cdk": "^17.2.2",
+    "@angular/cdk": "^18.2.13",
     "@angular/common": "^18.2.12",
     "@angular/compiler": "^18.2.12",
     "@angular/core": "^18.2.12",
     "@angular/fire": "^18.0.1",
     "@angular/forms": "^18.2.12",
-    "@angular/material": "^17.2.2",
+    "@angular/material": "^18.2.13",
     "@angular/platform-browser": "^18.2.12",
     "@angular/platform-browser-dynamic": "^18.2.12",
     "@angular/platform-server": "^18.2.12",

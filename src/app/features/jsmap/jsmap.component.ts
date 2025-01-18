@@ -2,6 +2,7 @@ import {
   Component,
   ViewChild,
   ElementRef,
+  afterNextRender,
 } from "@angular/core";
 import H from "@here/maps-api-for-javascript";
 import onResize from "simple-element-resize-detector";
@@ -28,7 +29,7 @@ export class JsmapComponent {
     pixelRatio: window.devicePixelRatio,
     zoom: DEFAULT_ZOOM,
     center: DEFAULT_POSITION,
-  }
+  };
 
   @ViewChild("map") mapDiv?: ElementRef;
 
@@ -48,7 +49,9 @@ export class JsmapComponent {
       onResize(this.mapDiv.nativeElement, () => map.getViewPort().resize());
       this.map = map;
       this.setLandmarks();
-      map.addEventListener("mapviewchange",  (ev: H.map.ChangeEvent) => this._handleMapChange(ev));
+      map.addEventListener("mapviewchange", (ev: H.map.ChangeEvent) =>
+        this._handleMapChange(ev)
+      );
       new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
     }
   }
