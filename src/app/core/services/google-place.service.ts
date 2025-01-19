@@ -23,7 +23,6 @@ export class GooglePlaceService {
     const url = `${this.baseUrl}?placeid=${this.placeId}&key=${this.apiKey}`;
     return this.#http.get(url).pipe(
       tap((res: any) => {
-        debugger
         console.log(res);
         
         this.myPlaceDetails.next(res.result);
