@@ -1,19 +1,28 @@
-import { Component, Signal, ViewChild, WritableSignal, inject, signal } from "@angular/core";
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  Signal,
+  ViewChild,
+  WritableSignal,
+  computed,
+  inject,
+  signal,
+  viewChild,
+} from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { MatIcon } from "@angular/material/icon";
 import { Appointment } from "../create-appointment/create-appointment.component";
-import { MatCard } from "@angular/material/card";
 import { AppointmentsService } from "src/app/core/services/appointments.service";
 import { MatSort, MatSortModule } from "@angular/material/sort";
-import { formatDate, untilDestroyed } from "src/app/core/helpers/utils";
-import { AsyncPipe, DatePipe, NgClass, NgFor } from "@angular/common";
+import { formatDate } from "src/app/core/helpers/utils";
+import { NgClass } from "@angular/common";
 import { ProcessWheelComponent } from "src/app/shared/components/process-wheel/process-wheel.component";
-import { BehaviorSubject, Observable, Subject, async, finalize, map, of, take } from "rxjs";
 import { NotificationService } from "src/app/core/services/notification.service";
-import { ResolveStart } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationDialogComponent } from "src/app/shared/components/confirmation-dialog/confirmation-dialog.component";
+import { AppointmentsStore } from "src/app/core/state/appointments/appointmenents.store";
 
 @Component({
   selector: "app-appointments",
@@ -22,78 +31,71 @@ import { ConfirmationDialogComponent } from "src/app/shared/components/confirmat
     TranslateModule,
     MatTableModule,
     MatIcon,
-    AsyncPipe,
     MatSortModule,
     MatSort,
-    DatePipe,
     ProcessWheelComponent,
-    NgFor,
-    NgClass
+    NgClass,
   ],
   templateUrl: "./appointments.component.html",
   styleUrl: "./appointments.component.scss",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppointmentsComponent {
-  @ViewChild(MatSort) sort!: MatSort;
+export class AppointmentsComponent implements AfterViewInit {
+  sort = viewChild(MatSort);
 
-  untilDestroyed = untilDestroyed();
-  displayedColumns: string[] = ["date", "name", "phone", "email", "slot", "service", "action"];
+  readonly AppointmentsStore = inject(AppointmentsStore);
+
+  displayedColumns: string[] = [
+    "date",
+    "name",
+    "phone",
+    "email",
+    "slot",
+    "service",
+    "action",
+  ];
   responsiveCol: string[] = ["date", "slot", "service", "action"];
-  dataSource!: MatTableDataSource<Appointment>;
-  allAppoitmentsAvailable: Subject<boolean> = new Subject();
-  allallAppoitmentsAvailable$ = this.allAppoitmentsAvailable.asObservable();
-  loading = false;
-  selectedRow: WritableSignal<Appointment | null> = signal(null)
+
+  dataSource = computed(() => {
+    const matTableDataSource = new MatTableDataSource<Appointment>(
+      this.AppointmentsStore.appointments()
+    );
+    matTableDataSource.sort = this.sort()!;
+    matTableDataSource.sortingDataAccessor = (item: any, property) => {
+      switch (property) {
+        case "date":
+          return formatDate(item.date);
+        default:
+          return item[property];
+      }
+    };
+    return matTableDataSource;
+  });
+
+  selectedRow: WritableSignal<Appointment | null> = signal(null);
 
   #apoitmentService = inject(AppointmentsService);
   #notificationService = inject(NotificationService);
   #matDialogService = inject(MatDialog);
 
-  ngOnInit() {
-    this.getAllAppoitments();
-  }
-
   ngAfterViewInit() {
-    this.allallAppoitmentsAvailable$.pipe(this.untilDestroyed()).subscribe((bool) => {
-      if (bool) {
-        this.dataSource.sort = this.sort;
-        this.dataSource.sortingDataAccessor = (item: any, property) => {
-          switch (property) {
-            case "date":
-              return formatDate(item.date);
-            default:
-              return item[property];
-          }
-        };
-      }
-    });
-  }
-
-  getAllAppoitments() {
-    this.loading = true;
-    this.#apoitmentService
-      .getAppointments()
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe((res: Appointment[]) => {
-        this.dataSource = new MatTableDataSource(res);
-        console.log(res);
-
-        this.allAppoitmentsAvailable.next(true);
-      });
+    this.AppointmentsStore.loadAll();
   }
 
   deleteAppointment(appointment: Appointment) {
-    this.selectedRow.set(appointment)
+    this.selectedRow.set(appointment);
     this.#matDialogService
       .open(ConfirmationDialogComponent)
       .afterClosed()
       .subscribe((res) => {
-        this.selectedRow.set(null)
+        this.selectedRow.set(null);
         if (res) {
-          this.#apoitmentService.deleteAppointment(appointment).subscribe((response) => {
-            this.#notificationService.showSuccess("Успешно изтрихте часа!");
-            this.getAllAppoitments();
-          });
+          this.#apoitmentService
+            .deleteAppointment(appointment)
+            .subscribe((response) => {
+              this.#notificationService.showSuccess("Успешно изтрихте часа!");
+              this.AppointmentsStore.loadAll();
+            });
         }
       });
   }

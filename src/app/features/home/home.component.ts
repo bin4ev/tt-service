@@ -22,10 +22,8 @@ import { CorouselComponent } from "src/app/shared/components/corousel/corousel.c
   standalone: true,
   imports: [
     MatButtonModule,
-    JsmapComponent,
     MatCardModule,
     RouterLink,
-    NgClass,
     CorouselComponent,
     ProcessWheelComponent,
     TranslateModule

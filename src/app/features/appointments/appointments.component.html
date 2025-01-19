@@ -3,9 +3,9 @@
     <span class="title">{{'APPOINTMENTS.title' | translate}}</span>
   </div>
 
-  @if(dataSource && dataSource.data.length) {
+  @if(dataSource() && dataSource().data.length) {
     <div class="table-wraper">
-      <table class="pbl-table" mat-table [dataSource]="dataSource" matSort>
+      <table class="pbl-table" mat-table [dataSource]="dataSource()" matSort>
   
         <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Дата</th>
@@ -51,7 +51,7 @@
       </table>
     </div>
 
-    <table class="responsive-table" mat-table [dataSource]="dataSource" >
+    <table class="responsive-table" mat-table [dataSource]="dataSource()" >
   
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef >Дата</th>
@@ -85,6 +85,6 @@
   }
 </div>
 
-@if(loading) {
+@if(AppointmentsStore.loading()) {
   <process-wheel [shown]="true"></process-wheel>
 }
