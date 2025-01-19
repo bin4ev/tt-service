@@ -1,9 +1,9 @@
-<div [matMenuTriggerFor]="menuLng" class="container">
+<div [matMenuTriggerFor]="menuLng" class="container" aria-details="changeLanguage">
     <div class="poiter">
         <div class="options pointer">
             <span>{{language}}</span>
             <div class="flex-align-center">
-                <img ngSrc="assets/flags/{{language}}.svg" height="19" width="21">
+                <img ngSrc="assets/flags/{{language}}.svg" height="19" width="21" alt="flag-{{language}}">
                 <mat-icon>arrow_drop_down</mat-icon>
             </div>
         </div>

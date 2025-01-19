@@ -1,13 +1,11 @@
-import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom, PLATFORM_ID } from "@angular/core";
+import { ApplicationConfig, importProvidersFrom,} from "@angular/core";
 import { provideRouter, withViewTransitions } from "@angular/router";
 import { routes } from "./routing";
 import { BrowserModule, provideClientHydration, withEventReplay } from "@angular/platform-browser";
 import { provideAnimations } from "@angular/platform-browser/animations";
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { HttpClient, provideHttpClient, withFetch, withInterceptorsFromDi } from "@angular/common/http";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { GooglePlaceService } from "./core/services/google-place.service";
-import { firstValueFrom } from "rxjs/internal/firstValueFrom";
 import { provideNativeDateAdapter } from "@angular/material/core";
 import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
 import { getAuth, provideAuth } from "@angular/fire/auth";
@@ -23,7 +21,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom(BrowserModule),
     provideAnimations(),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptorsFromDi(), withFetch()),
     provideRouter(
       routes,
       withViewTransitions() // Enable View Transitions
