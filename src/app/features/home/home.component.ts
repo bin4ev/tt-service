@@ -4,7 +4,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { JsmapComponent } from "../jsmap/jsmap.component";
 import { MatCardModule } from "@angular/material/card";
 import { RouterLink } from "@angular/router";
-import { NgClass } from "@angular/common";
+import { NgClass, NgOptimizedImage } from "@angular/common";
 
 
 
@@ -26,7 +26,8 @@ import { CorouselComponent } from "src/app/shared/components/corousel/corousel.c
     RouterLink,
     CorouselComponent,
     ProcessWheelComponent,
-    TranslateModule
+    TranslateModule,
+    NgOptimizedImage
   ],
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"],

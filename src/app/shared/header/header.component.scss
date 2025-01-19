@@ -11,6 +11,8 @@
 }
 
 .logo-wrapper {
+  position: relative;
+  width: 290px;
   height: 83px;
   gap: 0.5rem;
   z-index: 10;
@@ -86,5 +88,6 @@ li:hover {
 
   .logo-wrapper {
     height: 60px;
+    width: 210px;
   }
 }
