@@ -26,8 +26,7 @@ import { CorouselComponent } from "src/app/shared/components/corousel/corousel.c
     RouterLink,
     CorouselComponent,
     ProcessWheelComponent,
-    TranslateModule,
-    NgOptimizedImage
+    TranslateModule, 
   ],
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"],
