@@ -69,8 +69,9 @@ export class AppointmentsComponent implements AfterViewInit {
           return item[property];
       }
     };
+    matTableDataSource?.sort?.sort({ id: "date", start: "desc", disableClear: false });
     return matTableDataSource;
-  });
+ });
 
   selectedRow: WritableSignal<Appointment | null> = signal(null);
 
