@@ -180,7 +180,6 @@ export class CreateAppointmentComponent implements OnInit {
     let appoitmentForDate = this.allAppoitments.filter(
       (x) => x.date === formatDate(date)
     );
-    debugger
 
     if (appoitmentForDate.length > 0) {
       let slots = this.hoursSlots().map((x) => {
