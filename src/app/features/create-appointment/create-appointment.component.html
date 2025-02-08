@@ -4,8 +4,7 @@
   <main class="content">
     <mat-card class="inline-card">
       <mat-calendar [(selected)]="selected" [dateFilter]="myFilter" [minDate]="today"
-        (selectedChange)="onSelectedDate($event)"
-      >
+        (selectedChange)="onSelectedDate($event)">
       </mat-calendar>
     </mat-card>
 
@@ -13,23 +12,31 @@
       <div id="slotsContainer" class="container">
         @for(slot of hoursSlots(); track slot) {
         <div class="hour-slot" [ngStyle]="{'background-color': formValue().slot === slot.range  ? '#8ba7c8' : ''}"
-          [ngClass]="{'notAvailable' : !slot.available}" (click)="onSelectedSlot(slot)">
-          {{slot.range}}
+          [ngClass]="{
+          'notAvailable' : !slot.available,
+          'locked' : slot.locked && isLoggedIn
+          }" (click)="onSelectedSlot(slot)">
+
+          <span>{{slot.range}}</span>
+
+          @if(slot.locked && isLoggedIn) {
+            <mat-icon>lock</mat-icon>
+          }
         </div>
+        @if (loading) {
+          <process-wheel/>
+        }
         }
       </div>
     </mat-card>
 
+    @if(!isLoggedIn) {
     <mat-card class="inline-card">
-      <form #form="ngForm"
-        class="container"
-        (ngSubmit)="onSubmit(form, $event)">
+      <form #form="ngForm" class="container" (ngSubmit)="onSubmit(form, $event)">
 
         <mat-form-field appearance="fill">
           <mat-label>{{ 'APPOINTMENT.FORM.service' | translate }}</mat-label>
-          <mat-select #name="ngModel" matInput name="name" [(ngModel)]="formValue().service"
-           required
-           >
+          <mat-select #name="ngModel" matInput name="name" [(ngModel)]="formValue().service" required>
             <mat-option value="airCondition">Диагностика на климатик</mat-option>
             <mat-option value="oilChange">Смяна на масло и филтри</mat-option>
             <!-- <mat-option value="option3">Option 3</mat-option> -->
@@ -82,9 +89,10 @@
         </mat-form-field>
 
         <button type="submit" mat-raised-button>{{ 'BUTTON.save' | translate }}</button>
-        
+
       </form>
     </mat-card>
+    }
 
   </main>
 

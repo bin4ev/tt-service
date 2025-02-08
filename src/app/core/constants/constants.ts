@@ -3,3 +3,4 @@ export const WORKING_TIME = "09:00-17:30";
 export const ADDRESS_TOWN = "Бургас";
 export const ADDRESS_STREET = "Индустриална 5";
 export const WORKING_TIME_WEEKEND = "10:00-14:00";
+export const DEFAULT_NAME = "TT-АВТО-88"
