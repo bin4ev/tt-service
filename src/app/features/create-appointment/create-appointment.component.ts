@@ -2,7 +2,10 @@ import { Component, OnInit, inject, signal, viewChild } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
 import { MatCalendar } from "@angular/material/datepicker";
 import { MatCard } from "@angular/material/card";
-import { WORKING_TIME, WORKING_TIME_WEEKEND } from "src/app/core/constants/constants";
+import {
+  WORKING_TIME,
+  WORKING_TIME_WEEKEND,
+} from "src/app/core/constants/constants";
 import { FormsModule, NgForm } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -12,19 +15,31 @@ import { MatSelectModule } from "@angular/material/select";
 import { NotificationService } from "src/app/core/services/notification.service";
 import { NgClass, NgStyle } from "@angular/common";
 import { AppointmentsService } from "src/app/core/services/appointments.service";
-import { appendHiddenInputToForm, createToggleFunction, formatDate, isToday } from "src/app/core/helpers/utils";
-import { EMAIL_TEMPLATES_IDS, EmailService } from "src/app/core/services/email.service";
+import {
+  appendHiddenInputToForm,
+  createToggleFunction,
+  formatDate,
+  isToday,
+} from "src/app/core/helpers/utils";
+import {
+  EMAIL_TEMPLATES_IDS,
+  EmailService,
+} from "src/app/core/services/email.service";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationDialogComponent } from "src/app/shared/components/confirmation-dialog/confirmation-dialog.component";
+import { map, pipe } from "rxjs";
+import { Calendar } from "@fullcalendar/core";
+import { CalendarEvent } from "../calendar/services/calendar.service";
 
 export interface Appointment {
   name: string;
   phone: string;
   email: string;
-  date: Date | "";
+  date: Date | string;
   slot: string;
-  service: "";
-  id: string;
+  service: string;
+  id?: string;
+  role?: string;
 }
 
 export interface Slot {
@@ -58,7 +73,14 @@ export class CreateAppointmentComponent implements OnInit {
   workingTime = WORKING_TIME;
   saturdayTime = WORKING_TIME_WEEKEND;
   hoursSlots = signal<{ available: boolean; range: string }[]>([]);
-  formValue = signal<Appointment>({ name: "", phone: "", email: "", date: "", slot: "", service: "", id: "" });
+  formValue = signal<Appointment>({
+    name: "",
+    phone: "",
+    email: "",
+    date: "",
+    slot: "",
+    service: "",
+  });
   isLoggedIn = false;
   allAppoitments: Appointment[] = [];
   toggleFn = createToggleFunction();
@@ -88,15 +110,34 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   getAllAppoitments() {
-    this.#apoitmentService.getAppointments().subscribe((res) => {
-      this.allAppoitments = res as Appointment[];
-      console.log(this.allAppoitments);
-      this.setAppoitmentsForDate(this.selected());
-    });
+    this.#apoitmentService
+      .getAppointments()
+      .pipe(
+        map((res) => {
+          return res.map((x: any) => {
+            if (x.role === "admin") {
+              const calendarEv = {
+                ...x,
+                start: x.start.seconds * 1000,
+                end: x.end.seconds * 1000,
+              };
+              return this.#apoitmentService.transformEventToBooking(calendarEv);
+            }
+            return x as Appointment;
+          });
+        })
+      )
+      .subscribe((res) => {
+        this.allAppoitments = res as Appointment[];
+        console.log(this.allAppoitments);
+        this.setAppoitmentsForDate(this.selected());
+      });
   }
 
   initSlots() {
-    let timeRange = this.isSaturday(this.selected().toDateString()) ? this.saturdayTime : this.workingTime;
+    let timeRange = this.isSaturday(this.selected().toDateString())
+      ? this.saturdayTime
+      : this.workingTime;
     const { startTime, endTime } = this.extractTimes(timeRange);
     const range = 1;
     this.hoursSlots.set([]);
@@ -144,12 +185,30 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   setAppoitmentsForDate(date: Date) {
-    let appoitmentForDate = this.allAppoitments.filter((x) => x.date === formatDate(date));
+    let appoitmentForDate = this.allAppoitments.filter(
+      (x) => x.date === formatDate(date)
+    );
 
     if (appoitmentForDate.length > 0) {
-      let slots = this.hoursSlots().map((x) => {
-        let hour = appoitmentForDate.find((y) => x.range === y.slot);
-        return hour ? { range: x.range, available: false } : x;
+      let slots = this.hoursSlots().map((slot) => {
+        // Convert slot range to start and end Date objects
+        const [slotStartStr, slotEndStr] = slot.range.split("-");
+        const slotStart = new Date(`1970-01-01T${slotStartStr}:00`);
+        const slotEnd = new Date(`1970-01-01T${slotEndStr}:00`);
+
+        // Check if this slot overlaps with any booked slot
+        const isOverlapping = appoitmentForDate.some((appt) => {
+          const [apptStartStr, apptEndStr] = appt.slot.split("-");
+          const apptStart = new Date(`1970-01-01T${apptStartStr}:00`);
+          const apptEnd = new Date(`1970-01-01T${apptEndStr}:00`);
+
+          return slotStart < apptEnd && slotEnd > apptStart; // Overlapping logic
+        });
+
+        return {
+          range: slot.range,
+          available: !isOverlapping,
+        };
       });
 
       this.hoursSlots.set([...slots]);
@@ -181,20 +240,31 @@ export class CreateAppointmentComponent implements OnInit {
     config = {
       ...config,
       title: "Потвърждение",
-      message: `Сигурни ли сте, че искате да запазите час ${slot.split("-")[0]} за дата ${formatDate(date)} ?`,
+      message: `Сигурни ли сте, че искате да запазите час ${
+        slot.split("-")[0]
+      } за дата ${formatDate(date)} ?`,
     };
 
     dialogRef.componentInstance.config = signal(config);
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.#apoitmentService.createAppointment({ ...this.formValue() }).subscribe((response) => {
-          this.#notificationService.showSuccess("Успешно запазихте час!");
-          this.sendEmailToClien(event);
-          this.sendEmailToAdmin(event);
-          this.getAllAppoitments();
-          this.formValue.set({ name: "", phone: "", email: "", date: "", slot: "", service: "", id: "" });
-          form.resetForm();
-        });
+        this.#apoitmentService
+          .createAppointment({ ...this.formValue() })
+          .subscribe((response) => {
+            this.#notificationService.showSuccess("Успешно запазихте час!");
+            this.sendEmailToClien(event);
+            this.sendEmailToAdmin(event);
+            this.getAllAppoitments();
+            this.formValue.set({
+              name: "",
+              phone: "",
+              email: "",
+              date: "",
+              slot: "",
+              service: "",
+            });
+            form.resetForm();
+          });
       }
     });
   }
@@ -211,30 +281,40 @@ export class CreateAppointmentComponent implements OnInit {
   sendEmailToClien(event: SubmitEvent) {
     let form = event.target as HTMLFormElement;
 
-    appendHiddenInputToForm(form, "date", formatDate(this.formValue().date) as string);
+    appendHiddenInputToForm(
+      form,
+      "date",
+      formatDate(this.formValue().date) as string
+    );
     appendHiddenInputToForm(form, "slot", this.formValue().slot.split("-")[0]);
 
-    this.#emailService.sendEmail(form, EMAIL_TEMPLATES_IDS.CREATE_APPOINTMENT).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-        this.#notificationService.showError(`${err.text}. Email sending failed`);
-      },
-    });
+    this.#emailService
+      .sendEmail(form, EMAIL_TEMPLATES_IDS.CREATE_APPOINTMENT)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+        },
+        error: (err) => {
+          console.log(err);
+          this.#notificationService.showError(
+            `${err.text}. Email sending failed`
+          );
+        },
+      });
   }
 
   sendEmailToAdmin(event: SubmitEvent) {
     let form = event.target as HTMLFormElement;
     appendHiddenInputToForm(form, "service", this.formValue().service);
-    this.#emailService.sendEmail(event.target as HTMLFormElement, EMAIL_TEMPLATES_IDS.CONTACT).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.#emailService
+      .sendEmail(event.target as HTMLFormElement, EMAIL_TEMPLATES_IDS.CONTACT)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 }

@@ -1,0 +1,117 @@
+<mat-card class="inline-card">
+  <mat-card-header class="dialog-header">
+
+    <mat-card-title>{{ (formData.id ? "APPOINTMENT.editTitle" : "APPOINTMENT.title") | translate}}</mat-card-title>
+
+    <!-- Close button aligned to the right -->
+    <button mat-icon-button mat-dialog-close aria-label="Close" class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Form -->
+    <form #form="ngForm" (ngSubmit)="onSubmit(form, $event)">
+
+      <!-- SERVICE TEXTAREA -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>{{ 'APPOINTMENT.FORM.service' | translate }}</mat-label>
+        <textarea #service="ngModel" matInput name="service" [(ngModel)]="formData.service" required cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" cdkAutosizeMaxRows="8"></textarea>
+        <mat-icon matSuffix>manufacturing</mat-icon>
+
+        @if (service.errors?.['required']) {
+        <mat-error>
+          {{ 'APPOINTMENT.FORM.REQUARED.service' | translate }}
+        </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- NAME -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>{{ 'APPOINTMENT.FORM.name' | translate }}</mat-label>
+        <input #name="ngModel" matInput name="name" [(ngModel)]="formData.name" placeholder="John Doe" />
+        <mat-icon matSuffix>badge</mat-icon>
+
+        @if (name.errors?.['required']) {
+        <mat-error>
+          {{ 'APPOINTMENT.FORM.REQUARED.name' | translate }}
+        </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- EMAIL -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>{{ 'APPOINTMENT.FORM.email' | translate }}</mat-label>
+        <input #email="ngModel" matInput name="email" [(ngModel)]="formData.email" email />
+        <mat-icon matSuffix>mail</mat-icon>
+
+        @if (email.errors?.['required']) {
+        <mat-error>
+          {{ 'APPOINTMENT.FORM.REQUARED.email' | translate }}
+        </mat-error>
+        }
+
+        @if (email.errors?.['email']) {
+        <mat-error>
+          {{ 'APPOINTMENT.FORM.INVALID.email' | translate }}
+        </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- PHONE -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>{{ 'APPOINTMENT.FORM.phone' | translate }}</mat-label>
+        <input #phone="ngModel" matInput name="phone" [(ngModel)]="formData.phone" required pattern="[0-9]{10}" />
+        <mat-icon matSuffix>phone</mat-icon>
+
+        @if (phone.errors?.['required']) {
+        <mat-error>
+          {{ 'APPOINTMENT.FORM.REQUARED.phone' | translate }}
+        </mat-error>
+        }
+
+        @if (phone.errors?.['pattern']) {
+        <mat-error>
+          {{ 'APPOINTMENT.FORM.INVALID.phone' | translate }}
+        </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- DURATION (Admin only) -->
+      @if (isAdmin) {
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Duration (Hours)</mat-label>
+        <input type="number" #durationHours="ngModel" matInput min="1" max="24" step="1" name="durationHours"
+          [(ngModel)]="formData.durationHours" required />
+        <mat-icon matSuffix>schedule</mat-icon>
+
+        @if (durationHours.errors?.['required']) {
+        <mat-error>
+          Duration is required.
+        </mat-error>
+        }
+      </mat-form-field>
+      }
+
+      <!-- SUBMIT BUTTON -->
+
+      <div class="button-group">
+
+        <button type="submit" mat-raised-button color="primary">
+          {{ 'BUTTON.save' | translate }}
+        </button>
+
+
+        @if(formData.id && isAdmin) {
+
+        <button type="button" mat-raised-button color="warn" (click)="onDelete()">
+          {{ 'BUTTON.delete' | translate }}
+        </button>
+        }
+
+      </div>
+    </form>
+
+  </mat-card-content>
+</mat-card>

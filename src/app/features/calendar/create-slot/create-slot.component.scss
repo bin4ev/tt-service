@@ -1,0 +1,43 @@
+@import '../../../../variables.scss';
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  button[type="submit"] {
+    min-width: 190px;
+    margin-left: auto;
+  }
+}
+
+.inline-card {
+  min-width: 450px;
+}
+
+.close-button {
+  margin-inline-start: auto;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+  
+  button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: $sm-screen) {
+  .inline-card {
+    min-width: unset;
+  }
+
+}
+  

@@ -5,7 +5,8 @@
     "SERVICES": "Услуги",
     "CONTACTS": "Контакти",
     "APPOINTMENTS": "Запазени часове",
-    "FEEDBACKS": "Отзиви"
+    "FEEDBACKS": "Отзиви",
+    "CALENDAR": "Календар"
   },
   "WELCOME": "Добре дошли",
   "LOGIN": "Вход",
@@ -214,6 +215,7 @@
   },
   "APPOINTMENT": {
     "title": "Запази час",
+    "editTitle": "Редактирай час",
     "FORM": {
       "service": "Услуга",
       "name": "Име",
@@ -235,5 +237,19 @@
     "title" : "Запазени часове",
     "not_results": "Нямате запазаени часове"
 
+  },
+  "CALENDAR": {
+    "title": "Календар",
+    "create_slot": "Създай час",
+    "edit_slot": "Редактирай час",
+    "select_date": "Избери дата",
+    "select_time": "Избери час",
+    "select_service": "Избери услуга",
+    "select_name": "Въведи име",
+    "select_email": "Въведи имейл",
+    "select_phone": "Въведи телефон",
+    "slot_created_success": "Успешно създадохте час!",
+    "slot_updated_success": "Успешно редактирахте час!",
+    "slot_deleted_success": "Успешно изтрихте час!"
   }
 }

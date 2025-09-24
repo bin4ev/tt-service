@@ -9,6 +9,7 @@ import { AboutComponent } from "./features/about/about.component";
 import { ServicesComponent } from "./features/service/services.component";
 import { AppointmentsComponent } from "./features/appointments/appointments.component";
 import { FeedbacksComponent } from "./features/feedbacks/feedbacks.component";
+import { CalendarComponent } from "./features/calendar/calendar.component";
 
 export const routes: Routes = [
   { path: "'/'", redirectTo: "home", pathMatch: "full" },
@@ -75,5 +76,6 @@ export const routes: Routes = [
       ),
   },
   { path: 'create-appointment', component: CreateAppointmentComponent },
+  { path: 'calendar', component: CalendarComponent},
   {path:"**", redirectTo: "home"}
 ];

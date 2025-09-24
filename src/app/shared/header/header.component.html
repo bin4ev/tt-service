@@ -49,6 +49,7 @@
 <div class="position-relative">
   <section class="bar" [ngClass]="{'open-bar': isOpenBar}" (click)="isOpenBar = !isOpenBar">
     <mat-selection-list role="list">
+      
       <mat-list-item role="listitem" routerLinkActive="active" routerLink="home">{{"NAV.HOME" |
         translate}}</mat-list-item>
       <mat-list-item role="listitem" routerLinkActive="active" routerLink="gallery">{{"NAV.GALLERY" |
@@ -62,6 +63,8 @@
 
       @if(isLogedIn$ | async) {
       <mat-list-item role="listitem" routerLinkActive="active" routerLink="appointments">{{"NAV.APPOINTMENTS" |
+        translate}}</mat-list-item>
+        <mat-list-item role="listitem" routerLinkActive="active" routerLink="calendar">{{"NAV.CALENDAR" |
         translate}}</mat-list-item>
 
       <mat-list-item role="listitem" (click)="logOut()">

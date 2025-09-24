@@ -5,7 +5,9 @@
     "SERVICES": "Services",
     "CONTACTS": "Contacts",
     "APPOINTMENTS": "Appointmets",
-    "FEEDBACKS": "Feedbacks"
+    "FEEDBACKS": "Feedbacks",
+    "CALENDAR": "Calendar"
+
   },
   "WELCOME": "Welcome",
   "LOGIN": "Login",
@@ -214,6 +216,8 @@
   },
   "APPOINTMENT": {
     "title": "Book now",
+    "editTitle": "Edit Appointment",
+
     "FORM" : {
       "service": "Service",
       "name": "Name",
@@ -234,5 +238,19 @@
   "APPOINTMENTS": {
     "title" : "Appointments",
     "not_results": "There are not appointments"
+  },
+  "CALENDAR": {
+    "title": "Calendar",
+    "create_slot": "Create slot",
+    "edit_slot": "Edit slot",
+    "select_date": "Select date",
+    "select_time": "Select time",
+    "select_service": "Select service",
+    "select_name": "Enter name",
+    "select_email": "Enter email",
+    "select_phone": "Enter phone",
+    "slot_created_success": "Slot created successfully!",
+    "slot_updated_success": "Slot updated successfully!",
+    "slot_deleted_success": "Slot deleted successfully!"
   }
 }

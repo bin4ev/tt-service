@@ -1,0 +1,71 @@
+/* Increase the height of time slots */
+// ::ng-deep .fc-timegrid-slot {
+//   /* default is around 40px */
+// }
+
+/* Calendar wrapper */
+:host ::ng-deep .fc {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: #111827;
+  /* Neutral text */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Toolbar */
+:host ::ng-deep .fc-toolbar {
+  margin-bottom: 1rem;
+}
+
+:host ::ng-deep .fc-toolbar-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+:host ::ng-deep .fc-toolbar-chunk button {
+  background: #f3f4f6;
+  /* light gray */
+  border: 1px solid #d1d5db;
+  color: #374151;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+:host ::ng-deep .fc-toolbar-chunk button:hover {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+:host ::ng-deep .fc-toolbar-chunk .fc-button-active {
+  background: #2563eb !important;
+  /* professional blue */
+  border-color: #2563eb;
+  color: white !important;
+}
+
+/* Day header (Mon, Tue…) */
+:host ::ng-deep .fc-col-header-cell {
+  background: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+  padding: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Today highlight */
+:host ::ng-deep .fc-day-today {
+  background: #eff6ff !important;
+  /* subtle light blue */
+}
+
+/* Time slots */
+:host ::ng-deep .fc-timegrid-slot {
+  height: 48px;
+}
+
