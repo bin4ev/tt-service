@@ -1,2 +1,5 @@
-<div #map id="map"></div>
-
+<div #map id="map">
+  <gmpx-api-loader key="{{API_KEY_GOOGLE_MAP}}"
+    solution-channel="GMP_QB_locatorplus_v11_c"></gmpx-api-loader>
+  <gmpx-store-locator #locator map-id="DEMO_MAP_ID"></gmpx-store-locator>
+</div>

@@ -2,6 +2,7 @@ import {
   Component,
   ViewChild,
   ElementRef,
+  CUSTOM_ELEMENTS_SCHEMA,
 } from "@angular/core";
 import H from "@here/maps-api-for-javascript";
 import onResize from "simple-element-resize-detector";
@@ -21,9 +22,10 @@ const landmarks = [
   templateUrl: "./jsmap.component.html",
   styleUrls: ["./jsmap.component.scss"],
   standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class JsmapComponent {
-  private map?: H.Map;
+  /*  private map?: H.Map;
   initialMapOptions = {
     pixelRatio: window.devicePixelRatio,
     zoom: DEFAULT_ZOOM,
@@ -78,5 +80,44 @@ export class JsmapComponent {
         lng: lookAt.position.lng,
       });
     }
+  } */
+
+  @ViewChild("locator") locatorRef!: ElementRef;
+  API_KEY_GOOGLE_MAP = "AIzaSyAw4byy1Evhmvxd7UU1sEJBapcDw60PFVs"
+  private CONFIGURATION = {
+    locations: [
+      {
+        title: "Автосервиз ТТ Авто Бургас",
+        address1: "Southern Industrial Zone",
+        address2: 'ul. "Industrialna" 5, 8002 Burgas, Bulgaria',
+        coords: { lat: 42.48962415831665, lng: 27.453727335581956 },
+        placeId: "ChIJfWqBMMGVpkARCXTa2ufVueo",
+      },
+    ],
+    mapOptions: {
+      center: { lat: 38.0, lng: -100.0 },
+      fullscreenControl: true,
+      mapTypeControl: false,
+      streetViewControl: false,
+      zoom: 4,
+      zoomControl: true,
+      maxZoom: 17,
+      mapId: "DEMO_MAP_ID",
+    },
+    mapsApiKey: this.API_KEY_GOOGLE_MAP,
+    capabilities: {
+      input: false,
+      autocomplete: false,
+      directions: false,
+      distanceMatrix: false,
+      details: false,
+      actions: false,
+    },
+  };
+
+  async ngAfterViewInit() {
+    await customElements.whenDefined("gmpx-store-locator");
+    const locator = this.locatorRef.nativeElement as any;
+    locator.configureFromQuickBuilder(this.CONFIGURATION);
   }
 }
