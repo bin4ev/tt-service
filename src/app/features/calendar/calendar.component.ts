@@ -1,5 +1,5 @@
-import { Component, inject, OnInit } from "@angular/core";
-import { FullCalendarModule } from "@fullcalendar/angular";
+import { Component, inject, OnInit, ViewChild } from "@angular/core";
+import { FullCalendarComponent, FullCalendarModule } from "@fullcalendar/angular";
 import { CalendarOptions, EventClickArg } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
@@ -16,6 +16,7 @@ import { CreateSlotComponent } from "./create-slot/create-slot.component";
 import { NotificationService } from "src/app/core/services/notification.service";
 import { switchMap } from "rxjs";
 import { TranslateModule } from "@ngx-translate/core";
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 
 @Component({
   selector: "app-calendar",
@@ -25,21 +26,26 @@ import { TranslateModule } from "@ngx-translate/core";
   styleUrl: "./calendar.component.scss",
 })
 export class CalendarComponent implements OnInit {
+
+  @ViewChild(FullCalendarComponent) calendarComponent?: FullCalendarComponent;
+
   #calendarService = inject(CalendarService);
   #matDialog = inject(MatDialog);
   #notificationService = inject(NotificationService);
+  #breakpointObserver = inject(BreakpointObserver);
 
   startWorkingTime = WORKING_TIME.split("-")[0];
   endWorkingTime = WORKING_TIME.split("-")[1];
 
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-    initialView: "timeGridWeek", // or 'dayGridMonth'
+    initialView: window.innerWidth < 768 ? "timeGridDay" : "timeGridWeek",
     headerToolbar: {
       left: "prev,next today",
       center: "title",
       right: "dayGridMonth,timeGridWeek,timeGridDay",
     },
+    // auto-adjust when resizing
     slotMinTime: this.startWorkingTime,
     slotMaxTime: this.endWorkingTime,
     businessHours: {
@@ -78,7 +84,7 @@ export class CalendarComponent implements OnInit {
       minute: "2-digit",
       hour12: false, // event times also in 24-hour format
     },
-    
+    contentHeight: "auto",
   };
 
   constructor() {}
@@ -86,6 +92,38 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
     this.getAll();
   }
+
+ ngAfterViewInit() {
+  this.observeScreenSize();
+}
+
+observeScreenSize() {
+  this.#breakpointObserver
+    .observe([Breakpoints.Handset, Breakpoints.Tablet])
+    .subscribe(result => {
+      const calendarApi = this.calendarComponent?.getApi();
+      if (!calendarApi) return;
+
+      if (result.matches) {
+        // Mobile / Tablet
+        calendarApi.changeView('timeGridDay');
+        calendarApi.setOption('headerToolbar', { 
+          left: 'prev,next', 
+          center: 'title', 
+          right: 'dayGridMonth,timeGridDay' 
+        });
+      } else {
+        // Desktop
+        calendarApi.changeView('timeGridWeek');
+        calendarApi.setOption('headerToolbar', { 
+          left: 'prev,next today', 
+          center: 'title', 
+          right: 'dayGridMonth,timeGridWeek,timeGridDay' 
+        });
+      }
+    });
+}
+
 
   getAll() {
     this.#calendarService.getEvents().subscribe((evs) => {
@@ -152,5 +190,4 @@ export class CalendarComponent implements OnInit {
       });
     });
   }
-
 }
