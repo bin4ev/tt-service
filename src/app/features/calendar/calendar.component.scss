@@ -69,3 +69,32 @@
   height: 48px;
 }
 
+/* calendar.component.scss */
+::ng-deep .fc .fc-daygrid-event {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  max-width: 100%;
+}
+
+
+@media (max-width: 768px) {
+  ::ng-deep .fc-toolbar-chunk {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  ::ng-deep .fc .fc-daygrid-event {
+    font-size: 8px;
+    padding: 2px;
+    max-width: 50px;
+    /* adjust for your design */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 100%;
+  }
+}
