@@ -17,6 +17,7 @@ form {
 
 .inline-card {
   min-width: 450px;
+  max-height: 80dvh;
 }
 
 .close-button {
@@ -28,7 +29,7 @@ form {
   flex-direction: column;
   width: 100%;
   gap: 1rem;
-  
+
   button {
     width: 100%;
   }
@@ -40,4 +41,3 @@ form {
   }
 
 }
-  
