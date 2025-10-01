@@ -6,7 +6,7 @@
 /* Calendar wrapper */
 :host ::ng-deep .fc {
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 10px;
   font-family: "Inter", "Segoe UI", sans-serif;
   color: #111827;
@@ -77,6 +77,23 @@
   display: block;
   max-width: 100%;
 }
+
+.search-bar {
+
+  margin-bottom: 1rem;
+}
+
+.autocomplete-sub {
+  font-size: 12px;
+  color: #666;
+}
+
+::ng-deep .fc-event.highlighted {
+  background-color: #673ab7 !important;
+  color: white !important;
+  transition: background-color 0,3s ease-in-out;
+}
+
 
 
 @media (max-width: 768px) {

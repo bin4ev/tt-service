@@ -20,13 +20,27 @@ import { NotificationService } from "src/app/core/services/notification.service"
 import { switchMap } from "rxjs";
 import { TranslateModule } from "@ngx-translate/core";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import bgLocale from '@fullcalendar/core/locales/bg';
-
-
+import bgLocale from "@fullcalendar/core/locales/bg";
+import { MatIcon, MatIconModule } from "@angular/material/icon";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { FormsModule } from "@angular/forms";
+import { MatInputModule } from "@angular/material/input";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatButtonModule } from "@angular/material/button";
 @Component({
   selector: "app-calendar",
   standalone: true,
-  imports: [FullCalendarModule, MatTooltipModule, TranslateModule],
+  imports: [
+    FullCalendarModule,
+    MatTooltipModule,
+    TranslateModule,
+    MatIconModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatButtonModule
+  ],
   templateUrl: "./calendar.component.html",
   styleUrl: "./calendar.component.scss",
 })
@@ -40,6 +54,9 @@ export class CalendarComponent implements OnInit {
 
   startWorkingTime = WORKING_TIME.split("-")[0];
   endWorkingTime = WORKING_TIME.split("-")[1];
+  searchTerm: string = "";
+  allEvents: any = [];
+  filteredEvents: any = [];
 
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
@@ -54,7 +71,7 @@ export class CalendarComponent implements OnInit {
     slotMaxTime: this.endWorkingTime,
     slotLabelInterval: "00:30:00",
     firstDay: 1,
-    locale: bgLocale,  
+    locale: bgLocale,
 
     businessHours: {
       // Highlight working hours
@@ -93,6 +110,13 @@ export class CalendarComponent implements OnInit {
       hour12: false, // event times also in 24-hour format
     },
     contentHeight: "auto",
+    eventDidMount: (arg) => {
+      // Attach event ID to the element
+      const el = arg.el as HTMLElement;
+      if (arg.event.id) {
+        el.setAttribute("data-event-id", arg.event.id);
+      }
+    },
   };
 
   constructor() {}
@@ -135,6 +159,8 @@ export class CalendarComponent implements OnInit {
   getAll() {
     this.#calendarService.getEvents().subscribe((evs) => {
       console.log(evs);
+      this.allEvents = evs;
+      this.filteredEvents = evs;
       this.calendarOptions.events = evs;
     });
   }
@@ -196,5 +222,51 @@ export class CalendarComponent implements OnInit {
         dialogRef.close();
       });
     });
+  }
+
+  filterEvents() {
+    const term = this.searchTerm.toLowerCase();
+    this.filteredEvents = this.allEvents.filter(
+      (ev: any) =>
+        ev.title.toLowerCase().includes(term) ||
+        (ev.extendedProps?.phone || "").toLowerCase().includes(term) ||
+        (ev.extendedProps?.email || "").toLowerCase().includes(term) ||
+        (ev.extendedProps?.service || "").toLowerCase().includes(term)
+    );
+  }
+
+  clearSearch() {
+    this.searchTerm = "";
+    this.filteredEvents = this.allEvents;
+  }
+
+  goToEvent(ev: CalendarEvent) {
+    const calendarApi = this.calendarComponent?.getApi();
+    if (!calendarApi) return;
+
+    if (ev.start) {
+      calendarApi.gotoDate(ev.start as Date); // jump to date
+      calendarApi.changeView("timeGridDay"); // switch to day view
+
+      setTimeout(() => {
+        // Find the event element by ID
+        const eventEl = document.querySelector(
+          `[data-event-id="${ev.id}"]`
+        ) as HTMLElement;
+
+        if (eventEl) {
+          // Highlight
+          eventEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          eventEl.classList.add("highlighted");
+          setTimeout(() => eventEl.classList.remove("highlighted"), 3000);
+
+          // Scroll into view
+        }
+      }, 300); // wait a bit for calendar to render events
+    }
+  }
+
+  displayWith(ev: any) {
+    return ev && ev.title ? ev.title : "";
   }
 }

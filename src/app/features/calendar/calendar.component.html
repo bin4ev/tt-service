@@ -3,6 +3,27 @@
     <span class="title">{{'CALENDAR.title' | translate}}</span>
   </div>
 
-<full-calendar [options]="calendarOptions"></full-calendar>
+  <mat-form-field appearance="fill" class="search-bar">
+    <mat-icon matPrefix>search</mat-icon>
+    <mat-label>Търсене на събитие</mat-label>
+    <input type="text" matInput [matAutocomplete]="auto" [(ngModel)]="searchTerm" (input)="filterEvents()" />
+    @if(searchTerm) {
+    <mat-icon matSuffix (click)="clearSearch()">close</mat-icon>
+    }
+  </mat-form-field>
+
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="goToEvent($event.option.value)"
+    [displayWith]="displayWith">
+    @for (ev of filteredEvents; track ev.id) {
+    <mat-option [value]="ev">
+      <div>
+        <strong>{{ ev.title }}</strong>
+        <div class="autocomplete-sub">{{ ev.extendedProps?.phone }}</div>
+      </div>
+    </mat-option>
+    }
+  </mat-autocomplete>
+
+  <full-calendar [options]="calendarOptions"></full-calendar>
 
 </div>
