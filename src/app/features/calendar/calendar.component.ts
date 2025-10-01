@@ -1,5 +1,8 @@
 import { Component, inject, OnInit, ViewChild } from "@angular/core";
-import { FullCalendarComponent, FullCalendarModule } from "@fullcalendar/angular";
+import {
+  FullCalendarComponent,
+  FullCalendarModule,
+} from "@fullcalendar/angular";
 import { CalendarOptions, EventClickArg } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
@@ -17,6 +20,8 @@ import { NotificationService } from "src/app/core/services/notification.service"
 import { switchMap } from "rxjs";
 import { TranslateModule } from "@ngx-translate/core";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import bgLocale from '@fullcalendar/core/locales/bg';
+
 
 @Component({
   selector: "app-calendar",
@@ -26,7 +31,6 @@ import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
   styleUrl: "./calendar.component.scss",
 })
 export class CalendarComponent implements OnInit {
-
   @ViewChild(FullCalendarComponent) calendarComponent?: FullCalendarComponent;
 
   #calendarService = inject(CalendarService);
@@ -48,6 +52,10 @@ export class CalendarComponent implements OnInit {
     // auto-adjust when resizing
     slotMinTime: this.startWorkingTime,
     slotMaxTime: this.endWorkingTime,
+    slotLabelInterval: "00:30:00",
+    firstDay: 1,
+    locale: bgLocale,  
+
     businessHours: {
       // Highlight working hours
       daysOfWeek: [1, 2, 3, 4, 5, 6], // Monday to Saturday (0 = Sunday)
@@ -93,37 +101,36 @@ export class CalendarComponent implements OnInit {
     this.getAll();
   }
 
- ngAfterViewInit() {
-  this.observeScreenSize();
-}
+  ngAfterViewInit() {
+    this.observeScreenSize();
+  }
 
-observeScreenSize() {
-  this.#breakpointObserver
-    .observe([Breakpoints.Handset, Breakpoints.Tablet])
-    .subscribe(result => {
-      const calendarApi = this.calendarComponent?.getApi();
-      if (!calendarApi) return;
+  observeScreenSize() {
+    this.#breakpointObserver
+      .observe([Breakpoints.Handset, Breakpoints.Tablet])
+      .subscribe((result) => {
+        const calendarApi = this.calendarComponent?.getApi();
+        if (!calendarApi) return;
 
-      if (result.matches) {
-        // Mobile / Tablet
-        calendarApi.changeView('timeGridDay');
-        calendarApi.setOption('headerToolbar', { 
-          left: 'prev,next', 
-          center: 'title', 
-          right: 'dayGridMonth,timeGridDay' 
-        });
-      } else {
-        // Desktop
-        calendarApi.changeView('timeGridWeek');
-        calendarApi.setOption('headerToolbar', { 
-          left: 'prev,next today', 
-          center: 'title', 
-          right: 'dayGridMonth,timeGridWeek,timeGridDay' 
-        });
-      }
-    });
-}
-
+        if (result.matches) {
+          // Mobile / Tablet
+          calendarApi.changeView("timeGridDay");
+          calendarApi.setOption("headerToolbar", {
+            left: "prev,next",
+            center: "title",
+            right: "dayGridMonth,timeGridDay",
+          });
+        } else {
+          // Desktop
+          calendarApi.changeView("timeGridWeek");
+          calendarApi.setOption("headerToolbar", {
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
+          });
+        }
+      });
+  }
 
   getAll() {
     this.#calendarService.getEvents().subscribe((evs) => {
