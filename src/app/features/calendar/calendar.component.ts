@@ -72,6 +72,7 @@ export class CalendarComponent implements OnInit {
     slotLabelInterval: "00:30:00",
     firstDay: 1,
     locale: bgLocale,
+    nowIndicator: true,
 
     businessHours: {
       // Highlight working hours
