@@ -37,7 +37,7 @@ import { CalendarEvent } from "../services/calendar.service";
 })
 export class CreateSlotComponent {
   @Input() isAdmin: boolean = false;
-  @Input() selectedDate: string = "";
+  @Input() selectedDate!: Date
   @Output() slotCreated = new EventEmitter<CalendarEvent>();
   @Output() slotDeleted = new EventEmitter();
 

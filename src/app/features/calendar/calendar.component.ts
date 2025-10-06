@@ -175,12 +175,13 @@ export class CalendarComponent implements OnInit {
   }
 
   createEvent(arg: DateClickArg) {
+   
     const compRef = this.#matDialog.open(CreateSlotComponent).componentInstance;
     compRef.isAdmin = true;
-    let selectedDate = arg.date.toISOString();
+    let selectedDate = arg.date
     if (arg.allDay) {
       compRef.formData.durationHours = getWorkingHoursForDay(arg.date);
-      selectedDate = getOpeningTimeDateForDay(arg.date).toISOString();
+      selectedDate = getOpeningTimeDateForDay(arg.date);
     }
     compRef.selectedDate = selectedDate;
 
@@ -197,7 +198,7 @@ export class CalendarComponent implements OnInit {
     const compRef = dialogRef.componentInstance;
 
     compRef.isAdmin = true;
-    compRef.selectedDate = arg.event.startStr;
+    compRef.selectedDate = arg.event.start as Date;
     compRef.formData = {
       ...arg.event.extendedProps,
       durationHours:
