@@ -64,6 +64,52 @@ export function createToggleFunction() {
   }
 }
 
+/**
+ * Parses BG date string in format DD.MM.YYYY to Date object
+ * @param dateStr - date string like "25.12.2005"
+ * @returns Date object or null if invalid
+ */
+export function parseBgDate(dateStr: string): Date | null {
+  
+  if (!dateStr) {
+    return null;
+  }
+
+  const parts = dateStr.split('.');
+  if (parts.length !== 3) {
+    return null;
+  }
+
+  const [dayStr, monthStr, yearStr] = parts;
+
+  const day = Number(dayStr);
+  const month = Number(monthStr);
+  const year = Number(yearStr);
+
+  if (
+    !Number.isInteger(day) ||
+    !Number.isInteger(month) ||
+    !Number.isInteger(year)
+  ) {
+    return null;
+  }
+
+  // Month is 0-based in JS Date
+  const date = new Date(year, month - 1, day);
+
+  // Validate that date components didn't overflow
+  if (
+    date.getFullYear() !== year ||
+    date.getMonth() !== month - 1 ||
+    date.getDate() !== day
+  ) {
+    return null;
+  }
+
+  return date;
+}
+
+
 
 
 

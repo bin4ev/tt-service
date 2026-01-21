@@ -1,35 +1,31 @@
 import {
   Component,
-  Signal,
   ViewChild,
   WritableSignal,
   inject,
   signal,
 } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
-import { MatTableDataSource, MatTableModule } from "@angular/material/table";
-import { MatIcon } from "@angular/material/icon";
+import {
+  MatTableDataSource,
+  MatTableModule,
+  MatNoDataRow,
+} from "@angular/material/table";
+import { MatIconModule } from "@angular/material/icon";
 import { Appointment } from "../create-appointment/create-appointment.component";
-import { MatCard } from "@angular/material/card";
+
 import { AppointmentsService } from "src/app/core/services/appointments.service";
 import { MatSort, MatSortModule } from "@angular/material/sort";
-import { formatDate, untilDestroyed } from "src/app/core/helpers/utils";
-import { AsyncPipe, DatePipe, NgClass, NgFor } from "@angular/common";
+import { parseBgDate, untilDestroyed } from "src/app/core/helpers/utils";
+import { NgClass } from "@angular/common";
 import { ProcessWheelComponent } from "src/app/shared/components/process-wheel/process-wheel.component";
-import {
-  BehaviorSubject,
-  Observable,
-  Subject,
-  async,
-  finalize,
-  map,
-  of,
-  take,
-} from "rxjs";
+import { Subject, finalize, map } from "rxjs";
 import { NotificationService } from "src/app/core/services/notification.service";
-import { ResolveStart } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationDialogComponent } from "src/app/shared/components/confirmation-dialog/confirmation-dialog.component";
+import { CdkColumnDef } from "@angular/cdk/table";
+import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
+import { MatInput } from "@angular/material/input";
 
 @Component({
   selector: "app-appointments",
@@ -37,11 +33,13 @@ import { ConfirmationDialogComponent } from "src/app/shared/components/confirmat
   imports: [
     TranslateModule,
     MatTableModule,
-    MatIcon,
+    MatIconModule,
     MatSortModule,
-    MatSort,
     ProcessWheelComponent,
     NgClass,
+    MatNoDataRow,
+    MatFormFieldModule,
+    MatInput
   ],
   templateUrl: "./appointments.component.html",
   styleUrl: "./appointments.component.scss",
@@ -60,7 +58,7 @@ export class AppointmentsComponent {
     "action",
   ];
   responsiveCol: string[] = ["date", "slot", "service", "action"];
-  dataSource!: MatTableDataSource<Appointment>;
+  dataSource: MatTableDataSource<Appointment> = new MatTableDataSource();
   allAppoitmentsAvailable: Subject<boolean> = new Subject();
   allallAppoitmentsAvailable$ = this.allAppoitmentsAvailable.asObservable();
   loading = false;
@@ -75,21 +73,15 @@ export class AppointmentsComponent {
   }
 
   ngAfterViewInit() {
-    this.allallAppoitmentsAvailable$
-      .pipe(this.untilDestroyed())
-      .subscribe((bool) => {
-        if (bool) {
-          this.dataSource.sort = this.sort;
-          this.dataSource.sortingDataAccessor = (item: any, property) => {
-            switch (property) {
-              case "date":
-                return formatDate(item.date);
-              default:
-                return item[property];
-            }
-          };
-        }
-      });
+    this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = (item: any, property) => {
+      switch (property) {
+        case "date":
+          return parseBgDate(item.date);
+        default:
+          return item[property];
+      }
+    };
   }
 
   getAllAppoitments() {
@@ -107,14 +99,15 @@ export class AppointmentsComponent {
               };
               return this.#apoitmentService.transformEventToBooking(calendarEv);
             }
+            console.log(x);
+
             return x as Appointment;
           });
         }),
-        finalize(() => (this.loading = false))
+        finalize(() => (this.loading = false)),
       )
       .subscribe((res: Appointment[]) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.allAppoitmentsAvailable.next(true);
+        this.dataSource.data = res.reverse();
       });
   }
 
@@ -134,5 +127,11 @@ export class AppointmentsComponent {
             });
         }
       });
+  }
+
+  applyFilter(event: Event): void {
+    const value = (event.target as HTMLInputElement).value.trim().toLowerCase();
+
+    this.dataSource.filter = value;
   }
 }

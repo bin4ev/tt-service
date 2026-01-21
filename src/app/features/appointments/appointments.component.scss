@@ -15,8 +15,19 @@
 .responsive-table {
   display: none;
 }
+
 .selectedRow {
   background-color: red;
+}
+
+.no-data-row {
+  text-align: center;
+}
+
+.no-data-cell {
+  padding: 16px;
+  color: #777;
+  font-style: italic;
 }
 
 @media print,
