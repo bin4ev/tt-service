@@ -85,7 +85,8 @@ export class CalendarComponent implements OnInit {
     events: [],
     eventContent: (arg) => {
       const props = arg.event.extendedProps;
-      const tooltip = `Service: ${props["service"]}\nEmail: ${props["email"]}\nPhone: ${props["phone"]}`;
+      
+      const tooltip = `Service: ${props["service"]}\nEmail: ${props["email"]}\nPhone: ${props["phone"]}\nCar: ${props["car"]}\nModel Year: ${props["modelYear"]}\nModification: ${props["modification"]}`;
 
       return {
         html: `

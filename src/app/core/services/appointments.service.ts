@@ -111,6 +111,9 @@ export class AppointmentsService {
         email: booking.email,
         phone: booking.phone,
         service: booking.service,
+        ...(booking.car && { car: booking.car }), 
+        ...(booking.modelYear && { modelYear: booking.modelYear }), 
+        ...(booking.modification && { modification: booking.modification }),
       },
     };
   }
@@ -146,6 +149,9 @@ export class AppointmentsService {
       slot,
       email: event.extendedProps?.email || "",
       phone: event.extendedProps?.phone || "",
+      car: "",
+      modelYear: "",
+      modification: "",
       id: event.id,
     };
   }

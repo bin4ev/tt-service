@@ -13,6 +13,9 @@ export interface CalendarEvent {
     email: string;
     phone: string;
     service: string;
+    car?: string;
+    modelYear?: string;
+    modification?: string;
   };
   role?: string;
 }

@@ -81,6 +81,36 @@
           }
         </mat-form-field>
 
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'APPOINTMENT.FORM.car' | translate }}</mat-label>
+          <input #car="ngModel" matInput placeholder="BMW 320d" name="car" [(ngModel)]="formValue().car" required>
+          <mat-icon matSuffix>directions_car</mat-icon>
+
+          @if (car.errors?.['required']) {
+          <mat-error>{{ 'APPOINTMENT.FORM.REQUARED.car' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'APPOINTMENT.FORM.modelYear' | translate }}</mat-label>
+          <input #modelYear="ngModel" matInput placeholder="2015" name="modelYear" [(ngModel)]="formValue().modelYear" required>
+          <mat-icon matSuffix>calendar_today</mat-icon>
+
+          @if (modelYear.errors?.['required']) {
+          <mat-error>{{ 'APPOINTMENT.FORM.REQUARED.modelYear' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'APPOINTMENT.FORM.modification' | translate }}</mat-label>
+          <input #modification="ngModel" matInput placeholder="2.0d 184hp" name="modification" [(ngModel)]="formValue().modification" required>
+          <mat-icon matSuffix>build</mat-icon>
+
+          @if (modification.errors?.['required']) {
+          <mat-error>{{ 'APPOINTMENT.FORM.REQUARED.modification' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
         <button type="submit" mat-raised-button>{{ 'BUTTON.save' | translate }}</button>
         
       </form>

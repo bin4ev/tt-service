@@ -223,11 +223,17 @@
       "name": "Name",
       "email": "Email",
       "phone": "Phone",
+      "car": "Car make and model",
+      "modelYear": "Model year",
+      "modification": "Modification",
       "REQUARED": {
-        "service": "Service is require",
-        "name": "Name is require",
+        "service": "Service is required",
+        "name": "Name is required",
         "email": "Email is required",
-        "phone": "Phone is required"
+        "phone": "Phone is required",
+        "car": "Car make and model is required",
+        "modelYear": "Model year is required",
+        "modification": "Modification is required"
       },
       "INVALID": {
         "email": "Invalid email",
