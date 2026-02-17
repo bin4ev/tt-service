@@ -39,7 +39,7 @@ import { MatInput } from "@angular/material/input";
     NgClass,
     MatNoDataRow,
     MatFormFieldModule,
-    MatInput
+    MatInput,
   ],
   templateUrl: "./appointments.component.html",
   styleUrl: "./appointments.component.scss",
@@ -99,7 +99,6 @@ export class AppointmentsComponent {
               };
               return this.#apoitmentService.transformEventToBooking(calendarEv);
             }
-            console.log(x);
 
             return x as Appointment;
           });
@@ -107,7 +106,12 @@ export class AppointmentsComponent {
         finalize(() => (this.loading = false)),
       )
       .subscribe((res: Appointment[]) => {
-        this.dataSource.data = res.reverse();
+        console.log(res);
+        this.dataSource.data = res.sort(
+          (a, b) =>
+            parseBgDate(b.date as string)!.getTime() -
+            parseBgDate(a.date as string)!.getTime(),
+        );
       });
   }
 
