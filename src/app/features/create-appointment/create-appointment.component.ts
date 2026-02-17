@@ -288,7 +288,7 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   sendEmailToClien(event: SubmitEvent) {
-    /* let form = event.target as HTMLFormElement;
+    let form = event.target as HTMLFormElement;
 
     appendHiddenInputToForm(
       form,
@@ -309,11 +309,11 @@ export class CreateAppointmentComponent implements OnInit {
             `${err.text}. Email sending failed`
           );
         },
-      }); */
+      });
   }
 
   sendEmailToAdmin(event: SubmitEvent) {
-   /*  let form = event.target as HTMLFormElement;
+    let form = event.target as HTMLFormElement;
     appendHiddenInputToForm(form, "service", this.formValue().service);
     this.#emailService
       .sendEmail(event.target as HTMLFormElement, EMAIL_TEMPLATES_IDS.CONTACT)
@@ -324,6 +324,6 @@ export class CreateAppointmentComponent implements OnInit {
         error: (err) => {
           console.log(err);
         },
-      }); */
+      });
   }
 }
