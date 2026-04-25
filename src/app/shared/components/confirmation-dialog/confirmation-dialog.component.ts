@@ -1,6 +1,7 @@
-import { Component, inject, signal } from "@angular/core";
+import { Component, computed, inject, signal } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import {
+  MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
@@ -17,7 +18,6 @@ import { ConfirmDialogConfig } from "src/app/core/interfaces/confirm-dialog-conf
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
-    MatDialogClose,
     MatButtonModule,
     TranslateModule
   ],
@@ -25,14 +25,20 @@ import { ConfirmDialogConfig } from "src/app/core/interfaces/confirm-dialog-conf
   styleUrl: "./confirmation-dialog.component.scss",
 })
 export class ConfirmationDialogComponent {
-  config = signal<ConfirmDialogConfig>({
+  #matDialogRef = inject(MatDialogRef<ConfirmationDialogComponent>);
+
+  dataFromDialog = inject<ConfirmDialogConfig>(MAT_DIALOG_DATA);
+  dataFromDialogSignal = signal<ConfirmDialogConfig>(this.dataFromDialog);
+  configInitial = signal<ConfirmDialogConfig>({
     title: "DELETE_CONFIRMATION.title",
     message: "DELETE_CONFIRMATION.message",
     cancel_button_label: "DELETE_CONFIRMATION.cancel_button_label",
     confirm_button_label: "DELETE_CONFIRMATION.confirm_button_label",
   });
+  config = computed(() =>( this.dataFromDialogSignal() ? {...this.configInitial(),...this.dataFromDialogSignal()} : this.configInitial()));
 
-  #matDialogRef = inject(MatDialogRef<ConfirmationDialogComponent>);
+
+
 
 
   closeDialog(bul: boolean) {

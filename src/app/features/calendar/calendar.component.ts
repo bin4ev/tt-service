@@ -27,6 +27,7 @@ import { FormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatButtonModule } from "@angular/material/button";
+import { ConfirmationDialogComponent } from "src/app/shared/components/confirmation-dialog/confirmation-dialog.component";
 @Component({
   selector: "app-calendar",
   standalone: true,
@@ -39,7 +40,7 @@ import { MatButtonModule } from "@angular/material/button";
     FormsModule,
     MatInputModule,
     MatAutocompleteModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: "./calendar.component.html",
   styleUrl: "./calendar.component.scss",
@@ -85,7 +86,7 @@ export class CalendarComponent implements OnInit {
     events: [],
     eventContent: (arg) => {
       const props = arg.event.extendedProps;
-      
+
       const tooltip = `Service: ${props["service"]}\nEmail: ${props["email"]}\nPhone: ${props["phone"]}\nCar: ${props["car"]}\nModel Year: ${props["modelYear"]}\nModification: ${props["modification"]}`;
 
       return {
@@ -176,10 +177,9 @@ export class CalendarComponent implements OnInit {
   }
 
   createEvent(arg: DateClickArg) {
-   
     const compRef = this.#matDialog.open(CreateSlotComponent).componentInstance;
     compRef.isAdmin = true;
-    let selectedDate = arg.date
+    let selectedDate = arg.date;
     if (arg.allDay) {
       compRef.formData.durationHours = getWorkingHoursForDay(arg.date);
       selectedDate = getOpeningTimeDateForDay(arg.date);
@@ -219,11 +219,25 @@ export class CalendarComponent implements OnInit {
       });
 
     compRef.slotDeleted.subscribe(() => {
-      this.#calendarService.deleteEvent({ id: arg.event.id }).subscribe(() => {
-        this.#notificationService.showSuccess("Успешно изтрихте час!");
-        this.getAll();
-        dialogRef.close();
-      });
+      this.#matDialog
+        .open(ConfirmationDialogComponent, {
+          data: {
+            title: "Потвърждение",
+            message: "Сигурни ли сте, че искате да изтриете часа?",
+          }
+        })
+        .afterClosed()
+        .subscribe((res) => {
+          if (res) {
+            this.#calendarService
+              .deleteEvent({ id: arg.event.id })
+              .subscribe(() => {
+                this.#notificationService.showSuccess("Успешно изтрихте час!");
+                this.getAll();
+                dialogRef.close();
+              });
+          }
+        });
     });
   }
 
@@ -234,7 +248,7 @@ export class CalendarComponent implements OnInit {
         ev.title.toLowerCase().includes(term) ||
         (ev.extendedProps?.phone || "").toLowerCase().includes(term) ||
         (ev.extendedProps?.email || "").toLowerCase().includes(term) ||
-        (ev.extendedProps?.service || "").toLowerCase().includes(term)
+        (ev.extendedProps?.service || "").toLowerCase().includes(term),
     );
   }
 
@@ -254,7 +268,7 @@ export class CalendarComponent implements OnInit {
       setTimeout(() => {
         // Find the event element by ID
         const eventEl = document.querySelector(
-          `[data-event-id="${ev.id}"]`
+          `[data-event-id="${ev.id}"]`,
         ) as HTMLElement;
 
         if (eventEl) {
