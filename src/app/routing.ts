@@ -10,6 +10,8 @@ import { ServicesComponent } from "./features/service/services.component";
 import { AppointmentsComponent } from "./features/appointments/appointments.component";
 import { FeedbacksComponent } from "./features/feedbacks/feedbacks.component";
 import { CalendarComponent } from "./features/calendar/calendar.component";
+import { inject } from "@angular/core";
+import { AuthService } from "./core/services/auth.service";
 
 export const routes: Routes = [
   { path: "'/'", redirectTo: "home", pathMatch: "full" },
@@ -24,58 +26,64 @@ export const routes: Routes = [
   {
     path: "contacts",
     loadComponent: () =>
-      import("./features/contacts/contacts.component").then((m) => m.ContactsComponent),
+      import("./features/contacts/contacts.component").then(
+        (m) => m.ContactsComponent,
+      ),
   },
   {
     path: "services/full-sevice",
     loadComponent: () =>
       import("./features/service/full-service/full-service.component").then(
-        (m) => m.FullServiceComponent
+        (m) => m.FullServiceComponent,
       ),
   },
   {
     path: "services/air-condition",
     loadComponent: () =>
       import("./features/service/air-condition/air-condition.component").then(
-        (m) => m.AirConditionComponent
+        (m) => m.AirConditionComponent,
       ),
   },
   {
     path: "services/exhaust-system",
     loadComponent: () =>
       import("./features/service/exaust-system/exaust-system.component").then(
-        (m) => m.ExaustSystemComponent
+        (m) => m.ExaustSystemComponent,
       ),
   },
   {
     path: "services/brakes",
     loadComponent: () =>
       import("./features/service/brakes-system/brakes-system.component").then(
-        (m) => m.BrakesSystemComponent
+        (m) => m.BrakesSystemComponent,
       ),
   },
   {
     path: "services/timebelt",
     loadComponent: () =>
       import("./features/service/timebelt-service/timebelt-service.component").then(
-        (m) => m.TimebeltServiceComponent
+        (m) => m.TimebeltServiceComponent,
       ),
   },
   {
     path: "services/suspension",
     loadComponent: () =>
       import("./features/service/suspension-system/suspension-system.component").then(
-        (m) => m.SuspensionSystemComponent
+        (m) => m.SuspensionSystemComponent,
       ),
   },
   {
     path: "services/transmission",
     loadComponent: () =>
       import("./features/service/transmission-service/transmission-service.component").then(
-        (m) => m.TransmissionServiceComponent
+        (m) => m.TransmissionServiceComponent,
       ),
   },
-  { path: 'create-appointment', component: CreateAppointmentComponent },
-  { path: 'calendar', component: CalendarComponent},
-  {path:"**", redirectTo: "home"}
+  { path: "create-appointment", component: CreateAppointmentComponent },
+  {
+    path: "calendar",
+    component: CalendarComponent,
+    canActivate: [() => inject(AuthService).isLoggedIn],
+  },
+  { path: "**", redirectTo: "home" },
 ];

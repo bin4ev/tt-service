@@ -91,7 +91,7 @@ export class AppointmentsComponent {
       .pipe(
         map((res) => {
           return res.map((x: any) => {
-            if (x.role === "admin") {
+            if (x.role === "admin" ) {
               const calendarEv = {
                 ...x,
                 start: x.start.seconds * 1000,

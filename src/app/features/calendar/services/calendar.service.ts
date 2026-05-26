@@ -3,6 +3,7 @@ import { Appointment } from "../../create-appointment/create-appointment.compone
 import { AppointmentsService } from "src/app/core/services/appointments.service";
 import { map } from "rxjs/operators";
 import { NotificationService } from "src/app/core/services/notification.service";
+import { AuthService } from "src/app/core/services/auth.service";
 
 export interface CalendarEvent {
   id?: string;
@@ -25,7 +26,7 @@ export interface CalendarEvent {
 })
 export class CalendarService {
   #appointmentService = inject(AppointmentsService);
-  #notificationService = inject(NotificationService);
+  #authService = inject(AuthService);
 
 
 
@@ -33,7 +34,9 @@ export class CalendarService {
     return this.#appointmentService.getAppointments().pipe(
       map((res) =>
         res.map((app) => {
+  
           if (app?.role !== "admin") {
+            console.warn(app);
             return this.#appointmentService.transformBookingToEvent(app);
           }
           const adminEv = structuredClone(app) as any;

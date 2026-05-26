@@ -161,7 +161,6 @@ export class CalendarComponent implements OnInit {
 
   getAll() {
     this.#calendarService.getEvents().subscribe((evs) => {
-      console.log(evs);
       this.allEvents = evs;
       this.filteredEvents = evs;
       this.calendarOptions.events = evs;
@@ -224,7 +223,7 @@ export class CalendarComponent implements OnInit {
           data: {
             title: "Потвърждение",
             message: "Сигурни ли сте, че искате да изтриете часа?",
-          }
+          },
         })
         .afterClosed()
         .subscribe((res) => {

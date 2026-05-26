@@ -19,6 +19,7 @@ import { Observable, catchError, map, throwError } from "rxjs";
 import { formatDate } from "../helpers/utils";
 import { CalendarEvent } from "src/app/features/calendar/services/calendar.service";
 import { AuthService } from "./auth.service";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -29,6 +30,7 @@ export class AppointmentsService {
   #db = inject(Firestore);
   #notificationService = inject(NotificationService);
   #authService = inject(AuthService);
+  #router = inject(Router);
 
   collectionRef = collection(this.#db, this.basePath);
 
@@ -58,6 +60,7 @@ export class AppointmentsService {
     let bodyToSend = {
       ...appoitment,
       date: parsedDate,
+      role:'viewer'
     };
 
     return from(addDoc(this.collectionRef, bodyToSend)).pipe(
@@ -70,9 +73,19 @@ export class AppointmentsService {
   }
 
   createAppointmentAdmin(appoitment: CalendarEvent) {
+    if (!this.#authService.isLoggedIn) {
+      const msg = "You are not logged in!";
+      console.error(msg);
+      this.#notificationService.showError(msg).onAction().subscribe(_ => {
+        this.#router.navigateByUrl('/login');
+      });
+
+      return throwError(() => msg)
+    }
+
     let bodyToSend = {
       ...appoitment,
-      role: this.#authService.isLoggedIn ? "admin" : "viewer",
+      role: "admin",
     };
 
     return from(addDoc(this.collectionRef, bodyToSend)).pipe(
