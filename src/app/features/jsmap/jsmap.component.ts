@@ -7,6 +7,8 @@ import {
 import H from "@here/maps-api-for-javascript";
 import onResize from "simple-element-resize-detector";
 import { API_KEY, DEFAULT_POSITION, DEFAULT_ZOOM } from "../contacts/constants";
+import { environment } from "src/environments/environment";
+
 
 const landmarks = [
   {
@@ -83,7 +85,7 @@ export class JsmapComponent {
   } */
 
   @ViewChild("locator") locatorRef!: ElementRef;
-  API_KEY_GOOGLE_MAP = "AIzaSyAw4byy1Evhmvxd7UU1sEJBapcDw60PFVs"
+  API_KEY_GOOGLE_MAP = environment.API_KEY_GOOGLE_MAP;
   private CONFIGURATION = {
     locations: [
       {
